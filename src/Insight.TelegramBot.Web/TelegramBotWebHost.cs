@@ -7,9 +7,9 @@ namespace Insight.TelegramBot.Web
 {
     public class TelegramBotWebHost : IHostedService
     {
-        private readonly IBot _bot;
+        private readonly IHostedBot _bot;
 
-        public TelegramBotWebHost(IBot bot)
+        public TelegramBotWebHost(IHostedBot bot)
         {
             if (bot == null)
                 throw new ArgumentNullException(nameof(bot));
