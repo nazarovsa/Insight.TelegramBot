@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot", "src\Insight.TelegramBot\Insight.TelegramBot.csproj", "{C942ECBE-A65A-40F8-BAF9-0F210EE07658}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.State", "src\Insight.TelegramBot.State\Insight.TelegramBot.State.csproj", "{CC98F575-4C31-4A47-B511-7D208263B55B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.State.Tests", "tests\Insight.TelegramBot.State.Tests\Insight.TelegramBot.State.Tests.csproj", "{59BBB232-340F-4C62-A1B5-74D8B40C04F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C942ECBE-A65A-40F8-BAF9-0F210EE07658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C942ECBE-A65A-40F8-BAF9-0F210EE07658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C942ECBE-A65A-40F8-BAF9-0F210EE07658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C942ECBE-A65A-40F8-BAF9-0F210EE07658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC98F575-4C31-4A47-B511-7D208263B55B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC98F575-4C31-4A47-B511-7D208263B55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC98F575-4C31-4A47-B511-7D208263B55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC98F575-4C31-4A47-B511-7D208263B55B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59BBB232-340F-4C62-A1B5-74D8B40C04F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59BBB232-340F-4C62-A1B5-74D8B40C04F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59BBB232-340F-4C62-A1B5-74D8B40C04F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59BBB232-340F-4C62-A1B5-74D8B40C04F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
