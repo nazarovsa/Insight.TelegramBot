@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 
 namespace Insight.TelegramBot
 {
-    public abstract class Bot : IBot
+    public class Bot : IBot
     {
         protected BotConfiguration Config { get; private set; }
 

@@ -1,14 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot", "src\Insight.TelegramBot\Insight.TelegramBot.csproj", "{C942ECBE-A65A-40F8-BAF9-0F210EE07658}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot", "src\Insight.TelegramBot\Insight.TelegramBot.csproj", "{C942ECBE-A65A-40F8-BAF9-0F210EE07658}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.State", "src\Insight.TelegramBot.State\Insight.TelegramBot.State.csproj", "{CC98F575-4C31-4A47-B511-7D208263B55B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.State", "src\Insight.TelegramBot.State\Insight.TelegramBot.State.csproj", "{CC98F575-4C31-4A47-B511-7D208263B55B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.State.Tests", "tests\Insight.TelegramBot.State.Tests\Insight.TelegramBot.State.Tests.csproj", "{59BBB232-340F-4C62-A1B5-74D8B40C04F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.State.Tests", "tests\Insight.TelegramBot.State.Tests\Insight.TelegramBot.State.Tests.csproj", "{59BBB232-340F-4C62-A1B5-74D8B40C04F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Web", "src\Insight.TelegramBot.Web\Insight.TelegramBot.Web.csproj", "{93459619-9745-4815-985C-664E3957A1E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.Web", "src\Insight.TelegramBot.Web\Insight.TelegramBot.Web.csproj", "{93459619-9745-4815-985C-664E3957A1E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{494EDB46-5FFC-4970-969C-FB610ABFE2FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{81588F4A-07B4-4A93-A68E-973D04B8D463}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Samples.Domain", "samples\Insight.TelegramBot.Samples.Domain\Insight.TelegramBot.Samples.Domain.csproj", "{1B19D206-B375-4D30-9E02-4C52334E7B40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.Samples.SimpleHostedBot", "samples\Insight.TelegramBot.Samples.SimpleHostedBot\Insight.TelegramBot.Samples.SimpleHostedBot.csproj", "{64847461-8961-4504-A789-47BFAD06D8D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,8 +41,24 @@ Global
 		{93459619-9745-4815-985C-664E3957A1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93459619-9745-4815-985C-664E3957A1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93459619-9745-4815-985C-664E3957A1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B19D206-B375-4D30-9E02-4C52334E7B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B19D206-B375-4D30-9E02-4C52334E7B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B19D206-B375-4D30-9E02-4C52334E7B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B19D206-B375-4D30-9E02-4C52334E7B40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64847461-8961-4504-A789-47BFAD06D8D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64847461-8961-4504-A789-47BFAD06D8D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64847461-8961-4504-A789-47BFAD06D8D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64847461-8961-4504-A789-47BFAD06D8D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{59BBB232-340F-4C62-A1B5-74D8B40C04F9} = {494EDB46-5FFC-4970-969C-FB610ABFE2FE}
+		{1B19D206-B375-4D30-9E02-4C52334E7B40} = {81588F4A-07B4-4A93-A68E-973D04B8D463}
+		{64847461-8961-4504-A789-47BFAD06D8D5} = {81588F4A-07B4-4A93-A68E-973D04B8D463}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10C4076E-C2CA-4CC2-9B4F-661FA0F96D79}
 	EndGlobalSection
 EndGlobal
