@@ -26,7 +26,6 @@ namespace Insight.TelegramBot
             Client = client;
         }
 
-
         public virtual async Task<Message> SendMessage(BotMessage message, CancellationToken token = default)
         {
             return await Client.SendTextMessageAsync(message.ChatId, message.Text, message.ParseMode,
