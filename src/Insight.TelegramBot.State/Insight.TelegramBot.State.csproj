@@ -2,6 +2,13 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <PackageVersion>0.0.1</PackageVersion>
+        <Title>States for Insight.TelegramBot</Title>
+        <Authors>Sergey Nazarov</Authors>
+        <Copyright>Copyright © 2020 Sergey Nazarov</Copyright>
+        <PackageProjectUrl>https://github.com/InsightAppDev/Insight.TelegramBot</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/InsightAppDev/Insight.TelegramBot</RepositoryUrl>
+        <RepositoryType>Github</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
