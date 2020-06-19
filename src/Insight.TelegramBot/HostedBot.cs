@@ -13,7 +13,7 @@ namespace Insight.TelegramBot
         protected HostedBot(BotConfiguration config, ITelegramBotClient client)
             : base(client)
         {
-            if (Config == null)
+            if (config == null)
                 throw new ArgumentNullException(nameof(config));
             
             Config = config;
