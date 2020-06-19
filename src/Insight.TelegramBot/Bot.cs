@@ -11,7 +11,7 @@ namespace Insight.TelegramBot
     {
         protected ITelegramBotClient Client { get; private set; }
 
-        protected Bot(ITelegramBotClient client)
+        public Bot(ITelegramBotClient client)
         {
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
