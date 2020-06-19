@@ -9,20 +9,13 @@ namespace Insight.TelegramBot
 {
     public class Bot : IBot
     {
-        protected BotConfiguration Config { get; private set; }
-
         protected ITelegramBotClient Client { get; private set; }
 
-        protected Bot(BotConfiguration config,
-            ITelegramBotClient client)
+        protected Bot(ITelegramBotClient client)
         {
-            if (config == null)
-                throw new ArgumentNullException(nameof(config));
-
             if (client == null)
                 throw new ArgumentNullException(nameof(client));
 
-            Config = config;
             Client = client;
         }
 

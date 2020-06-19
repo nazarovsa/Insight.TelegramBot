@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <PackageVersion>0.0.1</PackageVersion>
+        <PackageVersion>0.0.2</PackageVersion>
         <Title>Simple SDK to implement telegram bot infrastructure</Title>
         <Authors>Sergey Nazarov</Authors>
         <Copyright>Copyright © 2020 Sergey Nazarov</Copyright>

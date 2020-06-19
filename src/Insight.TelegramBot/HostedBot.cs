@@ -8,9 +8,15 @@ namespace Insight.TelegramBot
 {
     public abstract class HostedBot : Bot, IHostedBot
     {
+        protected BotConfiguration Config { get; }
+
         protected HostedBot(BotConfiguration config, ITelegramBotClient client)
-            : base(config, client)
+            : base(client)
         {
+            if (Config == null)
+                throw new ArgumentNullException(nameof(config));
+            
+            Config = config;
         }
 
         public virtual async Task Start()
