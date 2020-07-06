@@ -25,9 +25,13 @@ namespace Insight.TelegramBot.Web
             _logger = logger;
             _processor = processor;
         }
-        
-        public async Task<IActionResult> Post(Update update, CancellationToken cancellationToken)
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Update update, CancellationToken cancellationToken)
         {
+            if (update == null)
+                return BadRequest();
+
             if (update.Type == UpdateType.Message)
             {
                 _logger.LogTrace($"Received message from: {update.Message.From.Id}");
@@ -39,6 +43,10 @@ namespace Insight.TelegramBot.Web
             {
                 _logger.LogTrace($"Received callback query from: {update.CallbackQuery.From.Id}");
                 await _processor.ProcessCallback(update.CallbackQuery, cancellationToken);
+            }
+            else
+            {
+                throw new NotImplementedException();
             }
 
             return Ok();
