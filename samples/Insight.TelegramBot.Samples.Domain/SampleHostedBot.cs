@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Insight.TelegramBot.Configurations;
 using Insight.TelegramBot.Models;
 using Telegram.Bot;
 using Telegram.Bot.Types;

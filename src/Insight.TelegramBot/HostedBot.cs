@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Insight.TelegramBot.Configurations;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -15,22 +16,29 @@ namespace Insight.TelegramBot
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
-            
+
             Config = config;
         }
 
         public virtual async Task Start()
         {
             var webHookInfo = await Client.GetWebhookInfoAsync();
-            if (webHookInfo != null && !Config.UseWebHook)
-                await Client.DeleteWebhookAsync();
-
-            if (Config.UseWebHook)
+            if (webHookInfo != null)
             {
-                if (string.IsNullOrWhiteSpace(Config.WebHookUrl))
-                    throw new ArgumentNullException($"Empty webhook url: {nameof(Config.WebHookUrl)}");
+                if (Config.WebHookConfiguration.UseWebHook &&
+                    webHookInfo.Url.Equals(Config.WebHookConfiguration.WebHookUrl, StringComparison.OrdinalIgnoreCase))
+                    return;
 
-                await Client.SetWebhookAsync(Config.WebHookUrl);
+                await Client.DeleteWebhookAsync();
+            }
+
+            if (Config.WebHookConfiguration.UseWebHook)
+            {
+                if (string.IsNullOrWhiteSpace(Config.WebHookConfiguration.WebHookUrl))
+                    throw new ArgumentNullException(
+                        $"Empty webhook url: {nameof(Config.WebHookConfiguration.WebHookUrl)}");
+
+                await Client.SetWebhookAsync(Config.WebHookConfiguration.WebHookUrl);
             }
             else
             {
@@ -42,7 +50,7 @@ namespace Insight.TelegramBot
 
         public virtual async Task Stop()
         {
-            if (Config.UseWebHook)
+            if (Config.WebHookConfiguration.UseWebHook)
                 await Client.DeleteWebhookAsync();
             else
                 Client.StopReceiving();

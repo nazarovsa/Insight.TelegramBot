@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Insight.TelegramBot.Configurations;
 using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
 
@@ -30,13 +31,13 @@ namespace Insight.TelegramBot.Web
             if (webHookInfo != null)
                 await _client.DeleteWebhookAsync(cancellationToken);
 
-            if (!_configuration.UseWebHook)
+            if (!_configuration.WebHookConfiguration.UseWebHook)
                 throw new InvalidOperationException("You can't use this host for polling bots");
 
-            if (string.IsNullOrWhiteSpace(_configuration.WebHookUrl))
-                throw new ArgumentNullException($"Empty webhook url: {nameof(_configuration.WebHookUrl)}");
+            if (string.IsNullOrWhiteSpace(_configuration.WebHookConfiguration.WebHookUrl))
+                throw new ArgumentNullException($"Empty webhook url: {nameof(_configuration.WebHookConfiguration.WebHookUrl)}");
 
-            await _client.SetWebhookAsync(_configuration.WebHookUrl, cancellationToken: cancellationToken);
+            await _client.SetWebhookAsync(_configuration.WebHookConfiguration.WebHookUrl, cancellationToken: cancellationToken);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
