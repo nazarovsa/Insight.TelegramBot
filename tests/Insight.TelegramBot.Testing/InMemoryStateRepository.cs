@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Insight.TelegramBot.State;
 
-namespace Insight.TelegramBot.State.Tests.Infrastructure
+namespace Insight.TelegramBot.Testing
 {
     public sealed class InMemoryStateRepository : IUserContextRepository<TestState>
     {

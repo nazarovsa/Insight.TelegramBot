@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Insight.TelegramBot.State.Tests.Infrastructure
+namespace Insight.TelegramBot.Testing
 {
     public interface IStateMachine
     {

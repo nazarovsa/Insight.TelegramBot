@@ -19,16 +19,16 @@ namespace Insight.TelegramBot
             Client = client;
         }
 
-        public virtual async Task<Message> SendMessage(BotMessage message, CancellationToken token = default)
+        public virtual async Task<Message> SendMessage(BotMessage message, CancellationToken cancellationToken = default)
         {
             return await Client.SendTextMessageAsync(message.ChatId, message.Text, message.ParseMode,
                 message.DisableWebPagePreview, message.DisableNotification, message.ReplyToMessageId,
-                message.ReplyMarkup, token);
+                message.ReplyMarkup, cancellationToken);
         }
 
-        public virtual async Task DeleteMessage(long chatId, int messageId, CancellationToken token = default)
+        public virtual async Task DeleteMessage(long chatId, int messageId, CancellationToken cancellationToken = default)
         {
-            await Client.DeleteMessageAsync(chatId, messageId, token);
+            await Client.DeleteMessageAsync(chatId, messageId, cancellationToken);
         }
     }
 }

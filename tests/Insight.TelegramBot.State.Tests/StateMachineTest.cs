@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Insight.TelegramBot.State.Tests.Infrastructure;
+using Insight.TelegramBot.Testing;
 using Stateless;
 using Xunit;
 

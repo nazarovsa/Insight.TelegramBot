@@ -1,8 +1,9 @@
 using System;
 using System.Threading.Tasks;
+using Insight.TelegramBot.State;
 using Stateless;
 
-namespace Insight.TelegramBot.State.Tests.Infrastructure
+namespace Insight.TelegramBot.Testing
 {
     public class TestStateMachine : BotStateMachine<TestState>, IStateMachine
     {

@@ -7,8 +7,8 @@ namespace Insight.TelegramBot
 {
     public interface IBot
     {
-        Task<Message> SendMessage(BotMessage message, CancellationToken token = default);
+        Task<Message> SendMessage(BotMessage message, CancellationToken cancellationToken = default);
 
-        Task DeleteMessage(long chatId, int messageId, CancellationToken token = default);
+        Task DeleteMessage(long chatId, int messageId, CancellationToken cancellationToken = default);
     }
 }
