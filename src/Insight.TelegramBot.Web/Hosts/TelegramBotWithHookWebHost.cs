@@ -29,8 +29,14 @@ namespace Insight.TelegramBot.Web.Hosts
         {
             var webHookInfo = await _client.GetWebhookInfoAsync(cancellationToken);
             if (webHookInfo != null)
-                await _client.DeleteWebhookAsync(cancellationToken);
+            {
+                if (_configuration.WebHookConfiguration.UseWebHook &&
+                    webHookInfo.Url.Equals(_configuration.WebHookConfiguration.WebHookUrl, StringComparison.OrdinalIgnoreCase))
+                    return;
 
+                await _client.DeleteWebhookAsync(cancellationToken);
+            }
+            
             if (!_configuration.WebHookConfiguration.UseWebHook)
                 throw new InvalidOperationException("You can't use this host for polling bots");
 
