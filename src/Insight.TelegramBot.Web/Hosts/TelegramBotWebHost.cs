@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 
-namespace Insight.TelegramBot.Web
+namespace Insight.TelegramBot.Web.Hosts
 {
     public class TelegramBotWebHost : IHostedService
     {
