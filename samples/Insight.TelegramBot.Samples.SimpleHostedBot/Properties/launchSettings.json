@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Insight.TelegramBot.HostedBot.Autofac": {
+    "Insight.TelegramBot.Samples.SimpleHostedBot": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

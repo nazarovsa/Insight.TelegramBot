@@ -56,8 +56,8 @@ namespace Insight.TelegramBot
                 Client.StopReceiving();
         }
 
-        public abstract Task ProcessMessage(Message message, CancellationToken token = default);
+        public abstract Task ProcessMessage(Message message, CancellationToken cancellationToken = default);
 
-        public abstract Task ProcessCallback(CallbackQuery query, CancellationToken token = default);
+        public abstract Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default);
     }
 }

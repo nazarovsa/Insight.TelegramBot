@@ -10,8 +10,8 @@ namespace Insight.TelegramBot
 
         Task Stop();
 
-        Task ProcessMessage(Message message, CancellationToken token = default);
+        Task ProcessMessage(Message message, CancellationToken cancellationToken = default);
 
-        Task ProcessCallback(CallbackQuery query, CancellationToken token = default);
+        Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default);
     }
 }

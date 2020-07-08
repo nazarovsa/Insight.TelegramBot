@@ -17,7 +17,7 @@ namespace Insight.TelegramBot.Samples.Domain
         {
         }
 
-        public override async Task ProcessMessage(Message message, CancellationToken token = default)
+        public override async Task ProcessMessage(Message message, CancellationToken cancellationToken = default)
         {
             if (message.Text != null)
             {
@@ -38,22 +38,22 @@ namespace Insight.TelegramBot.Samples.Domain
                                 }
                             }
                         })
-                    }, token);
+                    }, cancellationToken);
                 }
             }
         }
 
-        public override async Task ProcessCallback(CallbackQuery query, CancellationToken token = default)
+        public override async Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default)
         {
-            var callbackData = CallbackData<SampleState>.Parse(query.Data);
+            var callbackData = CallbackData<SampleState>.Parse(callbackQuery.Data);
 
             switch (callbackData.NextState)
             {
                 case SampleState.TouchMe:
                     await SendMessage(new BotMessage
                     {
-                        ChatId = query.From.Id,
-                        Text = "Hello world",
+                        ChatId = callbackQuery.From.Id,
+                        Text = "Oh my",
                         ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
                         {
                             new List<InlineKeyboardButton>
@@ -65,7 +65,7 @@ namespace Insight.TelegramBot.Samples.Domain
                                 }
                             }
                         })
-                    }, token);
+                    }, cancellationToken);
                     break;
                 default:
                     throw new ArgumentException(nameof(callbackData.NextState));
