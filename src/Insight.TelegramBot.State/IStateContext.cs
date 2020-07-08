@@ -2,7 +2,7 @@ using System;
 
 namespace Insight.TelegramBot.State
 {
-    public interface IUserContext<out TState>
+    public interface IStateContext<out TState>
         where TState : Enum
     {
         long TelegramId { get; }

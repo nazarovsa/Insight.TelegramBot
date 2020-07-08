@@ -2,10 +2,10 @@ using System;
 
 namespace Insight.TelegramBot.State
 {
-    public class UserContextBase<TState> : IUserContext<TState>
+    public class StateContextBase<TState> : IStateContext<TState>
         where TState : Enum
     {
-        public UserContextBase(long telegramId, TState currentState)
+        public StateContextBase(long telegramId, TState currentState)
         {
             TelegramId = telegramId;
             CurrentState = currentState;

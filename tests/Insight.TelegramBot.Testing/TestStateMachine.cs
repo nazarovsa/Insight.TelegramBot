@@ -7,7 +7,7 @@ namespace Insight.TelegramBot.Testing
 {
     public class TestStateMachine : BotStateMachine<TestState>, IStateMachine
     {
-        public TestStateMachine(IUserContext<TestState> userContext, IUserContextRepository<TestState> stateRepository,
+        public TestStateMachine(IStateContext<TestState> userContext, IStateContextRepository<TestState> stateRepository,
             Action<StateMachine<TestState, string>> configureDelegate) : base(
             userContext, stateRepository, configureDelegate)
         {

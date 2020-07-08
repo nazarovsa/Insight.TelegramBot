@@ -7,44 +7,44 @@ namespace Insight.TelegramBot.State
     public abstract class BotStateMachine<TState>
         where TState : Enum
     {
-        private readonly IUserContext<TState> _userContext;
+        protected IStateContextRepository<TState> StateRepository { get; }
 
-        private readonly IUserContextRepository<TState> _stateRepository;
-
-        protected StateMachine<TState, string> StateMachine;
+        protected StateMachine<TState, string> StateMachine { get; }
 
         public TState State { get; private set; }
 
-        protected BotStateMachine(IUserContext<TState> userContext,
-            IUserContextRepository<TState> stateRepository)
+        public long TelegramId { get; private set; }
+
+        protected BotStateMachine(IStateContext<TState> stateContext,
+            IStateContextRepository<TState> stateRepository)
         {
-            if (userContext == null)
-                throw new ArgumentNullException(nameof(userContext));
+            if (stateContext == null)
+                throw new ArgumentNullException(nameof(stateContext));
 
             if (stateRepository == null)
                 throw new ArgumentNullException(nameof(stateRepository));
 
-            _userContext = userContext;
-            _stateRepository = stateRepository;
+            StateRepository = stateRepository;
 
-            State = _userContext.CurrentState;
+            State = stateContext.CurrentState;
+            TelegramId = stateContext.TelegramId;
 
             StateMachine = new StateMachine<TState, string>(
                 () => State,
                 s => State = s, FiringMode.Immediate);
         }
 
-        protected BotStateMachine(IUserContext<TState> userContext,
-            IUserContextRepository<TState> stateRepository,
+        protected BotStateMachine(IStateContext<TState> stateContext,
+            IStateContextRepository<TState> stateRepository,
             Action<StateMachine<TState, string>> configureDelegate)
-            : this(userContext, stateRepository)
+            : this(stateContext, stateRepository)
         {
             Configure(configureDelegate);
         }
 
         protected virtual async Task CommitState()
         {
-            await _stateRepository.SetUserState(_userContext.TelegramId, State);
+            await StateRepository.Set(new StateContextBase<TState>(TelegramId, State));
         }
 
         public void Configure(Action<StateMachine<TState, string>> @delegate)

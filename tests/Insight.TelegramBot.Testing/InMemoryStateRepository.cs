@@ -5,37 +5,34 @@ using Insight.TelegramBot.State;
 
 namespace Insight.TelegramBot.Testing
 {
-    public sealed class InMemoryStateRepository : IUserContextRepository<TestState>
+    public sealed class InMemoryStateRepository : IStateContextRepository<TestState>
     {
         public int Count => _items.Count;
 
-        private readonly Dictionary<long, IUserContext<TestState>> _items = new Dictionary<long, IUserContext<TestState>>();
+        private readonly Dictionary<long, IStateContext<TestState>> _items =
+            new Dictionary<long, IStateContext<TestState>>();
 
-        public Task<IUserContext<TestState>> GetUserState(long telegramId, CancellationToken token = default)
+        public Task<IStateContext<TestState>> Get(long telegramId, CancellationToken cancellationToken = default)
         {
             if (_items.TryGetValue(telegramId, out var userContext))
                 return Task.FromResult(userContext);
 
-            return Task.FromResult<IUserContext<TestState>>(null);
+            return Task.FromResult<IStateContext<TestState>>(null);
         }
 
-        public Task AddUserState(IUserContext<TestState> userContext, CancellationToken token = default)
+        public Task Set(IStateContext<TestState> stateContext, CancellationToken cancellationToken = default)
         {
-            _items.Add(userContext.TelegramId, userContext);
-            return Task.CompletedTask;
-        }
-
-        public async Task SetUserState(long telegramId, TestState botTestState, CancellationToken token = default)
-        {
-            var context = new UserContextBase<TestState>(telegramId, botTestState);
-            if (_items.ContainsKey(telegramId))
+            var context = new StateContextBase<TestState>(stateContext.TelegramId, stateContext.CurrentState);
+            if (_items.ContainsKey(stateContext.TelegramId))
             {
-                _items[telegramId] = context;
+                _items[stateContext.TelegramId] = context;
             }
             else
             {
-                await AddUserState(context, CancellationToken.None);
+                _items.Add(stateContext.TelegramId, stateContext);
             }
+
+            return Task.CompletedTask;
         }
     }
 }
