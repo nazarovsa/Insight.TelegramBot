@@ -37,7 +37,7 @@ namespace Insight.TelegramBot
             var args = items[^1]
                 .Split('|');
 
-            if (args.Length == 0 || args.Length == 1 && string.IsNullOrEmpty(args[0]))
+            if (args.Length == 0 || args.Length == 1 && string.IsNullOrWhiteSpace(args[0]))
                 return new CallbackData<TState>(nextState, Array.Empty<string>());
 
             return new CallbackData<TState>(nextState, args);
