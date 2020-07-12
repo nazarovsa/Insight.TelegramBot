@@ -35,9 +35,7 @@ namespace Insight.TelegramBot.Web
             if (update.Type == UpdateType.Message)
             {
                 _logger.LogTrace($"Received message from: {update.Message.From.Id}");
-                var message = update.Message;
-                if (message.Type == MessageType.Text)
-                    await _processor.ProcessMessage(message, cancellationToken);
+                await _processor.ProcessMessage(update.Message, cancellationToken);
             }
             else if (update.Type == UpdateType.CallbackQuery)
             {
