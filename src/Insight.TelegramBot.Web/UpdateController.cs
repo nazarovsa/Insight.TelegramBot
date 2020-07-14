@@ -33,7 +33,7 @@ namespace Insight.TelegramBot.Web
                 return BadRequest();
 
             if (update.Type == UpdateType.Message)
-            {
+            { 
                 _logger.LogTrace($"Received message from: {update.Message.From.Id}");
                 await _processor.ProcessMessage(update.Message, cancellationToken);
             }
