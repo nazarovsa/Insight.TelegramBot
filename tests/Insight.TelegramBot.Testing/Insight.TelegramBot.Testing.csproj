@@ -5,6 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Telegram.Bot" Version="15.7.0" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\..\src\Insight.TelegramBot.State\Insight.TelegramBot.State.csproj" />
       <ProjectReference Include="..\..\src\Insight.TelegramBot\Insight.TelegramBot.csproj" />
     </ItemGroup>
