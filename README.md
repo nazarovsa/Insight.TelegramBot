@@ -8,7 +8,8 @@ Readme in progress
 
 Insight.TelegramBot.Web
 ------------------------
-Readme in progress
+Extensions to simplify bot implementation at Startup.cs
+
 
 Samples
 ------------------------
