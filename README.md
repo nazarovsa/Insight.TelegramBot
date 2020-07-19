@@ -4,7 +4,8 @@ Simple SDK to implement telegram bot infrastructure. It includes tools to work w
 
 Insight.TelegramBot.State
 ------------------------
-Readme in progress
+Includes abstractions to implement state machine for your bot. You can see working example at [tests](https://github.com/InsightAppDev/Insight.TelegramBot/blob/master/tests/Insight.TelegramBot.State.Tests/StateMachineTest.cs). 
+StateMachine is abstract class that uses [Stateless](https://www.nuget.org/packages/stateless) library to work with state, so you should know a little about how to use it to configure your state machine.
 
 Insight.TelegramBot.Web
 ------------------------
