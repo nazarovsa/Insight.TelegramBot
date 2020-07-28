@@ -13,6 +13,8 @@ namespace Insight.TelegramBot
 
         Task<Chat> GetChat(ChatId id, CancellationToken cancellationToken = default);
 
+        Task<int> GetChatMembersCountAsync(ChatId id, CancellationToken cancellationToken = default);
+
         Task<User> GetMe(CancellationToken cancellationToken = default);
 
         Task<ChatMember[]> GetChatAdministratorsAsync(ChatId id, CancellationToken cancellationToken = default);

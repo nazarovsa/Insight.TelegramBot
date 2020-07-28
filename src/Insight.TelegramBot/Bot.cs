@@ -32,6 +32,11 @@ namespace Insight.TelegramBot
             return Client.GetChatAsync(id, cancellationToken);
         }
 
+        public virtual Task<int> GetChatMembersCountAsync(ChatId id, CancellationToken cancellationToken = default)
+        {
+            return Client.GetChatMembersCountAsync(id, cancellationToken);
+        }
+
         public virtual Task<User> GetMe(CancellationToken cancellationToken = default)
         {
             return Client.GetMeAsync(cancellationToken);
