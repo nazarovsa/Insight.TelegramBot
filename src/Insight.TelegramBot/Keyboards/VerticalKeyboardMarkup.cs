@@ -5,6 +5,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Insight.TelegramBot.Keyboards
 {
+    
     public sealed class VerticalKeyboardMarkup
     {
         private readonly List<IEnumerable<IKeyboardButton>> _buttons;
@@ -22,9 +23,9 @@ namespace Insight.TelegramBot.Keyboards
             _buttons = new List<IEnumerable<IKeyboardButton>>();
         }
 
-        public VerticalKeyboardMarkup(IEnumerable<IEnumerable<IKeyboardButton>> buttons) : this()
+        public VerticalKeyboardMarkup(IEnumerable<IKeyboardButton> buttons) : this()
         {
-            _buttons.AddRange(buttons);
+            _buttons.AddRange(buttons.Select(x => new[] {x}));
         }
 
         public void Add(IKeyboardButton button)
