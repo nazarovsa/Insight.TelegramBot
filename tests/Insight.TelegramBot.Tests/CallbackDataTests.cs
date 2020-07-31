@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Insight.TelegramBot.Tests
 {
-	public sealed class CallbackDataTests
+    public sealed class CallbackDataTests
     {
         [Fact]
         public void Should_parse_callback_data_with_args()

@@ -27,6 +27,16 @@ namespace Insight.TelegramBot
                 message.ReplyMarkup, cancellationToken);
         }
 
+
+        public virtual Task<Message> ForwardMessage(ChatId receiverId,
+            ChatId chatId, int messageId,
+            bool disableNotification = false,
+            CancellationToken cancellationToken = default)
+        {
+            return Client.ForwardMessageAsync(receiverId, chatId, messageId, disableNotification, cancellationToken);
+        }
+
+
         public virtual Task<Chat> GetChat(ChatId id, CancellationToken cancellationToken = default)
         {
             return Client.GetChatAsync(id, cancellationToken);

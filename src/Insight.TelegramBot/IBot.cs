@@ -9,6 +9,9 @@ namespace Insight.TelegramBot
     {
         Task<Message> SendMessage(BotMessage message, CancellationToken cancellationToken = default);
 
+        Task<Message> ForwardMessage(ChatId receiverId, ChatId chatId, int messageId, bool disableNotification = false,
+            CancellationToken cancellationToken = default);
+
         Task DeleteMessage(long chatId, int messageId, CancellationToken cancellationToken = default);
 
         Task<Chat> GetChat(ChatId id, CancellationToken cancellationToken = default);
