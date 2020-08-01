@@ -1,5 +1,4 @@
 using System;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Models;
@@ -33,7 +32,7 @@ namespace Insight.TelegramBot.Tests
 			var bot = new Bot(_client);
 			var chatId = 1;
 			var text = "Hello world";
-			var message = await bot.SendMessage(new BotMessage
+			var message = await bot.SendMessageAsync(new TextMessage
 			{
 				ChatId = chatId,
 				Text = text
@@ -47,7 +46,7 @@ namespace Insight.TelegramBot.Tests
 		public async Task Should_delete_message()
 		{
 			var bot = new Bot(_client);
-			await bot.DeleteMessage(0, 0);
+			await bot.DeleteMessageAsync(0, 0);
 		}
 
 		private ITelegramBotClient CreateSut()

@@ -7,18 +7,28 @@ namespace Insight.TelegramBot
 {
     public interface IBot
     {
-        Task<Message> SendMessage(BotMessage message, CancellationToken cancellationToken = default);
+        Task<Message> SendMessageAsync(TextMessage message, CancellationToken cancellationToken = default);
 
-        Task<Message> ForwardMessage(ChatId receiverId, ChatId chatId, int messageId, bool disableNotification = false,
+        Task<Message> SendDocumentAsync(DocumentMessage message,
             CancellationToken cancellationToken = default);
 
-        Task DeleteMessage(long chatId, int messageId, CancellationToken cancellationToken = default);
+        Task<Message> SendPhotoAsync(PhotoMessage message,
+            CancellationToken cancellationToken = default);
 
-        Task<Chat> GetChat(ChatId id, CancellationToken cancellationToken = default);
+        Task<Message> SendAudioAsync(AudioMessage message,
+            CancellationToken cancellationToken = default);
+
+        Task<Message> ForwardMessageAsync(ChatId receiverId, ChatId chatId, int messageId,
+            bool disableNotification = false,
+            CancellationToken cancellationToken = default);
+
+        Task DeleteMessageAsync(long chatId, int messageId, CancellationToken cancellationToken = default);
+
+        Task<Chat> GetChatAsync(ChatId id, CancellationToken cancellationToken = default);
 
         Task<int> GetChatMembersCountAsync(ChatId id, CancellationToken cancellationToken = default);
 
-        Task<User> GetMe(CancellationToken cancellationToken = default);
+        Task<User> GetMeAsync(CancellationToken cancellationToken = default);
 
         Task<ChatMember[]> GetChatAdministratorsAsync(ChatId id, CancellationToken cancellationToken = default);
     }

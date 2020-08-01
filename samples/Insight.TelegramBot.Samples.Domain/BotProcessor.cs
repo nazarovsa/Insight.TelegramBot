@@ -26,7 +26,7 @@ namespace Insight.TelegramBot.Samples.Domain
             {
                 if (message.Text == "/start")
                 {
-                    await _bot.SendMessage(new BotMessage
+                    await _bot.SendMessageAsync(new TextMessage
                     {
                         ChatId = message.Chat.Id,
                         Text = "Hello world",
@@ -53,7 +53,7 @@ namespace Insight.TelegramBot.Samples.Domain
             switch (callbackData.NextState)
             {
                 case SampleState.TouchMe:
-                    await _bot.SendMessage(new BotMessage
+                    await _bot.SendMessageAsync(new TextMessage
                     {
                         ChatId = callbackQuery.From.Id,
                         Text = "Oh my",
