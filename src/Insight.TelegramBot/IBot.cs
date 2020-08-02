@@ -31,5 +31,7 @@ namespace Insight.TelegramBot
         Task<User> GetMeAsync(CancellationToken cancellationToken = default);
 
         Task<ChatMember[]> GetChatAdministratorsAsync(ChatId id, CancellationToken cancellationToken = default);
+
+        Task<File> GetFileAsync(string id, CancellationToken cancellationToken = default);
     }
 }

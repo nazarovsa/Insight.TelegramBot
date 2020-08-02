@@ -83,5 +83,10 @@ namespace Insight.TelegramBot
         {
             return Client.GetChatAdministratorsAsync(id, cancellationToken);
         }
+
+        public virtual Task<File> GetFileAsync(string id, CancellationToken cancellationToken = default)
+        {
+            return Client.GetFileAsync(id, cancellationToken);
+        }
     }
 }
