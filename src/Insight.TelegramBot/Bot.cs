@@ -99,5 +99,10 @@ namespace Insight.TelegramBot
         {
             return Client.GetMyCommandsAsync(cancellationToken);
         }
+
+        public virtual Task<StickerSet> GetStickerSetAsync(string name, CancellationToken cancellationToken = default)
+        {
+            return Client.GetStickerSetAsync(name, cancellationToken);
+        }
     }
 }

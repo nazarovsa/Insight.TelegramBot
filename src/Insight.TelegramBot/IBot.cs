@@ -37,5 +37,7 @@ namespace Insight.TelegramBot
         Task<ChatMember> GetChatMemberAsync(ChatId chatId, int userId, CancellationToken cancellationToken = default);
 
         Task<BotCommand[]> GetMyCommandsAsync(CancellationToken cancellationToken = default);
+
+        Task<StickerSet> GetStickerSetAsync(string name, CancellationToken cancellationToken = default);
     }
 }
