@@ -39,5 +39,8 @@ namespace Insight.TelegramBot
         Task<BotCommand[]> GetMyCommandsAsync(CancellationToken cancellationToken = default);
 
         Task<StickerSet> GetStickerSetAsync(string name, CancellationToken cancellationToken = default);
+
+        Task<UserProfilePhotos> GetUserProfilePhotosAsync(int userId, int offset = 0, int limit = 0,
+            CancellationToken cancellationToken = default);
     }
 }

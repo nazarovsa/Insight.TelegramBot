@@ -104,5 +104,10 @@ namespace Insight.TelegramBot
         {
             return Client.GetStickerSetAsync(name, cancellationToken);
         }
+        
+        public virtual Task<UserProfilePhotos> GetUserProfilePhotosAsync(int userId, int offset = 0, int limit = 0, CancellationToken cancellationToken = default)
+        {
+            return Client.GetUserProfilePhotosAsync(userId, offset, limit, cancellationToken);
+        }
     }
 }
