@@ -49,6 +49,14 @@ namespace Insight.TelegramBot
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
         }
 
+        public virtual Task<Message> SendAnimationAsync(AnimationMessage message,
+            CancellationToken cancellationToken = default)
+        {
+            return Client.SendAnimationAsync(message.ChatId, message.InputOnlineFile, message.Duration, message.Width,
+                message.Height, message.Thumb, message.Caption, message.ParseMode,
+                message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
+        }
+
         public virtual Task<Message> ForwardMessageAsync(ChatId receiverId,
             ChatId chatId, int messageId,
             bool disableNotification = false,
@@ -104,8 +112,9 @@ namespace Insight.TelegramBot
         {
             return Client.GetStickerSetAsync(name, cancellationToken);
         }
-        
-        public virtual Task<UserProfilePhotos> GetUserProfilePhotosAsync(int userId, int offset = 0, int limit = 0, CancellationToken cancellationToken = default)
+
+        public virtual Task<UserProfilePhotos> GetUserProfilePhotosAsync(int userId, int offset = 0, int limit = 0,
+            CancellationToken cancellationToken = default)
         {
             return Client.GetUserProfilePhotosAsync(userId, offset, limit, cancellationToken);
         }
