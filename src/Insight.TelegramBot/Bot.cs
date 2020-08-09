@@ -57,6 +57,12 @@ namespace Insight.TelegramBot
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
         }
 
+        public virtual Task<Message> SendStickerAsync(StickerMessage message, CancellationToken cancellationToken = default)
+        {
+            return Client.SendStickerAsync(message.ChatId, message.InputOnlineFile,
+                message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
+        }
+
         public virtual Task<Message> ForwardMessageAsync(ChatId receiverId,
             ChatId chatId, int messageId,
             bool disableNotification = false,

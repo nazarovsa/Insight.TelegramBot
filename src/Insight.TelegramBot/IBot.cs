@@ -21,6 +21,8 @@ namespace Insight.TelegramBot
         Task<Message> SendAnimationAsync(AnimationMessage message,
             CancellationToken cancellationToken = default);
 
+        Task<Message> SendStickerAsync(StickerMessage message, CancellationToken cancellationToken = default);
+
         Task<Message> ForwardMessageAsync(ChatId receiverId, ChatId chatId, int messageId,
             bool disableNotification = false,
             CancellationToken cancellationToken = default);
