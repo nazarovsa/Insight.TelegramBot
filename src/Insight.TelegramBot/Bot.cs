@@ -57,10 +57,18 @@ namespace Insight.TelegramBot
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
         }
 
-        public virtual Task<Message> SendStickerAsync(StickerMessage message, CancellationToken cancellationToken = default)
+        public virtual Task<Message> SendStickerAsync(StickerMessage message,
+            CancellationToken cancellationToken = default)
         {
             return Client.SendStickerAsync(message.ChatId, message.InputOnlineFile,
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
+        }
+
+        public virtual Task<Message> SendDiceAsync(DiceMessage message, CancellationToken cancellationToken = default)
+        {
+            return Client.SendDiceAsync(message.ChatId,
+                message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken,
+                message.Emoji);
         }
 
         public virtual Task<Message> ForwardMessageAsync(ChatId receiverId,
