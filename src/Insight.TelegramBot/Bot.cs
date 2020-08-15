@@ -70,6 +70,12 @@ namespace Insight.TelegramBot
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken,
                 message.Emoji);
         }
+        
+        public virtual Task<Message> SendGameAsync(GameMessage message, CancellationToken cancellationToken = default)
+        {
+            return Client.SendGameAsync(message.ChatId.Identifier, message.GameShortName,
+                message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
+        }
 
         public virtual Task<Message> ForwardMessageAsync(ChatId receiverId,
             ChatId chatId, int messageId,
