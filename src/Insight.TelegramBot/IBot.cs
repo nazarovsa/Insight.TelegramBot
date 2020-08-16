@@ -27,6 +27,9 @@ namespace Insight.TelegramBot
 
         Task<Message> SendGameAsync(GameMessage message, CancellationToken cancellationToken = default);
 
+        Task<Message> SendLocationAsync(LocationMessage message,
+            CancellationToken cancellationToken = default);
+
         Task<Message> ForwardMessageAsync(ChatId receiverId, ChatId chatId, int messageId,
             bool disableNotification = false,
             CancellationToken cancellationToken = default);

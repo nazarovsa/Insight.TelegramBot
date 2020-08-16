@@ -48,7 +48,7 @@ namespace Insight.TelegramBot.Tests
             var bot = new Bot(_client);
             await bot.DeleteMessageAsync(0, 0);
         }
-
+        
         private ITelegramBotClient CreateSut()
         {
             var mock = new Mock<ITelegramBotClient>();
