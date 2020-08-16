@@ -1,7 +1,13 @@
-﻿namespace Insight.TelegramBot.Models
+﻿using Telegram.Bot.Types;
+
+namespace Insight.TelegramBot.Models
 {
     public class TextMessage : BotMessage
     {
+        public TextMessage(ChatId chatId) : base(chatId)
+        {
+        }
+
         public string Text { get; set; }
 
         public bool DisableWebPagePreview { get; set; } = false;

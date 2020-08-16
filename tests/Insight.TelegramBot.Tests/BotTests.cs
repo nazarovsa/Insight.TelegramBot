@@ -32,9 +32,8 @@ namespace Insight.TelegramBot.Tests
             var bot = new Bot(_client);
             var chatId = 1;
             var text = "Hello world";
-            var message = await bot.SendMessageAsync(new TextMessage
+            var message = await bot.SendMessageAsync(new TextMessage(chatId)
             {
-                ChatId = chatId,
                 Text = text
             });
             Assert.NotNull(message);
@@ -48,7 +47,7 @@ namespace Insight.TelegramBot.Tests
             var bot = new Bot(_client);
             await bot.DeleteMessageAsync(0, 0);
         }
-        
+
         private ITelegramBotClient CreateSut()
         {
             var mock = new Mock<ITelegramBotClient>();

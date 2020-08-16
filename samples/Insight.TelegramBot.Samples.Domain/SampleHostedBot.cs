@@ -23,9 +23,8 @@ namespace Insight.TelegramBot.Samples.Domain
             {
                 if (message.Text == "/start")
                 {
-                    await SendMessageAsync(new TextMessage
+                    await SendMessageAsync(new TextMessage(message.Chat.Id)
                     {
-                        ChatId = message.Chat.Id,
                         Text = "Hello world",
                         ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
                         {
@@ -43,16 +42,16 @@ namespace Insight.TelegramBot.Samples.Domain
             }
         }
 
-        public override async Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default)
+        public override async Task ProcessCallback(CallbackQuery callbackQuery,
+            CancellationToken cancellationToken = default)
         {
             var callbackData = CallbackData<SampleState>.Parse(callbackQuery.Data);
 
             switch (callbackData.NextState)
             {
                 case SampleState.TouchMe:
-                    await SendMessageAsync(new TextMessage
+                    await SendMessageAsync(new TextMessage(callbackQuery.From.Id)
                     {
-                        ChatId = callbackQuery.From.Id,
                         Text = "Oh my",
                         ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
                         {
