@@ -30,6 +30,9 @@ namespace Insight.TelegramBot
         Task<Message> SendLocationAsync(LocationMessage message,
             CancellationToken cancellationToken = default);
 
+        Task<Message> SendVideoAsync(VideoMessage message,
+            CancellationToken cancellationToken = default);
+
         Task<Message> ForwardMessageAsync(ChatId receiverId, ChatId chatId, int messageId,
             bool disableNotification = false,
             CancellationToken cancellationToken = default);
