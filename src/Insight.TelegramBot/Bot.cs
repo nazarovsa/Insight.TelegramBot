@@ -91,6 +91,14 @@ namespace Insight.TelegramBot
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
         }
 
+
+        public virtual Task<Message> SendVoiceAsync(VoiceMessage message,
+            CancellationToken cancellationToken = default)
+        {
+            return Client.SendVoiceAsync(message.ChatId, message.InputOnlineFile, message.Caption,message.ParseMode, message.Duration,
+                message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
+        }
+
         public virtual Task<Message> ForwardMessageAsync(ChatId receiverId,
             ChatId chatId, int messageId,
             bool disableNotification = false,
