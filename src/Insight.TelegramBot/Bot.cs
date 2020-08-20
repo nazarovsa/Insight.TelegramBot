@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Insight.TelegramBot.Models;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace Insight.TelegramBot
 {
@@ -87,16 +88,23 @@ namespace Insight.TelegramBot
         public virtual Task<Message> SendVideoAsync(VideoMessage message,
             CancellationToken cancellationToken = default)
         {
-            return Client.SendVideoAsync(message.ChatId, message.InputOnlineFile, message.Duration, message.Width, message.Height, message.Caption, message.ParseMode, message.SupportsStreaming,
+            return Client.SendVideoAsync(message.ChatId, message.InputOnlineFile, message.Duration, message.Width,
+                message.Height, message.Caption, message.ParseMode, message.SupportsStreaming,
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
         }
-
 
         public virtual Task<Message> SendVoiceAsync(VoiceMessage message,
             CancellationToken cancellationToken = default)
         {
-            return Client.SendVoiceAsync(message.ChatId, message.InputOnlineFile, message.Caption,message.ParseMode, message.Duration,
+            return Client.SendVoiceAsync(message.ChatId, message.InputOnlineFile, message.Caption, message.ParseMode,
+                message.Duration,
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
+        }
+
+        public virtual Task SendChatActionAsync(ChatId chatId, ChatAction chatAction,
+            CancellationToken cancellationToken = default)
+        {
+            return Client.SendChatActionAsync(chatId, chatAction, cancellationToken);
         }
 
         public virtual Task<Message> ForwardMessageAsync(ChatId receiverId,

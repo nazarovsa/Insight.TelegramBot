@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Models;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace Insight.TelegramBot
 {
@@ -34,6 +35,9 @@ namespace Insight.TelegramBot
             CancellationToken cancellationToken = default);
 
         Task<Message> SendVoiceAsync(VoiceMessage message,
+            CancellationToken cancellationToken = default);
+
+        Task SendChatActionAsync(ChatId chatId, ChatAction chatAction,
             CancellationToken cancellationToken = default);
 
         Task<Message> ForwardMessageAsync(ChatId receiverId, ChatId chatId, int messageId,
