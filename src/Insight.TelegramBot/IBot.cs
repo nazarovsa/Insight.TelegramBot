@@ -43,6 +43,9 @@ namespace Insight.TelegramBot
         Task SendVideoNoteAsync(VideoNoteMessage message,
             CancellationToken cancellationToken = default);
 
+        Task SendContactAsync(ContactMessage message,
+            CancellationToken cancellationToken = default);
+
         Task<Message> ForwardMessageAsync(ChatId receiverId, ChatId chatId, int messageId,
             bool disableNotification = false,
             CancellationToken cancellationToken = default);

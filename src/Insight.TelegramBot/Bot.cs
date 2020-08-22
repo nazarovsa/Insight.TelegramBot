@@ -113,6 +113,13 @@ namespace Insight.TelegramBot
             return Client.SendVideoNoteAsync(message.ChatId, message.InputOnlineFile, message.Duration, message.Length,
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
         }
+        
+        public virtual Task SendContactAsync(ContactMessage message,
+            CancellationToken cancellationToken = default)
+        {
+            return Client.SendContactAsync(message.ChatId, message.PhoneNumber, message.FirstName, message.LastName,
+                message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
+        }
 
         public virtual Task<Message> ForwardMessageAsync(ChatId receiverId,
             ChatId chatId, int messageId,
