@@ -40,10 +40,10 @@ namespace Insight.TelegramBot
         Task SendChatActionAsync(ChatId chatId, ChatAction chatAction,
             CancellationToken cancellationToken = default);
 
-        Task SendVideoNoteAsync(VideoNoteMessage message,
+        Task<Message> SendVideoNoteAsync(VideoNoteMessage message,
             CancellationToken cancellationToken = default);
 
-        Task SendContactAsync(ContactMessage message,
+        Task<Message> SendContactAsync(ContactMessage message,
             CancellationToken cancellationToken = default);
 
         Task<Message> ForwardMessageAsync(ChatId receiverId, ChatId chatId, int messageId,

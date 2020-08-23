@@ -107,14 +107,14 @@ namespace Insight.TelegramBot
             return Client.SendChatActionAsync(chatId, chatAction, cancellationToken);
         }
 
-        public virtual Task SendVideoNoteAsync(VideoNoteMessage message,
+        public virtual Task<Message> SendVideoNoteAsync(VideoNoteMessage message,
             CancellationToken cancellationToken = default)
         {
             return Client.SendVideoNoteAsync(message.ChatId, message.InputOnlineFile, message.Duration, message.Length,
                 message.DisableNotification, message.ReplyToMessageId, message.ReplyMarkup, cancellationToken);
         }
         
-        public virtual Task SendContactAsync(ContactMessage message,
+        public virtual Task<Message> SendContactAsync(ContactMessage message,
             CancellationToken cancellationToken = default)
         {
             return Client.SendContactAsync(message.ChatId, message.PhoneNumber, message.FirstName, message.LastName,
