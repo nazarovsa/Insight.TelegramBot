@@ -49,9 +49,6 @@ namespace Insight.TelegramBot.State
 
         public void Configure(Action<StateMachine<TState, string>> @delegate)
         {
-            if (StateMachine == null)
-                throw new ArgumentNullException(nameof(StateMachine));
-
             if (@delegate == null)
                 throw new ArgumentNullException(nameof(@delegate));
 
