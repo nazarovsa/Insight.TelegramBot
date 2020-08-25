@@ -1,18 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Models;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Insight.TelegramBot.Samples.Domain
 {
-    public sealed class BotProcessor : IBotProcessor
+    public sealed class UpdateProcessor : IUpdateProcessor
     {
         private readonly IBot _bot;
 
-        public BotProcessor(IBot bot)
+        public UpdateProcessor(IBot bot)
         {
             if (bot == null)
                 throw new ArgumentNullException(nameof(bot));
@@ -20,7 +22,18 @@ namespace Insight.TelegramBot.Samples.Domain
             _bot = bot;
         }
 
-        public async Task ProcessMessage(Message message, CancellationToken cancellationToken = default)
+
+        public Task ProcessUpdate(Update update, CancellationToken cancellationToken = default)
+        {
+            return update.Type switch
+            {
+                UpdateType.Message => ProcessMessage(update.Message, cancellationToken),
+                UpdateType.CallbackQuery => ProcessCallback(update.CallbackQuery, cancellationToken),
+                _ => throw new NotImplementedException()
+            };
+        }
+
+        private async Task ProcessMessage(Message message, CancellationToken cancellationToken = default)
         {
             if (message.Text != null)
             {
@@ -45,7 +58,7 @@ namespace Insight.TelegramBot.Samples.Domain
             }
         }
 
-        public async Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default)
+        private async Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default)
         {
             var callbackData = CallbackData<SampleState>.Parse(callbackQuery.Data);
 
