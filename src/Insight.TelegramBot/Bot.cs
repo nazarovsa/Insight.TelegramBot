@@ -130,6 +130,11 @@ namespace Insight.TelegramBot
             return Client.ForwardMessageAsync(receiverId, chatId, messageId, disableNotification, cancellationToken);
         }
 
+        public virtual Task LeaveChatAsync(long chatId, CancellationToken cancellationToken = default)
+        {
+            return Client.LeaveChatAsync(chatId, cancellationToken);
+        }
+
         public virtual Task DeleteMessageAsync(long chatId, int messageId,
             CancellationToken cancellationToken = default)
         {

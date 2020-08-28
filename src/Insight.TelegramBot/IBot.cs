@@ -50,6 +50,8 @@ namespace Insight.TelegramBot
             bool disableNotification = false,
             CancellationToken cancellationToken = default);
 
+        Task LeaveChatAsync(long chatId, CancellationToken cancellationToken = default);
+
         Task DeleteMessageAsync(long chatId, int messageId, CancellationToken cancellationToken = default);
 
         Task<Chat> GetChatAsync(ChatId id, CancellationToken cancellationToken = default);
