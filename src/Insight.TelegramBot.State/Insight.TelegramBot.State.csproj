@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <PackageVersion>0.3.0</PackageVersion>
+        <PackageVersion>0.3.1</PackageVersion>
         <Title>States for Insight.TelegramBot</Title>
         <Authors>Sergey Nazarov</Authors>
         <Copyright>Copyright © 2020 Sergey Nazarov</Copyright>

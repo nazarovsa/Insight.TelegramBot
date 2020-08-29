@@ -33,7 +33,7 @@ namespace Insight.TelegramBot.Web
 
             try
             {
-                _logger.LogTrace($"Received update from: {update.Message.From.Id}");
+                _logger.LogTrace($"Received update id: {update.Id}");
 
                 await _processor.ProcessUpdate(update, cancellationToken);
 
