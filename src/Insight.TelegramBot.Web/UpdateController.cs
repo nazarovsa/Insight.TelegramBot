@@ -15,14 +15,8 @@ namespace Insight.TelegramBot.Web
 
         public UpdateController(ILogger<UpdateController> logger, IUpdateProcessor processor)
         {
-            if (logger == null)
-                throw new ArgumentNullException(nameof(logger));
-
-            if (processor == null)
-                throw new ArgumentNullException(nameof(processor));
-
-            _logger = logger;
-            _processor = processor;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _processor = processor ?? throw new ArgumentNullException(nameof(processor));
         }
 
         [HttpPost]

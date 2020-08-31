@@ -16,10 +16,7 @@ namespace Insight.TelegramBot.Samples.Domain
 
         public UpdateProcessor(IBot bot)
         {
-            if (bot == null)
-                throw new ArgumentNullException(nameof(bot));
-
-            _bot = bot;
+            _bot = bot ?? throw new ArgumentNullException(nameof(bot));
         }
 
 

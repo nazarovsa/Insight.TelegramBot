@@ -11,10 +11,7 @@ namespace Insight.TelegramBot.Web.Hosts
 
         public TelegramBotWebHost(IHostedBot bot)
         {
-            if (bot == null)
-                throw new ArgumentNullException(nameof(bot));
-
-            _bot = bot;
+            _bot = bot ?? throw new ArgumentNullException(nameof(bot));
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)

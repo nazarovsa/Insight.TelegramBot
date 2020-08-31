@@ -9,10 +9,7 @@ namespace Insight.TelegramBot.Models
     {
         protected BotMessage(ChatId chatId)
         {
-            if (chatId == null)
-                throw new ArgumentNullException(nameof(chatId));
-
-            ChatId = chatId;
+            ChatId = chatId ?? throw new ArgumentNullException(nameof(chatId));
         }
 
         public ChatId ChatId { get; private set; }

@@ -14,10 +14,7 @@ namespace Insight.TelegramBot
 
         public Bot(ITelegramBotClient client)
         {
-            if (client == null)
-                throw new ArgumentNullException(nameof(client));
-
-            Client = client;
+            Client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public virtual Task<Message> SendMessageAsync(TextMessage message,

@@ -15,14 +15,8 @@ namespace Insight.TelegramBot.Web.Hosts
 
         public TelegramBotWebHookHost(ITelegramBotClient client, BotConfiguration configuration)
         {
-            if (client == null)
-                throw new ArgumentNullException(nameof(client));
-
-            if (configuration == null)
-                throw new ArgumentNullException(nameof(configuration));
-
-            _client = client;
-            _configuration = configuration;
+            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)

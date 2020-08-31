@@ -21,10 +21,7 @@ namespace Insight.TelegramBot.State
             if (stateContext == null)
                 throw new ArgumentNullException(nameof(stateContext));
 
-            if (stateRepository == null)
-                throw new ArgumentNullException(nameof(stateRepository));
-
-            StateRepository = stateRepository;
+            StateRepository = stateRepository ?? throw new ArgumentNullException(nameof(stateRepository));
 
             State = stateContext.CurrentState;
             TelegramId = stateContext.TelegramId;

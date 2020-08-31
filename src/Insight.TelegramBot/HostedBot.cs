@@ -14,10 +14,7 @@ namespace Insight.TelegramBot
         protected HostedBot(BotConfiguration config, ITelegramBotClient client)
             : base(client)
         {
-            if (config == null)
-                throw new ArgumentNullException(nameof(config));
-
-            Config = config;
+            Config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
         public virtual async Task Start()
