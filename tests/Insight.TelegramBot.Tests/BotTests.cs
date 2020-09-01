@@ -13,7 +13,7 @@ namespace Insight.TelegramBot.Tests
 {
     public sealed class BotTests
     {
-        private ITelegramBotClient _client;
+        private readonly ITelegramBotClient _client;
 
         public BotTests()
         {
