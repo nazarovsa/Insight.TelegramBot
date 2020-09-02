@@ -17,6 +17,16 @@ namespace Insight.TelegramBot.Samples.Domain
         {
         }
 
+        public override Task ProcessInlineQuery(InlineQuery inlineQuery, CancellationToken cancellationToken = default)
+        {
+	        throw new NotImplementedException();
+        }
+
+        public override Task ProcessUpdate(Update message, CancellationToken cancellationToken = default)
+        {
+	        throw new NotImplementedException();
+        }
+
         public override async Task ProcessMessage(Message message, CancellationToken cancellationToken = default)
         {
             if (message.Text != null)

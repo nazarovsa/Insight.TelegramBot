@@ -4,14 +4,18 @@ using Telegram.Bot.Types;
 
 namespace Insight.TelegramBot
 {
-    public interface IHostedBot
-    {
-        Task Start();
+	public interface IHostedBot
+	{
+		void Start();
 
-        Task Stop();
+		void Stop();
 
-        Task ProcessMessage(Message message, CancellationToken cancellationToken = default);
+		Task ProcessInlineQuery(InlineQuery inlineQuery, CancellationToken cancellationToken = default);
 
-        Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default);
-    }
+		Task ProcessUpdate(Update message, CancellationToken cancellationToken = default);
+
+		Task ProcessMessage(Message message, CancellationToken cancellationToken = default);
+
+		Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default);
+	}
 }

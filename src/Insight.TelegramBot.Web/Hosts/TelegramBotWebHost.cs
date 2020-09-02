@@ -14,14 +14,16 @@ namespace Insight.TelegramBot.Web.Hosts
             _bot = bot ?? throw new ArgumentNullException(nameof(bot));
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            await _bot.Start();
+            _bot.Start();
+            return Task.CompletedTask;
         }
 
-        public async Task StopAsync(CancellationToken cancellationToken)
+        public Task StopAsync(CancellationToken cancellationToken)
         {
-            await _bot.Stop();
+            _bot.Stop();
+            return Task.CompletedTask;
         }
     }
 }
