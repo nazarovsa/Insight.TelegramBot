@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Insight.TelegramBot.Configurations;
 using Insight.TelegramBot.Models;
 using Telegram.Bot;
+using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -12,19 +13,19 @@ namespace Insight.TelegramBot.Samples.Domain
 {
     public sealed class SampleHostedBot : HostedBot
     {
-        public SampleHostedBot(BotConfiguration config, ITelegramBotClient client) : base(
-            config, client)
+        public SampleHostedBot(BotConfiguration config, ITelegramBotClient client)
+            : base(config, client)
         {
         }
 
         public override Task ProcessInlineQuery(InlineQuery inlineQuery, CancellationToken cancellationToken = default)
         {
-	        throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override Task ProcessUpdate(Update message, CancellationToken cancellationToken = default)
         {
-	        throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override async Task ProcessMessage(Message message, CancellationToken cancellationToken = default)
@@ -79,6 +80,12 @@ namespace Insight.TelegramBot.Samples.Domain
                 default:
                     throw new ArgumentException(nameof(callbackData.NextState));
             }
+        }
+
+        public override Task ProcessReceiveError(ApiRequestException exception,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
     }
 }
