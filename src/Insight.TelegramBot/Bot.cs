@@ -126,6 +126,11 @@ namespace Insight.TelegramBot
 				message.DisableWebPagePreview, message.ReplyMarkup as InlineKeyboardMarkup, cancellationToken);
 		}
 
+		public virtual Task DeleteChatPhotoAsync(ChatId chatId, CancellationToken cancellationToken = default)
+		{
+			return Client.DeleteChatPhotoAsync(chatId, cancellationToken);
+		}
+
 		public virtual Task<Message> ForwardMessageAsync(ChatId receiverId,
 			ChatId chatId,
 			int messageId,
