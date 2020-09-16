@@ -51,6 +51,8 @@ namespace Insight.TelegramBot
 
 		Task DeleteChatPhotoAsync(ChatId chatId, CancellationToken cancellationToken = default);
 
+		Task DeleteChatStickerSetAsync(ChatId chatId, CancellationToken cancellationToken = default);
+
 		Task<Message> ForwardMessageAsync(ChatId receiverId, ChatId chatId, int messageId,
 			bool disableNotification = false,
 			CancellationToken cancellationToken = default);

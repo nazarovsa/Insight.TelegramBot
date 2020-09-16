@@ -130,6 +130,10 @@ namespace Insight.TelegramBot
 		{
 			return Client.DeleteChatPhotoAsync(chatId, cancellationToken);
 		}
+		public virtual Task DeleteChatStickerSetAsync(ChatId chatId, CancellationToken cancellationToken = default)
+		{
+			return Client.DeleteChatStickerSetAsync(chatId, cancellationToken);
+		}
 
 		public virtual Task<Message> ForwardMessageAsync(ChatId receiverId,
 			ChatId chatId,
