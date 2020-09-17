@@ -4,7 +4,7 @@ Insight.TelegramBot
 [![nuget version](https://img.shields.io/nuget/v/Insight.TelegramBot)](https://www.nuget.org/packages/Insight.TelegramBot/)
 [![Nuget](https://img.shields.io/nuget/dt/Insight.TelegramBot?color=%2300000)](https://www.nuget.org/packages/Insight.TelegramBot/)
 
-Simple SDK to implement telegram bot infrastructure. It includes tools to work with state in your bot and web extensions to simplify bot implementation at your Startup.cs.
+Simple SDK to implement telegram bot infrastructure. It includes tools to work with state in your bot and web extensions to simplify bot implementation at your Startup.cs
 
 Insight.TelegramBot.State
 ------------------------
