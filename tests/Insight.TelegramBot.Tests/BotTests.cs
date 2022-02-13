@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Insight.TelegramBot.Models;
 using Moq;
 using Telegram.Bot;
+using Telegram.Bot.Requests.Abstractions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -66,9 +67,11 @@ namespace Insight.TelegramBot.Tests
                 .ReturnsAsync((ChatId chatId,
                         string text,
                         ParseMode parseMode,
+                        IEnumerable<MessageEntity> entities,
                         bool disableWebPagePreview,
                         bool disableNotification,
                         int replyToMessageId,
+                        bool allowSendingWithoutReply,
                         IReplyMarkup replyMarkup,
                         CancellationToken cancellationToken) =>
                     new Message { Chat = new Chat { Id = chatId.Identifier }, Text = text });
