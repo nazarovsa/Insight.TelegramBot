@@ -25,24 +25,29 @@ namespace Insight.TelegramBot.Web.Hosts
             if (webHookInfo != null)
             {
                 if (_configuration.WebHookConfiguration.UseWebHook &&
-                    webHookInfo.Url.Equals(_configuration.WebHookConfiguration.WebHookUrl, StringComparison.OrdinalIgnoreCase))
+                    webHookInfo.Url.Equals(_configuration.WebHookConfiguration.WebHookUrl,
+                        StringComparison.OrdinalIgnoreCase))
                     return;
 
-                await _client.DeleteWebhookAsync(cancellationToken);
+                await _client.DeleteWebhookAsync(_configuration.WebHookConfiguration.DropPendingUpdatesOnDeleteWebhook,
+                    cancellationToken);
             }
-            
+
             if (!_configuration.WebHookConfiguration.UseWebHook)
                 throw new InvalidOperationException("You can't use this host for polling bots");
 
             if (string.IsNullOrWhiteSpace(_configuration.WebHookConfiguration.WebHookUrl))
-                throw new ArgumentNullException($"Empty webhook url: {nameof(_configuration.WebHookConfiguration.WebHookUrl)}");
+                throw new ArgumentNullException(
+                    $"Empty webhook url: {nameof(_configuration.WebHookConfiguration.WebHookUrl)}");
 
-            await _client.SetWebhookAsync(_configuration.WebHookConfiguration.WebHookUrl, cancellationToken: cancellationToken);
+            await _client.SetWebhookAsync(_configuration.WebHookConfiguration.WebHookUrl,
+                cancellationToken: cancellationToken);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            await _client.DeleteWebhookAsync(cancellationToken);
+            await _client.DeleteWebhookAsync(_configuration.WebHookConfiguration.DropPendingUpdatesOnDeleteWebhook,
+                cancellationToken);
         }
     }
 }

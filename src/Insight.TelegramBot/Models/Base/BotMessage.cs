@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -21,5 +22,9 @@ namespace Insight.TelegramBot.Models
         public int ReplyToMessageId { get; set; } = 0;
 
         public IReplyMarkup ReplyMarkup { get; set; } = null;
+        
+        public IEnumerable<MessageEntity> Entities { get; set; } = ArraySegment<MessageEntity>.Empty;
+        
+        public bool AllowSendingWithoutReply { get; set; }
     }
 }

@@ -10,6 +10,8 @@ namespace Insight.TelegramBot.Models
         }
 
         public InputOnlineFile InputOnlineFile { get; set; }
+        
+        public InputMedia Thumb { get; set; }
 
         public string Caption { get; set; } = null;
     }

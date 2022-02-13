@@ -13,5 +13,9 @@ namespace Insight.TelegramBot.Models
         public float Longitude { get; set; }
 
         public int LivePeriod { get; set; }
+        
+        public int Heading { get; set; }
+        
+        public int ProximityAlertRadius { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace Insight.TelegramBot.Configurations
         public string WebHookBaseUrl { get; set; }
 
         public string WebHookPath { get; set; }
+        
+        public bool DropPendingUpdatesOnDeleteWebhook { get; set; }
 
         public string WebHookUrl
         {

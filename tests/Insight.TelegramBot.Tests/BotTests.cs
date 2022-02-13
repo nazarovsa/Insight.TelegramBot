@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Models;
@@ -51,13 +53,14 @@ namespace Insight.TelegramBot.Tests
         private ITelegramBotClient CreateSut()
         {
             var mock = new Mock<ITelegramBotClient>();
-            mock
-                .Setup(x => x.SendTextMessageAsync(It.IsAny<ChatId>(),
+            mock.Setup(x => x.SendTextMessageAsync(It.IsAny<ChatId>(),
                     It.IsAny<string>(),
                     It.IsAny<ParseMode>(),
+                    It.IsAny<IEnumerable<MessageEntity>>(),
                     It.IsAny<bool>(),
                     It.IsAny<bool>(),
                     It.IsAny<int>(),
+                    It.IsAny<bool>(),
                     It.IsAny<IReplyMarkup>(),
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync((ChatId chatId,
@@ -68,7 +71,7 @@ namespace Insight.TelegramBot.Tests
                         int replyToMessageId,
                         IReplyMarkup replyMarkup,
                         CancellationToken cancellationToken) =>
-                    new Message {Chat = new Chat {Id = chatId.Identifier}, Text = text});
+                    new Message { Chat = new Chat { Id = chatId.Identifier }, Text = text });
 
             mock.Setup(x => x.DeleteMessageAsync(It.IsAny<ChatId>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.CompletedTask);

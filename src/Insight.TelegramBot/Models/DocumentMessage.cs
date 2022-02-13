@@ -7,5 +7,7 @@ namespace Insight.TelegramBot.Models
         public DocumentMessage(ChatId chatId) : base(chatId)
         {
         }
+
+        public bool DisableContentTypeDetection { get; set; }
     }
 }

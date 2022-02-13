@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <PackageVersion>0.4.0</PackageVersion>
         <Title>Simple SDK to implement telegram bot infrastructure</Title>
         <Authors>Sergey Nazarov</Authors>
         <Copyright>Copyright © 2020 Sergey Nazarov</Copyright>
@@ -12,7 +11,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Telegram.Bot" Version="15.7.1" />
+      <PackageReference Include="Telegram.Bot" Version="16.0.2" />
     </ItemGroup>
 
 </Project>
