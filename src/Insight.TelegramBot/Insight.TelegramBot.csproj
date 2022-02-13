@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <PackageVersion>0.4.0</PackageVersion>
         <Title>Simple SDK to implement telegram bot infrastructure</Title>
         <Authors>Sergey Nazarov</Authors>

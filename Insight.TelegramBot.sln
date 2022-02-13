@@ -25,6 +25,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Testing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Samples.WebHookBot", "samples\Insight.TelegramBot.Samples.WebHookBot\Insight.TelegramBot.Samples.WebHookBot.csproj", "{4084EE63-0379-421A-873E-E80A77B158D3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6EA49BAD-7E61-4DDA-9718-D357D9A4DED6}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		publish-nuget.sh = publish-nuget.sh
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
