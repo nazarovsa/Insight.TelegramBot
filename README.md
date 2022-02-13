@@ -1,6 +1,6 @@
 Insight.TelegramBot
 ========================
-[![Build Status](https://travis-ci.org/InsightAppDev/Insight.TelegramBot.svg?branch=master)](https://travis-ci.org/InsightAppDev/Insight.TelegramBot)
+[![Build & test](https://github.com/nazarovsa/Insight.TelegramBot/actions/workflows/dotnet.yml/badge.svg)](https://github.com/nazarovsa/Insight.TelegramBot/actions/workflows/dotnet.yml)
 [![nuget version](https://img.shields.io/nuget/v/Insight.TelegramBot)](https://www.nuget.org/packages/Insight.TelegramBot/)
 [![Nuget](https://img.shields.io/nuget/dt/Insight.TelegramBot?color=%2300000)](https://www.nuget.org/packages/Insight.TelegramBot/)
 
