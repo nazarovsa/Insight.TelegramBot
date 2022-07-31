@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Models;
@@ -10,17 +9,17 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Insight.TelegramBot.Samples.Domain
 {
-    public sealed class UpdateProcessor : IUpdateProcessor
+    public sealed class SampleUpdateProcessor : IPollingUpdateProcessor
     {
         private readonly IBot _bot;
 
-        public UpdateProcessor(IBot bot)
+        public SampleUpdateProcessor(IBot bot)
         {
             _bot = bot ?? throw new ArgumentNullException(nameof(bot));
         }
 
 
-        public Task ProcessUpdate(Update update, CancellationToken cancellationToken = default)
+        public Task HandleUpdate(Update update, CancellationToken cancellationToken = default)
         {
             return update.Type switch
             {
@@ -28,6 +27,11 @@ namespace Insight.TelegramBot.Samples.Domain
                 UpdateType.CallbackQuery => ProcessCallback(update.CallbackQuery, cancellationToken),
                 _ => throw new NotImplementedException()
             };
+        }
+
+        public Task HandlePollingErrorAsync(Exception exception, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
 
         private async Task ProcessMessage(Message message, CancellationToken cancellationToken = default)
@@ -43,9 +47,8 @@ namespace Insight.TelegramBot.Samples.Domain
                         {
                             new List<InlineKeyboardButton>
                             {
-                                new InlineKeyboardButton
+                                new InlineKeyboardButton("Touch me.")
                                 {
-                                    Text = "Touch me",
                                     CallbackData = new CallbackData<SampleState>(SampleState.TouchMe).ToString()
                                 }
                             }
@@ -69,9 +72,8 @@ namespace Insight.TelegramBot.Samples.Domain
                         {
                             new List<InlineKeyboardButton>
                             {
-                                new InlineKeyboardButton
+                                new InlineKeyboardButton("Touch me")
                                 {
-                                    Text = "Touch me",
                                     CallbackData = new CallbackData<SampleState>(SampleState.TouchMe).ToString()
                                 }
                             }

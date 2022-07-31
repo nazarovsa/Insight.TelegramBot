@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Models;
 using Moq;
 using Telegram.Bot;
-using Telegram.Bot.Requests.Abstractions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -60,6 +58,7 @@ namespace Insight.TelegramBot.Tests
                     It.IsAny<IEnumerable<MessageEntity>>(),
                     It.IsAny<bool>(),
                     It.IsAny<bool>(),
+                    It.IsAny<bool>(),
                     It.IsAny<int>(),
                     It.IsAny<bool>(),
                     It.IsAny<IReplyMarkup>(),
@@ -74,7 +73,7 @@ namespace Insight.TelegramBot.Tests
                         bool allowSendingWithoutReply,
                         IReplyMarkup replyMarkup,
                         CancellationToken cancellationToken) =>
-                    new Message { Chat = new Chat { Id = chatId.Identifier }, Text = text });
+                    new Message { Chat = new Chat { Id = chatId.Identifier.Value }, Text = text });
 
             mock.Setup(x => x.DeleteMessageAsync(It.IsAny<ChatId>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.CompletedTask);

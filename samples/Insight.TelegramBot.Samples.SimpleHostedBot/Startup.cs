@@ -1,7 +1,8 @@
 using System.Net.Http;
 using Insight.TelegramBot.Configurations;
 using Insight.TelegramBot.Samples.Domain;
-using Insight.TelegramBot.Web.Hosts;
+using Insight.TelegramBot.Web;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -21,15 +22,18 @@ namespace Insight.TelegramBot.Samples.SimpleHostedBot
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<BotConfiguration>(Configuration.GetSection(nameof(BotConfiguration)));
-
-            services.AddSingleton<IHostedBot, SampleHostedBot>(c => new SampleHostedBot(
-                c.GetService<IOptions<BotConfiguration>>().Value, c.GetService<ITelegramBotClient>()));
+            services.AddTransient<IUpdateProcessor, SampleUpdateProcessor>();
+            services.AddTransient<IBot, SampleBot>();
 
             services.AddSingleton<ITelegramBotClient, TelegramBotClient>(c =>
                 new TelegramBotClient(c.GetService<IOptions<BotConfiguration>>().Value.Token,
                     new HttpClient()));
 
-            services.AddHostedService<TelegramBotWebHost>();
+            services.AddPollingBotWebHost();
+        }
+
+        public void Configure(IApplicationBuilder configure)
+        {
         }
     }
 }

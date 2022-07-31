@@ -1,8 +1,13 @@
 using System;
 using System.Reflection;
+using Insight.TelegramBot.Configurations;
+using Insight.TelegramBot.Web.Hosts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Options;
+using Telegram.Bot;
+using Telegram.Bot.Polling;
 
 namespace Insight.TelegramBot.Web
 {
@@ -39,9 +44,30 @@ namespace Insight.TelegramBot.Web
                 throw new ArgumentNullException(nameof(route));
 
             builder.MapControllerRoute("update", route,
-                new {Controller = "Update", Action = "Post"});
+                new { Controller = "Update", Action = "Post" });
 
             return builder;
+        }
+
+        /// <summary>
+        /// Add polling bot.
+        /// </summary>
+        /// <param name="services"><see cref="IServiceCollection"/>.</param>
+        /// <param name="receiverOptions"><see cref="ReceiverOptions"/>.</param>
+        public static IServiceCollection AddPollingBotWebHost(this IServiceCollection services, ReceiverOptions? receiverOptions = null)
+        {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
+            services.AddHostedService(ctx =>
+                new TelegramBotPollingWebHost(ctx.GetRequiredService<IServiceProvider>(),
+                    ctx.GetRequiredService<IOptions<BotConfiguration>>(),
+                    ctx.GetRequiredService<ITelegramBotClient>(),
+                    receiverOptions));
+
+            return services;
         }
     }
 }

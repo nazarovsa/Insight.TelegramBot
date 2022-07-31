@@ -6,6 +6,6 @@ namespace Insight.TelegramBot
 {
     public interface IUpdateProcessor
     {
-        Task ProcessUpdate(Update update, CancellationToken cancellationToken = default);
+        Task HandleUpdate(Update update, CancellationToken cancellationToken = default);
     }
 }

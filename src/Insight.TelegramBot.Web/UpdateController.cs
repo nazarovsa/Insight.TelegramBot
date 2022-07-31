@@ -29,7 +29,7 @@ namespace Insight.TelegramBot.Web
             {
                 _logger.LogTrace($"Received update id: {update.Id}");
 
-                await _processor.ProcessUpdate(update, cancellationToken);
+                await _processor.HandleUpdate(update, cancellationToken);
 
                 return Ok();
             }

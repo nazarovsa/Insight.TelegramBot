@@ -15,7 +15,9 @@ namespace Insight.TelegramBot.Models
 
         public ChatId ChatId { get; private set; }
 
-        public ParseMode ParseMode { get; set; } = ParseMode.Default;
+        public ParseMode ParseMode { get; set; } = ParseMode.Html;
+        
+        public bool ProtectContent { get; set; }
 
         public bool DisableNotification { get; set; } = false;
 
@@ -23,7 +25,7 @@ namespace Insight.TelegramBot.Models
 
         public IReplyMarkup ReplyMarkup { get; set; } = null;
         
-        public IEnumerable<MessageEntity> Entities { get; set; } = ArraySegment<MessageEntity>.Empty;
+        public IEnumerable<MessageEntity> Entities { get; set; } = Array.Empty<MessageEntity>();
         
         public bool AllowSendingWithoutReply { get; set; }
     }
