@@ -1,6 +1,6 @@
 # CHANGES
 
-## 0.4.0
+## 0.6.0
 * Update Telegram.Bots version to 18.0.0. 
 
 ## 0.1.0
