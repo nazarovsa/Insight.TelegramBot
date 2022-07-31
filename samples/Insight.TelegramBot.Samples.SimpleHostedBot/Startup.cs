@@ -29,7 +29,7 @@ namespace Insight.TelegramBot.Samples.SimpleHostedBot
                 new TelegramBotClient(c.GetService<IOptions<BotConfiguration>>().Value.Token,
                     new HttpClient()));
 
-            services.AddPollingBotWebHost();
+            services.AddPollingBotHost();
         }
 
         public void Configure(IApplicationBuilder configure)

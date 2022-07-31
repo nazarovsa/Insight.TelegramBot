@@ -42,10 +42,8 @@ namespace Insight.TelegramBot.Samples.WebHookBot
             services.AddTransient<ITelegramBotClient, TelegramBotClient>(c =>
                 new TelegramBotClient(c.GetService<IOptions<BotConfiguration>>().Value.Token,
                     c.GetService<IHttpClientFactory>().CreateClient()));
-
-            services.AddHostedService(c =>
-                new TelegramBotWebHookHost(c.GetService<ITelegramBotClient>(),
-                    c.GetService<IOptions<BotConfiguration>>().Value));
+            
+            services.AddWebHookBotHost();
         }
 
         public void Configure(IApplicationBuilder app)

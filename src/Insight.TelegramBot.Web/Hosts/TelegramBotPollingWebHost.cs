@@ -10,69 +10,68 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Insight.TelegramBot.Web.Hosts
+namespace Insight.TelegramBot.Web.Hosts;
+
+internal sealed class TelegramBotPollingWebHost : IHostedService
 {
-    internal sealed class TelegramBotPollingWebHost : IHostedService
+    private readonly IServiceProvider _serviceProvider;
+
+    private readonly ITelegramBotClient _client;
+
+    private readonly BotConfiguration _botConfiguration;
+        
+    private readonly ReceiverOptions? _receiverOptions;
+        
+    private CancellationTokenSource _cts;
+
+    public TelegramBotPollingWebHost(IServiceProvider serviceProvider, IOptions<BotConfiguration> config, ITelegramBotClient client, ReceiverOptions? receiverOptions = null)
     {
-        private readonly IServiceProvider _serviceProvider;
+        _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        _client = client ?? throw new ArgumentNullException(nameof(client));
+        _botConfiguration = config?.Value ?? throw new ArgumentNullException(nameof(config));
+        _receiverOptions = receiverOptions;
+    }
 
-        private readonly ITelegramBotClient _client;
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        if (_botConfiguration.WebHookConfiguration.UseWebHook)
+            throw new InvalidOperationException("For webhook bots use TelegramBotWithHookWebHost");
 
-        private readonly BotConfiguration _botConfiguration;
-        
-        private readonly ReceiverOptions? _receiverOptions;
-        
-        private CancellationTokenSource _cts;
+        _cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
-        public TelegramBotPollingWebHost(IServiceProvider serviceProvider, IOptions<BotConfiguration> config, ITelegramBotClient client, ReceiverOptions? receiverOptions = null)
-        {
-            _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-            _client = client ?? throw new ArgumentNullException(nameof(client));
-            _botConfiguration = config?.Value ?? throw new ArgumentNullException(nameof(config));
-            _receiverOptions = receiverOptions;
-        }
+        var receiverOptions = _receiverOptions ??
+            new ReceiverOptions
+            {
+                AllowedUpdates = Array.Empty<UpdateType>()
+            };
 
-        public Task StartAsync(CancellationToken cancellationToken)
-        {
-            if (_botConfiguration.WebHookConfiguration.UseWebHook)
-                throw new InvalidOperationException("For webhook bots use TelegramBotWithHookWebHost");
-
-            _cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-
-            var receiverOptions = _receiverOptions ??
-                new ReceiverOptions
-                {
-                    AllowedUpdates = Array.Empty<UpdateType>()
-                };
-
-            _client.StartReceiving(
-                updateHandler: HandleUpdateAsync,
-                pollingErrorHandler: HandlePollingErrorAsync,
-                receiverOptions: receiverOptions,
-                cancellationToken: _cts.Token
-            );
+        _client.StartReceiving(
+            updateHandler: HandleUpdateAsync,
+            pollingErrorHandler: HandlePollingErrorAsync,
+            receiverOptions: receiverOptions,
+            cancellationToken: _cts.Token
+        );
             
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
+    }
 
-        public Task StopAsync(CancellationToken cancellationToken = default)
-        {
-            _cts.Cancel();
-            return Task.CompletedTask;
-        }
+    public Task StopAsync(CancellationToken cancellationToken = default)
+    {
+        _cts.Cancel();
+        return Task.CompletedTask;
+    }
 
-        private async Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken cancellationToken = default)
-        {
-            using var scope = _serviceProvider.CreateScope();
-            var updateProcessor = scope.ServiceProvider.GetRequiredService<IUpdateProcessor>();
-            await updateProcessor.HandleUpdate(update, cancellationToken);
-        }
+    private async Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken cancellationToken = default)
+    {
+        using var scope = _serviceProvider.CreateScope();
+        var updateProcessor = scope.ServiceProvider.GetRequiredService<IUpdateProcessor>();
+        await updateProcessor.HandleUpdate(update, cancellationToken);
+    }
 
-        private async Task HandlePollingErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken cancellationToken = default)
-        {
-            using var scope = _serviceProvider.CreateScope();
-            var updateProcessor = scope.ServiceProvider.GetRequiredService<IPollingUpdateProcessor>();
-            await updateProcessor.HandlePollingErrorAsync(exception, cancellationToken);
-        }
+    private async Task HandlePollingErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken cancellationToken = default)
+    {
+        using var scope = _serviceProvider.CreateScope();
+        var updateProcessor = scope.ServiceProvider.GetRequiredService<IPollingUpdateProcessor>();
+        await updateProcessor.HandlePollingErrorAsync(exception, cancellationToken);
     }
 }
