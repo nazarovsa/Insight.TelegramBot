@@ -1,8 +1,9 @@
-CHANGES
-=========================
+# CHANGES
 
-0.1.0
--------------------------
+## 0.4.0
+* Update Telegram.Bots version to 18.0.0. 
+
+## 0.1.0
 Add methods:
 * SendDocumentAsync
 * SendPhotoAsync

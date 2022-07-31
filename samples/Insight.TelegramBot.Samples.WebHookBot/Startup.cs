@@ -2,7 +2,6 @@ using System.Net.Http;
 using Insight.TelegramBot.Configurations;
 using Insight.TelegramBot.Samples.Domain;
 using Insight.TelegramBot.Web;
-using Insight.TelegramBot.Web.Hosts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,15 +36,13 @@ namespace Insight.TelegramBot.Samples.WebHookBot
             services.AddHttpClient();
             
             services.AddScoped<IBot, Bot>();
-            services.AddScoped<IUpdateProcessor, UpdateProcessor>();
+            services.AddScoped<IUpdateProcessor, SampleUpdateProcessor>();
             
             services.AddTransient<ITelegramBotClient, TelegramBotClient>(c =>
                 new TelegramBotClient(c.GetService<IOptions<BotConfiguration>>().Value.Token,
                     c.GetService<IHttpClientFactory>().CreateClient()));
-
-            services.AddHostedService(c =>
-                new TelegramBotWebHookHost(c.GetService<ITelegramBotClient>(),
-                    c.GetService<IOptions<BotConfiguration>>().Value));
+            
+            services.AddWebHookBotHost();
         }
 
         public void Configure(IApplicationBuilder app)

@@ -19,7 +19,7 @@ namespace Insight.TelegramBot
 
         public override string ToString()
         {
-            var result = $"{Convert.ToInt32(NextState)}>{string.Join('|', Args)}";
+            var result = $"{Convert.ToInt32(NextState)}>{string.Join("|", Args)}";
 
             return Encoding.UTF8.GetBytes(result).Length > 64
                 ? throw new ArgumentException("String length should be less than 65 bytes")
@@ -31,10 +31,10 @@ namespace Insight.TelegramBot
             if (string.IsNullOrWhiteSpace(commandText))
                 throw new ArgumentNullException(nameof(commandText));
 
-            var items = commandText.Split(">");
+            var items = commandText.Split('>');
             var nextState = (TState) Enum.Parse(typeof(TState), items[0]);
 
-            var args = items[^1]
+            var args = items[items.Length - 1]
                 .Split('|');
 
             if (args.Length == 0 || args.Length == 1 && string.IsNullOrWhiteSpace(args[0]))

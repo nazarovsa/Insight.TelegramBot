@@ -5,39 +5,38 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot.Types;
 
-namespace Insight.TelegramBot.Web
+namespace Insight.TelegramBot.Web;
+
+public sealed class UpdateController : ControllerBase
 {
-    public sealed class UpdateController : ControllerBase
+    private readonly ILogger<UpdateController> _logger;
+
+    private readonly IUpdateProcessor _processor;
+
+    public UpdateController(ILogger<UpdateController> logger, IUpdateProcessor processor)
     {
-        private readonly ILogger<UpdateController> _logger;
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _processor = processor ?? throw new ArgumentNullException(nameof(processor));
+    }
 
-        private readonly IUpdateProcessor _processor;
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody] Update update, CancellationToken cancellationToken)
+    {
+        if (update == null)
+            return BadRequest();
 
-        public UpdateController(ILogger<UpdateController> logger, IUpdateProcessor processor)
+        try
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _processor = processor ?? throw new ArgumentNullException(nameof(processor));
+            _logger.LogTrace($"Received update id: {update.Id}");
+
+            await _processor.HandleUpdate(update, cancellationToken);
+
+            return Ok();
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Update update, CancellationToken cancellationToken)
+        catch (Exception ex)
         {
-            if (update == null)
-                return BadRequest();
-
-            try
-            {
-                _logger.LogTrace($"Received update id: {update.Id}");
-
-                await _processor.ProcessUpdate(update, cancellationToken);
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error at processing update");
-                return BadRequest();
-            }
+            _logger.LogError(ex, "Error at processing update");
+            return BadRequest();
         }
     }
 }
