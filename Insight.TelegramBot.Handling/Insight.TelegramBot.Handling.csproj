@@ -12,7 +12,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\Insight.TelegramBot\Insight.TelegramBot.csproj" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\src\Insight.TelegramBot\Insight.TelegramBot.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,32 +1,27 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Handling.Handlers;
-using Insight.TelegramBot.Handling.Matchers;
 using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot.Types;
 
 namespace Insight.TelegramBot.Handling;
 
 internal sealed class HandlingUpdateProcessor : IUpdateProcessor
 {
+    private readonly ILogger<HandlingUpdateProcessor> _logger;
     private readonly IServiceProvider _serviceProvider;
+    private readonly IUpdateHandlersProvider _updateHandlersProvider;
 
-    private static readonly Dictionary<Type, IUpdateMatcher> _typeMatchersMap = new();
-
-    public HandlingUpdateProcessor(IServiceProvider serviceProvider, IUpdateHandlersProvider updateHandlersProvider)
+    public HandlingUpdateProcessor(ILogger<HandlingUpdateProcessor> logger,
+        IServiceProvider serviceProvider,
+        IUpdateHandlersProvider updateHandlersProvider)
     {
+        _logger = logger;
         _serviceProvider = serviceProvider;
-
-        foreach (var pair in updateHandlersProvider.GetTypeMap())
-        {
-            if (!_typeMatchersMap.ContainsKey(pair.Key))
-            {
-                _typeMatchersMap.Add(pair.Key, pair.Value);
-            }
-        }
+        _updateHandlersProvider = updateHandlersProvider;
     }
 
     /// <summary>
@@ -36,20 +31,24 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
     /// <param name="cancellationToken"><see cref="CancellationToken"/>.</param>
     public async Task HandleUpdate(Update update, CancellationToken cancellationToken = default)
     {
-        foreach (var kv in _typeMatchersMap)
+        foreach (var kv in _updateHandlersProvider.TypeMap)
         {
             if (kv.Value.Matches(update))
             {
-                using (var scope = _serviceProvider.CreateScope())
+                using var scope = _serviceProvider.CreateScope();
+                var services = scope.ServiceProvider.GetServices(kv.Key);
+                foreach (var service in services)
                 {
-                    var service = scope.ServiceProvider.GetService(kv.Key) as IUpdateHandler;
-                    if (service == null)
+                    if (service is IUpdateHandler updateHandler)
                     {
-                        throw new InvalidOperationException(
-                            $"There is no registered implementation for {kv.Key.Name}.");
+                        await updateHandler.Handle(update, cancellationToken);
                     }
-
-                    await service.Handle(update, cancellationToken);
+                    else
+                    {
+                        _logger.LogWarning("Update handler resolved for {ResolvedType} is not a {TypeName}",
+                            kv.Key.Name,
+                            nameof(IUpdateHandler));
+                    }
                 }
             }
         }

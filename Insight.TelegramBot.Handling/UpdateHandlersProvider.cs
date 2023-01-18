@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
 using Insight.TelegramBot.Handling.Handlers;
@@ -10,7 +10,7 @@ namespace Insight.TelegramBot.Handling;
 
 internal sealed class UpdateHandlersProvider : IUpdateHandlersProvider
 {
-    private Dictionary<Type, IUpdateMatcher> _typeMap = new();
+    public ConcurrentDictionary<Type, IUpdateMatcher> TypeMap { get; } = new();
 
     public UpdateHandlersProvider(params Assembly[] assemblies)
     {
@@ -34,7 +34,7 @@ internal sealed class UpdateHandlersProvider : IUpdateHandlersProvider
 
         foreach (var type in types)
         {
-            if (!_typeMap.ContainsKey(type))
+            if (!TypeMap.ContainsKey(type))
             {
                 var propertyInfo = type.BaseType
                     .GetProperty("Matcher", BindingFlags.Public | BindingFlags.Static);
@@ -43,7 +43,7 @@ internal sealed class UpdateHandlersProvider : IUpdateHandlersProvider
                     throw new InvalidOperationException(
                         $"Failed to extract matcher property info for handler: {type.Name}. Check that your handler inherits from {typeof(MatchingUpdateHandler<>).Name} not from {typeof(IMatchingUpdateHandler<>)}.");
                 }
-                
+
                 var matcher = propertyInfo.GetValue(null, null) as IUpdateMatcher;
                 if (matcher == null)
                 {
@@ -57,16 +57,12 @@ internal sealed class UpdateHandlersProvider : IUpdateHandlersProvider
                             .IsAssignableFrom(typeof(IMatchingUpdateHandler<>))
                     );
 
-                _typeMap.Add(implementedGenericMatcherInterfaceType, matcher);
+                if (!TypeMap.TryAdd(implementedGenericMatcherInterfaceType, matcher))
+                {
+                    throw new InvalidOperationException(
+                        $"Failed to add matcher of type {matcher.GetType().Name} for handler type {implementedGenericMatcherInterfaceType.Name}");
+                }
             }
-        }
-    }
-
-    public IEnumerable<KeyValuePair<Type, IUpdateMatcher>> GetTypeMap()
-    {
-        foreach (var kv in _typeMap)
-        {
-            yield return kv;
         }
     }
 }
