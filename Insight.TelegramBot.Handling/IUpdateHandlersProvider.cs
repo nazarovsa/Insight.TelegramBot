@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Insight.TelegramBot.Handling.Matchers;
 
 namespace Insight.TelegramBot.Handling;
 
 internal interface IUpdateHandlersProvider
 {
-    ConcurrentDictionary<Type, IUpdateMatcher> TypeMap { get; }
+    Dictionary<Type, IUpdateMatcher> TypeMap { get; }
 }

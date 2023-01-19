@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Insight.TelegramBot.Handling.Handlers;
@@ -10,7 +10,7 @@ namespace Insight.TelegramBot.Handling;
 
 internal sealed class UpdateHandlersProvider : IUpdateHandlersProvider
 {
-    public ConcurrentDictionary<Type, IUpdateMatcher> TypeMap { get; } = new();
+    public Dictionary<Type, IUpdateMatcher> TypeMap { get; } = new();
 
     public UpdateHandlersProvider(params Assembly[] assemblies)
     {
@@ -57,11 +57,7 @@ internal sealed class UpdateHandlersProvider : IUpdateHandlersProvider
                             .IsAssignableFrom(typeof(IMatchingUpdateHandler<>))
                     );
 
-                if (!TypeMap.TryAdd(implementedGenericMatcherInterfaceType, matcher))
-                {
-                    throw new InvalidOperationException(
-                        $"Failed to add matcher of type {matcher.GetType().Name} for handler type {implementedGenericMatcherInterfaceType.Name}");
-                }
+                TypeMap.Add(implementedGenericMatcherInterfaceType, matcher);
             }
         }
     }
