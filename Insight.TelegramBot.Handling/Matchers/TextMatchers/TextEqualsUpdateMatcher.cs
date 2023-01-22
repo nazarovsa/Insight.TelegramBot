@@ -5,7 +5,7 @@ namespace Insight.TelegramBot.Handling.Matchers.TextMatchers;
 
 public abstract class TextEqualsUpdateMatcher : TextUpdateMatcher
 {
-    public string Template { get; protected set; }
+    public string Template { get; protected set; } = null!;
 
     public StringComparison StringComparison { get; protected set; } = StringComparison.InvariantCultureIgnoreCase;
 

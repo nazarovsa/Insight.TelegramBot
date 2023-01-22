@@ -23,9 +23,12 @@ internal sealed class TelegramBotPollingWebHost : IHostedService
         
     private readonly ReceiverOptions? _receiverOptions;
         
-    private CancellationTokenSource _cts;
+    private CancellationTokenSource? _cts;
 
-    public TelegramBotPollingWebHost(IServiceProvider serviceProvider, IOptions<BotConfiguration> config, ITelegramBotClient client, ReceiverOptions? receiverOptions = null)
+    public TelegramBotPollingWebHost(IServiceProvider serviceProvider,
+        IOptions<BotConfiguration> config, 
+        ITelegramBotClient client,
+        ReceiverOptions? receiverOptions = null)
     {
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         _client = client ?? throw new ArgumentNullException(nameof(client));
@@ -58,7 +61,7 @@ internal sealed class TelegramBotPollingWebHost : IHostedService
 
     public Task StopAsync(CancellationToken cancellationToken = default)
     {
-        _cts.Cancel();
+        _cts?.Cancel();
         return Task.CompletedTask;
     }
 

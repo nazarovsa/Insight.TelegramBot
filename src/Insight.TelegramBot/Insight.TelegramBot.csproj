@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>$(PackageFrameworkVersions);</TargetFrameworks>
         <LangVersion>$(LanguageVersion)</LangVersion>
         <Title>Simple SDK to implement telegram bot infrastructure</Title>
         <Authors>Sergey Nazarov</Authors>
-        <PackageProjectUrl>https://github.com/InsightAppDev/Insight.TelegramBot</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/InsightAppDev/Insight.TelegramBot</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/nazarovsa/Insight.TelegramBot</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/nazarovsa/Insight.TelegramBot</RepositoryUrl>
         <RepositoryType>Github</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Telegram.Bot" Version="$(TelegramBotVersion)" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+        <PackageReference Include="Telegram.Bot"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
     </ItemGroup>
 
 </Project>

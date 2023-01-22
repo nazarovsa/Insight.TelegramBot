@@ -34,14 +34,21 @@ internal sealed class UpdateHandlersProvider : IUpdateHandlersProvider
 
         foreach (var type in types)
         {
-            if (!TypeMap.ContainsKey(type))
+            var implementedGenericMatcherInterfaceType = type.GetInterfaces()
+                .Single(x =>
+                    x.IsGenericType &&
+                    x.GetGenericTypeDefinition()
+                        .IsAssignableFrom(typeof(IMatchingUpdateHandler<>))
+                );
+
+            if (!TypeMap.ContainsKey(implementedGenericMatcherInterfaceType))
             {
-                var propertyInfo = type.BaseType
+                var propertyInfo = implementedGenericMatcherInterfaceType
                     .GetProperty("Matcher", BindingFlags.Public | BindingFlags.Static);
                 if (propertyInfo == null)
                 {
                     throw new InvalidOperationException(
-                        $"Failed to extract matcher property info for handler: {type.Name}. Check that your handler inherits from {typeof(MatchingUpdateHandler<>).Name} not from {typeof(IMatchingUpdateHandler<>)}.");
+                        $"Failed to extract matcher property info for handler: {type.Name}. m {typeof(IMatchingUpdateHandler<>)}.");
                 }
 
                 var matcher = propertyInfo.GetValue(null, null) as IUpdateMatcher;
@@ -49,13 +56,6 @@ internal sealed class UpdateHandlersProvider : IUpdateHandlersProvider
                 {
                     throw new InvalidOperationException($"Failed to extract matcher for handler: {type.Name}");
                 }
-
-                var implementedGenericMatcherInterfaceType = type.GetInterfaces()
-                    .Single(x =>
-                        x.IsGenericType &&
-                        x.GetGenericTypeDefinition()
-                            .IsAssignableFrom(typeof(IMatchingUpdateHandler<>))
-                    );
 
                 TypeMap.Add(implementedGenericMatcherInterfaceType, matcher);
             }

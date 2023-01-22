@@ -5,5 +5,5 @@ namespace Insight.TelegramBot.Handling.Handlers;
 public interface IMatchingUpdateHandler<TMatcher> : IUpdateHandler
     where TMatcher : IUpdateMatcher, new()
 {
-    static TMatcher Matcher { get; }
+    static TMatcher Matcher { get; } = new TMatcher();
 }

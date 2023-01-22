@@ -7,7 +7,7 @@ using Telegram.Bot;
 
 namespace Insight.TelegramBot.Web.Hosts;
 
-public class TelegramBotWebHookHost : IHostedService
+internal sealed class TelegramBotWebHookHost : IHostedService
 {
     private readonly ITelegramBotClient _client;
 

@@ -1,17 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>$(PackageFrameworkVersions);</TargetFrameworks>
+        <Nullable>enable</Nullable>
         <LangVersion>$(LanguageVersion)</LangVersion>
         <Title>States for Insight.TelegramBot</Title>
         <Authors>Sergey Nazarov</Authors>
-        <PackageProjectUrl>https://github.com/InsightAppDev/Insight.TelegramBot</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/InsightAppDev/Insight.TelegramBot</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/nazarovsa/Insight.TelegramBot</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/nazarovsa/Insight.TelegramBot</RepositoryUrl>
         <RepositoryType>Github</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Stateless" Version="5.11.0" />
+        <PackageReference Include="Stateless"/>
     </ItemGroup>
 
 </Project>

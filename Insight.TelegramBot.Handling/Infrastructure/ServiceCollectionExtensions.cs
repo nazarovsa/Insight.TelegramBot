@@ -47,14 +47,23 @@ public static class ServiceCollectionExtensions
 
         foreach (var type in types)
         {
-            var implementedGenericMatcherInterfaceType = type.GetInterfaces()
-                .Single(x =>
+            var implementedGenericMatcherInterfaceTypes = type.GetInterfaces()
+                .Where(x =>
                     x.IsGenericType &&
                     x.GetGenericTypeDefinition()
                         .IsAssignableFrom(typeof(IMatchingUpdateHandler<>))
-                );
+                ).ToArray();
 
-            var serviceDescriptor = new ServiceDescriptor(implementedGenericMatcherInterfaceType, type, ServiceLifetime.Transient);
+            if (implementedGenericMatcherInterfaceTypes.Length > 1)
+            {
+                throw new InvalidOperationException(
+                    $"{type.Name} implements more than one {typeof(IMatchingUpdateHandler<>).Name} interfaces.");
+            }
+
+            var implementedGenericMatcherInterfaceType = implementedGenericMatcherInterfaceTypes.Single();
+            var serviceDescriptor = new ServiceDescriptor(implementedGenericMatcherInterfaceType,
+                type,
+                ServiceLifetime.Transient);
             services.Add(serviceDescriptor);
         }
     }

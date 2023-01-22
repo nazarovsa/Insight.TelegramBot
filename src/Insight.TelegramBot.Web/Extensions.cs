@@ -82,7 +82,7 @@ public static class Extensions
         }
 
         services.AddHostedService(ctx =>
-            new TelegramBotWebHookHost(ctx.GetService<ITelegramBotClient>(),
+            new TelegramBotWebHookHost(ctx.GetRequiredService<ITelegramBotClient>(),
                 ctx.GetRequiredService<IOptions<BotConfiguration>>().Value));
 
         return services;
