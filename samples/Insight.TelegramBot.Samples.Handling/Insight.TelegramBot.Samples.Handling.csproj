@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Insight.TelegramBot.Handling\Insight.TelegramBot.Handling.csproj" />
+      <ProjectReference Include="..\..\src\Insight.TelegramBot.Handling\Insight.TelegramBot.Handling.csproj" />
     </ItemGroup>
+
 
 </Project>

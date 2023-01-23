@@ -1,7 +1,7 @@
 <Project>
     <PropertyGroup>
         <TelegramBotVersion>18.0.0</TelegramBotVersion>
-        <MicrosoftVersion>6.0.0</MicrosoftVersion>
+        <MicrosoftVersion>7.0.0</MicrosoftVersion>
         <LanguageVersion>10</LanguageVersion>
         <PackageFrameworkVersions>netstandard2.1;net6.0;net7.0</PackageFrameworkVersions>
     </PropertyGroup>
@@ -15,6 +15,7 @@
         <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(MicrosoftVersion)"/>
         <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftVersion)"/>
         <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="$(MicrosoftVersion)"/>
+        <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="$(MicrosoftVersion)"/>
     </ItemGroup>
     <ItemGroup Label="Testing">
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.11.0"/>
