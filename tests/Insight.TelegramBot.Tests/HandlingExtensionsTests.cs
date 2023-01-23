@@ -47,6 +47,8 @@ public class HandlingExtensionsTests
         // Arrange
         var services = new ServiceCollection();
         services.AddTelegramBotHandling(typeof(StartMessageHandler).Assembly);
+        services.AddOptions();
+        
         var dummy = Substitute.For<IDummy>();
         services.AddSingleton(dummy);
 

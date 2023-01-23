@@ -36,6 +36,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IUpdateHandlersProvider>(updateHandlersProvider);
         services.AddScoped<IUpdateProcessor, HandlingUpdateProcessor>();
 
+        services.AddOptions();
+        
         return services;
     }
 

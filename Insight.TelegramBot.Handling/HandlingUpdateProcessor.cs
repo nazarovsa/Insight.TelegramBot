@@ -5,6 +5,7 @@ using Insight.TelegramBot.Handling.Handlers;
 using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Telegram.Bot.Types;
 
 namespace Insight.TelegramBot.Handling;
@@ -12,17 +13,18 @@ namespace Insight.TelegramBot.Handling;
 internal sealed class HandlingUpdateProcessor : IUpdateProcessor
 {
     private readonly ILogger<HandlingUpdateProcessor> _logger;
+    private readonly HandlingUpdateProcessorOptions _options;
     private readonly IServiceProvider _serviceProvider;
     private readonly IUpdateHandlersProvider _updateHandlersProvider;
 
-    private readonly bool _throwFlowExceptions = false;
-
     public HandlingUpdateProcessor(ILogger<HandlingUpdateProcessor> logger,
         IServiceProvider serviceProvider,
+        IOptionsSnapshot<HandlingUpdateProcessorOptions> options,
         IUpdateHandlersProvider updateHandlersProvider)
     {
         _logger = logger;
         _serviceProvider = serviceProvider;
+        _options = options?.Value ?? new HandlingUpdateProcessorOptions();
         _updateHandlersProvider = updateHandlersProvider;
     }
 
@@ -75,14 +77,14 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
         }
         catch (Exception ex)
         {
-            var logLevel = _throwFlowExceptions
+            var logLevel = _options.ThrowFlowExceptions
                 ? LogLevel.Error
                 : LogLevel.Warning;
 
             _logger.Log(logLevel, ex, "Exception occured while handling message: {UpdateHandlerType}",
                 handler.GetType().Name);
 
-            if (_throwFlowExceptions)
+            if (_options.ThrowFlowExceptions)
             {
                 throw;
             }
