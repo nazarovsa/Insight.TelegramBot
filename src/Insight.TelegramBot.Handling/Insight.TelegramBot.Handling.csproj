@@ -2,8 +2,9 @@
 
     <PropertyGroup>
         <TargetFrameworks>$(PackageFrameworkVersions);</TargetFrameworks>
+        <Nullable>disable</Nullable>
         <LangVersion>$(LanguageVersion)</LangVersion>
-        <Title>Simple SDK to implement telegram bot infrastructure</Title>
+        <Title>Update handlers for Insight.TelegramBot</Title>
         <Authors>Sergey Nazarov</Authors>
         <PackageProjectUrl>https://github.com/nazarovsa/Insight.TelegramBot</PackageProjectUrl>
         <RepositoryUrl>https://github.com/nazarovsa/Insight.TelegramBot</RepositoryUrl>
@@ -11,8 +12,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Telegram.Bot"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Insight.TelegramBot\Insight.TelegramBot.csproj" />
     </ItemGroup>
 
 </Project>

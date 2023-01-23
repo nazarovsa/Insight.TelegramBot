@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <LangVersion>$(LanguageVersion)</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Telegram.Bot" Version="$(TelegramBotVersion)" />
+        <PackageReference Include="Telegram.Bot"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Insight.TelegramBot.State\Insight.TelegramBot.State.csproj" />
-      <ProjectReference Include="..\..\src\Insight.TelegramBot.Web\Insight.TelegramBot.Web.csproj" />
-      <ProjectReference Include="..\..\src\Insight.TelegramBot\Insight.TelegramBot.csproj" />
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.State\Insight.TelegramBot.State.csproj"/>
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.Web\Insight.TelegramBot.Web.csproj"/>
+        <ProjectReference Include="..\..\src\Insight.TelegramBot\Insight.TelegramBot.csproj"/>
     </ItemGroup>
 
 </Project>

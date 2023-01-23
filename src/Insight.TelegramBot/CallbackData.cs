@@ -34,7 +34,7 @@ namespace Insight.TelegramBot
             var items = commandText.Split('>');
             var nextState = (TState) Enum.Parse(typeof(TState), items[0]);
 
-            var args = items[items.Length - 1]
+            var args = items[^1]
                 .Split('|');
 
             if (args.Length == 0 || args.Length == 1 && string.IsNullOrWhiteSpace(args[0]))

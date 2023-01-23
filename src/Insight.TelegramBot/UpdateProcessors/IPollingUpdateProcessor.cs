@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Insight.TelegramBot;
+namespace Insight.TelegramBot.UpdateProcessors;
 
 public interface IPollingUpdateProcessor : IUpdateProcessor
 {

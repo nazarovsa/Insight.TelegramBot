@@ -13,7 +13,5 @@ namespace Insight.TelegramBot.Models
         public int Width { get; set; } = 0;
 
         public int Height { get; set; } = 0;
-
-        public InputMedia Thumb { get; set; } = null;
     }
 }
