@@ -21,7 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Insight.TelegramBot.Handling\Insight.TelegramBot.Handling.csproj"/>
         <ProjectReference Include="..\..\samples\Insight.TelegramBot.Samples.Handling\Insight.TelegramBot.Samples.Handling.csproj"/>
         <ProjectReference Include="..\..\src\Insight.TelegramBot\Insight.TelegramBot.csproj"/>
         <ProjectReference Include="..\Insight.TelegramBot.Testing\Insight.TelegramBot.Testing.csproj"/>
