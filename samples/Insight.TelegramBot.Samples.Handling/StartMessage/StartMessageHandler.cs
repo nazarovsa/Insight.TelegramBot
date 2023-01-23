@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Handling.Handlers;
-using Insight.TelegramBot.Samples.Handling.ClickButton;
 using Telegram.Bot.Types;
 
 namespace Insight.TelegramBot.Samples.Handling.StartMessage;

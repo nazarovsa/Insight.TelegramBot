@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Handling.Handlers;
@@ -41,21 +40,7 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
         // Process update with handlers for all updates.
         foreach (var updateHandler in allUpdateHandlers)
         {
-            // TODO : Extract to method HandleWithExceptions.
-            try
-            {
-                await updateHandler.Handle(update, cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(ex, "Exception occured while handling message: {UpdateHandlerType}",
-                    updateHandler.GetType().Name);
-
-                if (_throwFlowExceptions)
-                {
-                    throw;
-                }
-            }
+            await HandleWithExceptionHandling(updateHandler, update, cancellationToken);
         }
 
         foreach (var kv in _updateHandlersProvider.TypeMap)
@@ -68,20 +53,7 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
             {
                 if (service is IUpdateHandler updateHandler)
                 {
-                    // TODO : Extract to method HandleWithExceptions.
-                    try
-                    {
-                        await updateHandler.Handle(update, cancellationToken);
-                    }
-                    catch (Exception exception)
-                    {
-                        _logger.LogWarning(exception, "Exception occured while handling message: {UpdateHandlerType}",
-                            updateHandler.GetType().Name);
-                        if (_throwFlowExceptions)
-                        {
-                            throw;
-                        }
-                    }
+                    await HandleWithExceptionHandling(updateHandler, update, cancellationToken);
                 }
                 else
                 {
@@ -89,6 +61,30 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
                         kv.Key.Name,
                         nameof(IUpdateHandler));
                 }
+            }
+        }
+    }
+
+    private async Task HandleWithExceptionHandling(IUpdateHandler handler,
+        Update update,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await handler.Handle(update, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            var logLevel = _throwFlowExceptions
+                ? LogLevel.Error
+                : LogLevel.Warning;
+
+            _logger.Log(logLevel, ex, "Exception occured while handling message: {UpdateHandlerType}",
+                handler.GetType().Name);
+
+            if (_throwFlowExceptions)
+            {
+                throw;
             }
         }
     }

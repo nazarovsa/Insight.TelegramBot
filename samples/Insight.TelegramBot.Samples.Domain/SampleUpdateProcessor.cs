@@ -19,7 +19,6 @@ namespace Insight.TelegramBot.Samples.Domain
             _bot = bot ?? throw new ArgumentNullException(nameof(bot));
         }
 
-
         public Task HandleUpdate(Update update, CancellationToken cancellationToken = default)
         {
             return update.Type switch
