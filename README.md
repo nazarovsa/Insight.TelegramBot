@@ -19,11 +19,11 @@ In progress... To fast start check [HandlingExtensionsTests](https://github.com/
 Includes abstractions to implement state machine for your bot. You can see working example at [tests](https://github.com/nazarovsa/Insight.TelegramBot/blob/master/tests/Insight.TelegramBot.State.Tests/StateMachineTest.cs). 
 StateMachine is abstract class that uses [Stateless](https://www.nuget.org/packages/stateless) library to work with state, so you should know a little about how to use it to configure your state machine.
 
-## Insight.TelegramBot.Web
-[![nuget version](https://img.shields.io/nuget/v/Insight.TelegramBot.Web)](https://www.nuget.org/packages/Insight.TelegramBot.Web/)
-[![Nuget](https://img.shields.io/nuget/dt/Insight.TelegramBot.Web?color=%2300000)](https://www.nuget.org/packages/Insight.TelegramBot.Web/)
+## Insight.TelegramBot.Hosting
+[![nuget version](https://img.shields.io/nuget/v/Insight.TelegramBot.Hosting)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting/)
+[![Nuget](https://img.shields.io/nuget/dt/Insight.TelegramBot.Hosting?color=%2300000)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting/)
 
-Extensions to simplify bot usage at Startup.cs
+Extensions to simplify bot usage and hosted services.
 
 Samples
 ------------------------
