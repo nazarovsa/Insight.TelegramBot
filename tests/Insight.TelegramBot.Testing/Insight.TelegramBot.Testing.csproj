@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Telegram.Bot"/>
+        <PackageReference Include="Telegram.Bot" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Insight.TelegramBot.State\Insight.TelegramBot.State.csproj"/>
-        <ProjectReference Include="..\..\src\Insight.TelegramBot.Web\Insight.TelegramBot.Web.csproj"/>
-        <ProjectReference Include="..\..\src\Insight.TelegramBot\Insight.TelegramBot.csproj"/>
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.State\Insight.TelegramBot.State.csproj" />
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.Hosting\Insight.TelegramBot.Hosting.csproj" />
+        <ProjectReference Include="..\..\src\Insight.TelegramBot\Insight.TelegramBot.csproj" />
     </ItemGroup>
 
 </Project>

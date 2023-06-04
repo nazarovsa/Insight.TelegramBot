@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.State",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.State.Tests", "tests\Insight.TelegramBot.State.Tests\Insight.TelegramBot.State.Tests.csproj", "{59BBB232-340F-4C62-A1B5-74D8B40C04F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.Web", "src\Insight.TelegramBot.Web\Insight.TelegramBot.Web.csproj", "{93459619-9745-4815-985C-664E3957A1E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.Hosting", "src\Insight.TelegramBot.Hosting\Insight.TelegramBot.Hosting.csproj", "{93459619-9745-4815-985C-664E3957A1E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{494EDB46-5FFC-4970-969C-FB610ABFE2FE}"
 EndProject

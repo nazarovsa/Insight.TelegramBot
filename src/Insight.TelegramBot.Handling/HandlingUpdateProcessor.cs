@@ -67,13 +67,13 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
         }
     }
 
-    private async Task HandleWithExceptionHandling(IUpdateHandler handler,
+    private Task HandleWithExceptionHandling(IUpdateHandler handler,
         Update update,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            await handler.Handle(update, cancellationToken);
+            return handler.Handle(update, cancellationToken);
         }
         catch (Exception ex)
         {
@@ -89,5 +89,7 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
                 throw;
             }
         }
+
+        return Task.CompletedTask;
     }
 }

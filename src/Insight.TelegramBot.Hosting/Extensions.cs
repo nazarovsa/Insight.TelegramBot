@@ -1,15 +1,15 @@
 using System;
 using System.Reflection;
 using Insight.TelegramBot.Configurations;
-using Insight.TelegramBot.Web.Hosts;
+using Insight.TelegramBot.Hosting.Hosts;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 
-namespace Insight.TelegramBot.Web;
+namespace Insight.TelegramBot.Hosting;
 
 public static class Extensions
 {

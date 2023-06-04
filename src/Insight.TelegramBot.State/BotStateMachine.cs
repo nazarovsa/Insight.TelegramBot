@@ -4,10 +4,11 @@ using Stateless;
 
 namespace Insight.TelegramBot.State
 {
-    public abstract class BotStateMachine<TState>
+    public abstract class BotStateMachine<TStateContext, TState>
         where TState : Enum
+        where TStateContext : IStateContext<TState>
     {
-        protected IStateContextRepository<TState> StateRepository { get; }
+        protected IStateContextRepository<TStateContext, TState> StateRepository { get; }
 
         protected StateMachine<TState, string> StateMachine { get; }
 
@@ -15,8 +16,8 @@ namespace Insight.TelegramBot.State
 
         public long TelegramId { get; private set; }
 
-        protected BotStateMachine(IStateContext<TState> stateContext,
-            IStateContextRepository<TState> stateRepository)
+        protected BotStateMachine(TStateContext stateContext,
+            IStateContextRepository<TStateContext, TState> stateRepository)
         {
             if (stateContext == null)
                 throw new ArgumentNullException(nameof(stateContext));
@@ -31,17 +32,17 @@ namespace Insight.TelegramBot.State
                 s => State = s, FiringMode.Immediate);
         }
 
-        protected BotStateMachine(IStateContext<TState> stateContext,
-            IStateContextRepository<TState> stateRepository,
+        protected BotStateMachine(TStateContext stateContext,
+            IStateContextRepository<TStateContext, TState> stateRepository,
             Action<StateMachine<TState, string>> configureDelegate)
             : this(stateContext, stateRepository)
         {
             Configure(configureDelegate);
         }
 
-        protected virtual async Task CommitState()
+        protected virtual Task CommitState()
         {
-            await StateRepository.Set(new StateContextBase<TState>(TelegramId, State));
+            return StateRepository.SetState(TelegramId, State);
         }
 
         public void Configure(Action<StateMachine<TState, string>> @delegate)
