@@ -4,7 +4,7 @@ using Telegram.Bot.Types.Enums;
 namespace Insight.TelegramBot.Handling.Matchers.TextMatchers;
 
 /// <summary>
-/// Abstract update matcher which
+/// Abstract update matcher for text messages.
 /// </summary>
 public abstract class TextUpdateMatcher : IUpdateMatcher
 {
@@ -14,6 +14,6 @@ public abstract class TextUpdateMatcher : IUpdateMatcher
     /// <param name="update"><see cref="Update"/>.</param>
     public virtual bool Matches(Update update)
     {
-        return update.Type == UpdateType.Message;
+        return update.Type == UpdateType.Message && update.Message!.Type == MessageType.Text;
     }
 }
