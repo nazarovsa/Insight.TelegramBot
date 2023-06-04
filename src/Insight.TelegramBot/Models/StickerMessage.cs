@@ -7,5 +7,7 @@ namespace Insight.TelegramBot.Models
         public StickerMessage(ChatId chatId) : base(chatId)
         {
         }
+
+        public string? Emoji { get; set; }
     }
 }

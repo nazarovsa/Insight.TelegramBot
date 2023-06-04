@@ -1,9 +1,9 @@
 <Project>
     <PropertyGroup>
-        <TelegramBotVersion>18.0.0</TelegramBotVersion>
+        <TelegramBotVersion>19.0.0</TelegramBotVersion>
         <MicrosoftVersion>7.0.0</MicrosoftVersion>
         <LanguageVersion>10</LanguageVersion>
-        <PackageFrameworkVersions>netstandard2.1;net6.0;net7.0</PackageFrameworkVersions>
+        <TargetFrameworks>netstandard2.1;net6.0;net7.0</TargetFrameworks>
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="Telegram.Bot" Version="$(TelegramBotVersion)"/>

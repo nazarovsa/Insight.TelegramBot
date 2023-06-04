@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>$(PackageFrameworkVersions);</TargetFrameworks>
         <Nullable>disable</Nullable>
         <LangVersion>$(LanguageVersion)</LangVersion>
         <Title>Update handlers for Insight.TelegramBot</Title>

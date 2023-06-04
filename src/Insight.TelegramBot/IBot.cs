@@ -39,6 +39,7 @@ namespace Insight.TelegramBot
 
         Task SendChatActionAsync(ChatId chatId,
             ChatAction chatAction,
+            int? messageThreadId = null,
             CancellationToken cancellationToken = default);
 
         Task<Message> SendVideoNoteAsync(VideoNoteMessage message,
@@ -58,6 +59,7 @@ namespace Insight.TelegramBot
         Task<Message> ForwardMessageAsync(ChatId receiverId,
             ChatId chatId,
             int messageId,
+            int? messageThreadId = default,
             bool disableNotification = false,
             bool protectContent = false,
             CancellationToken cancellationToken = default);
@@ -78,7 +80,8 @@ namespace Insight.TelegramBot
 
         Task<ChatMember> GetChatMemberAsync(ChatId chatId, int userId, CancellationToken cancellationToken = default);
 
-        Task<BotCommand[]> GetMyCommandsAsync(BotCommandScope? scope = null, string? languageCode = null, CancellationToken cancellationToken = default);
+        Task<BotCommand[]> GetMyCommandsAsync(BotCommandScope? scope = null, string? languageCode = null,
+            CancellationToken cancellationToken = default);
 
         Task<StickerSet> GetStickerSetAsync(string name, CancellationToken cancellationToken = default);
 

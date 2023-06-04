@@ -16,6 +16,8 @@ namespace Insight.TelegramBot.Models
         public ChatId ChatId { get; private set; }
 
         public ParseMode ParseMode { get; set; } = ParseMode.Html;
+
+        public int? MessageThreadId { get; set; } = null;
         
         public bool ProtectContent { get; set; }
 

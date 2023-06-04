@@ -1,5 +1,4 @@
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.InputFiles;
 
 namespace Insight.TelegramBot.Models
 {
@@ -9,9 +8,12 @@ namespace Insight.TelegramBot.Models
         {
         }
 
-        public InputOnlineFile InputOnlineFile { get; set; }
+        public InputFile InputOnlineFile { get; set; }
         
-        public InputMedia Thumb { get; set; } = null;
+        public InputFile? Thumbnail { get; set; } = null;
+        
+
+        public bool? HasSpoiler { get; set; }
 
         public string Caption { get; set; } = null;
     }

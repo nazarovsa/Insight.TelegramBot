@@ -7,7 +7,7 @@ namespace Insight.TelegramBot.Models
         public VideoMessage(ChatId chatId) : base(chatId)
         {
         }
-
+        
         public int Duration { get; set; }
 
         public int Width { get; set; }
