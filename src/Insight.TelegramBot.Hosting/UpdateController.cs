@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot.Types;
 
-namespace Insight.TelegramBot.Web;
+namespace Insight.TelegramBot.Hosting;
 
 public sealed class UpdateController : ControllerBase
 {

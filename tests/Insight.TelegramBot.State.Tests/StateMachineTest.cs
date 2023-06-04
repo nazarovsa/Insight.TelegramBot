@@ -11,7 +11,7 @@ namespace Insight.TelegramBot.State.Tests
         [Fact]
         public async Task Should_change_states()
         {
-            IStateContext<TestState> userContext = new StateContextBase<TestState>(default, TestState.None);
+            var userContext = new StateContextBase<TestState>(default, TestState.None);
             var repository = new InMemoryStateRepository();
             await repository.Set(userContext);
             Assert.NotEqual(0, repository.Count);

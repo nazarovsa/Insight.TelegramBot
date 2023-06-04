@@ -11,7 +11,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Insight.TelegramBot.Web.Hosts;
+namespace Insight.TelegramBot.Hosting.Hosts;
 
 internal sealed class TelegramBotPollingWebHost : IHostedService
 {

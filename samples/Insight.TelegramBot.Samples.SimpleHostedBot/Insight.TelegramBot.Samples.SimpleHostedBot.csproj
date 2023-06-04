@@ -6,12 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Controllers\"/>
+        <Folder Include="Controllers\" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Insight.TelegramBot.Web\Insight.TelegramBot.Web.csproj"/>
-        <ProjectReference Include="..\Insight.TelegramBot.Samples.Domain\Insight.TelegramBot.Samples.Domain.csproj"/>
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.Hosting\Insight.TelegramBot.Hosting.csproj" />
+        <ProjectReference Include="..\Insight.TelegramBot.Samples.Domain\Insight.TelegramBot.Samples.Domain.csproj" />
     </ItemGroup>
 
 </Project>

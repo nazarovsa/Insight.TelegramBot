@@ -5,7 +5,7 @@ using Insight.TelegramBot.Configurations;
 using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
 
-namespace Insight.TelegramBot.Web.Hosts;
+namespace Insight.TelegramBot.Hosting.Hosts;
 
 internal sealed class TelegramBotWebHookHost : IHostedService
 {
