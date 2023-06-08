@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
@@ -10,9 +11,9 @@ public abstract class TextEqualsUpdateMatcher : TextUpdateMatcher
 
     public StringComparison StringComparison { get; protected set; } = StringComparison.InvariantCultureIgnoreCase;
 
-    public override async Task<bool> MatchesAsync(Update update)
+    public override async Task<bool> MatchesAsync(Update update, CancellationToken cancellationToken = default)
     {
-        if (!await base.MatchesAsync(update))
+        if (!await base.MatchesAsync(update, cancellationToken))
             return false;
 
         return update.Message!.Text!.Equals(Template, StringComparison);
