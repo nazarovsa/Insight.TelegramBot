@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Handling.Matchers;
 using Telegram.Bot.Types;
@@ -13,7 +14,7 @@ public sealed class ContextMessageMatcher : IContextUpdateMatcher
         _scopedService = scopedService;
     }
 
-    public Task<bool> MatchesAsync(Update update)
+    public Task<bool> MatchesAsync(Update update, CancellationToken cancellationToken = default)
     {
         return Task.FromResult(_scopedService.IsTrue());
     }
