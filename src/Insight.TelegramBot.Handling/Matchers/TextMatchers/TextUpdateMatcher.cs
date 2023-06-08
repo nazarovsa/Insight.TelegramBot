@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -12,8 +13,8 @@ public abstract class TextUpdateMatcher : IUpdateMatcher
     /// Is <see cref="UpdateType"/> a message.
     /// </summary>
     /// <param name="update"><see cref="Update"/>.</param>
-    public virtual bool Matches(Update update)
+    public virtual Task<bool> MatchesAsync(Update update)
     {
-        return update.Type == UpdateType.Message && update.Message!.Type == MessageType.Text;
+        return Task.FromResult(update.Type == UpdateType.Message && update.Message!.Type == MessageType.Text);
     }
 }

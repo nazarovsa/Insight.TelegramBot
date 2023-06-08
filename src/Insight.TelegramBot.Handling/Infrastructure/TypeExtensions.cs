@@ -34,4 +34,11 @@ internal static class TypeExtensions
                         !x.IsAbstract &&
                         !x.IsInterface);
     }
+    internal static IEnumerable<Type> GetContextMatchingUpdateHandlersImplementations(this IEnumerable<Type> types)
+    {
+        return types
+            .Where(x => x.IsAssignableToGenericType(typeof(IContextMatchingUpdateHandler<>)) &&
+                        !x.IsAbstract &&
+                        !x.IsInterface);
+    }
 }

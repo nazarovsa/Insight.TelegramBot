@@ -77,4 +77,35 @@ public class HandlingExtensionsTests
 
         dummy.Received(1).Handle();
     }
+    
+    [Fact]
+    public async Task Add_handling_registers_handler_with_context_matcher_and_it_calls_to_scoped_service()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+        services.AddTelegramBotHandling(typeof(StartMessageHandler).Assembly);
+        services.AddOptions();
+        
+        var dummy = Substitute.For<IDummy>();
+        dummy.IsTrue().ReturnsForAnyArgs(true);
+        services.AddSingleton(dummy);
+
+        var logger = NullLogger<HandlingUpdateProcessor>.Instance;
+        services.AddSingleton<ILogger<HandlingUpdateProcessor>>(logger);
+
+        var sp = services.BuildServiceProvider();
+
+        // Act
+        var processor = sp.GetRequiredService<IUpdateProcessor>();
+
+        var update = new Update()
+        {
+            Message = new Message() {Text = "Hi!"}
+        };
+
+        await processor.HandleUpdate(update, CancellationToken.None);
+
+        // Assert
+        dummy.Received(1).IsTrue();
+    }
 }

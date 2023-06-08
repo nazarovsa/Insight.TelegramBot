@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
 namespace Insight.TelegramBot.Handling.Matchers.CallbackQueryMatchers;
@@ -8,9 +9,9 @@ public class StateCallbackQueryMatcher<TState> : CallbackQueryMatcher
 {
     public TState ExpectingState { get; protected set; }
 
-    public override bool Matches(Update update)
+    public override async Task<bool> MatchesAsync(Update update)
     {
-        if (!base.Matches(update))
+        if (!await base.MatchesAsync(update))
             return false;
 
         var callbackData = CallbackData<TState>.Parse(update.CallbackQuery!.Data);

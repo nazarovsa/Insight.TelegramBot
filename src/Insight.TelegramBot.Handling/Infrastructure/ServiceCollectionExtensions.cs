@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Insight.TelegramBot.Handling.Handlers;
+using Insight.TelegramBot.Handling.Matchers;
 using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,7 +30,8 @@ public static class ServiceCollectionExtensions
 
         foreach (var assembly in assemblies)
         {
-            services.RegisterHandlers(assembly);
+            services.RegisterMatchingHandlers(assembly);
+            services.RegisterContextMatchingHandlers(assembly);
         }
 
         var updateHandlersProvider = new UpdateHandlersProvider(assemblies);
@@ -41,7 +43,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    private static void RegisterHandlers(this IServiceCollection services, Assembly assembly)
+    private static void RegisterMatchingHandlers(this IServiceCollection services, Assembly assembly)
     {
         var types = assembly.ExportedTypes
             .GetMatchingUpdateHandlersImplementations()
@@ -67,6 +69,40 @@ public static class ServiceCollectionExtensions
                 type,
                 ServiceLifetime.Transient);
             services.Add(serviceDescriptor);
+        }
+    } 
+    
+    private static void RegisterContextMatchingHandlers(this IServiceCollection services, Assembly assembly)
+    {
+        var types = assembly.ExportedTypes
+            .GetContextMatchingUpdateHandlersImplementations()
+            .ToArray();
+
+        foreach (var type in types)
+        {
+            var implementedGenericMatcherInterfaceTypes = type.GetInterfaces()
+                .Where(x =>
+                    x.IsGenericType &&
+                    x.GetGenericTypeDefinition()
+                        .IsAssignableFrom(typeof(IContextMatchingUpdateHandler<>))
+                ).ToArray();
+
+            if (implementedGenericMatcherInterfaceTypes.Length > 1)
+            {
+                throw new InvalidOperationException(
+                    $"{type.Name} implements more than one {typeof(IContextMatchingUpdateHandler<>).Name} interfaces.");
+            }
+
+            var implementedGenericMatcherInterfaceType = implementedGenericMatcherInterfaceTypes.Single();
+            var handlerServiceDescriptor = new ServiceDescriptor(implementedGenericMatcherInterfaceType,
+                type,
+                ServiceLifetime.Transient);
+            
+            services.Add(handlerServiceDescriptor);
+
+            var matcherType = implementedGenericMatcherInterfaceType.GenericTypeArguments[0];
+            var matcherServiceDescriptor = new ServiceDescriptor(typeof(IContextUpdateMatcher), matcherType, ServiceLifetime.Scoped);
+            services.Add(matcherServiceDescriptor);
         }
     }
 }
