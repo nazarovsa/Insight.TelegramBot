@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Insight.TelegramBot.Handling.Matchers.CallbackQueryMatchers;
+namespace Insight.TelegramBot.Handling.Matchers.MessageTypeMatchers;
 
 public abstract class CallbackQueryMatcher : IUpdateMatcher
 {
