@@ -158,6 +158,12 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
         {
             try
             {
+                var beforeExecutionHandlers = scope.ServiceProvider.GetServices(typeof(IBeforeExecutionHandler)).OfType<IBeforeExecutionHandler>();
+                foreach (var beforeExecutionHandler in beforeExecutionHandlers)
+                {
+                    await beforeExecutionHandler.Handle(update, cancellationToken);
+                }
+                
                 await handler.Handle(update, cancellationToken);
             }
             catch (Exception ex)
