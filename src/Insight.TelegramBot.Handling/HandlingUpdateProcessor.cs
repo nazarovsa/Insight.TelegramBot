@@ -39,11 +39,10 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
 
         using var scope = _serviceProvider.CreateScope();
         var logger = scope.ServiceProvider.GetService<ILogger<HandlingUpdateProcessor>>();
-        var allUpdateHandlers = scope.ServiceProvider
-            .GetServices<IUpdateHandler>();
 
         // Process update with handlers for all updates.
         logger?.LogDebug("Queueing handlers of type {HandlerType}", typeof(IUpdateHandler).FullName);
+        var allUpdateHandlers = scope.ServiceProvider.GetServices<IUpdateHandler>();
         foreach (var updateHandler in allUpdateHandlers)
         {
             handlersQueue.Enqueue(updateHandler);
@@ -56,23 +55,45 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
         logger?.LogDebug("Queueing handlers of type {HandlerType}", typeof(IMatchingUpdateHandler<>).FullName);
         foreach (var kv in _updateHandlersProvider.TypeMap)
         {
-            if (!await kv.Value.MatchesAsync(update))
+            try
+            {
+                if (!await kv.Value.MatchesAsync(update, cancellationToken))
+                {
+                    continue;
+                }
+            }
+            catch (Exception ex)
+            {
+                var logLevel = _options.ThrowBuildFlowExceptions
+                    ? LogLevel.Error
+                    : LogLevel.Warning;
+
+                logger?.Log(logLevel, ex, "Exception occured while matching message with mather {MatcherType}",
+                    kv.Value.GetType().FullName);
+
+                if (_options.ThrowBuildFlowExceptions)
+                {
+                    throw;
+                }
+                
                 continue;
+            }
 
             var matchingHandlers = scope.ServiceProvider.GetServices(kv.Key);
             foreach (var matchingHandler in matchingHandlers)
             {
-                var handler = matchingHandler as IUpdateHandler;
-                if (handler == null)
+                if (matchingHandler is not IUpdateHandler handler)
                 {
                     logger?.LogWarning("Failed to cast {HandlerType} to {IUpdateHandlerType}",
-                        kv.Key.Name,
-                        nameof(IUpdateHandler));
+                        kv.Key.FullName,
+                        typeof(IUpdateHandler).FullName);
+                    continue;
                 }
 
                 handlersQueue.Enqueue(handler);
             }
         }
+
         logger?.LogDebug("Queued handlers of type {HandlerType}. Total: {TotalQueuedHandlers}",
             typeof(IMatchingUpdateHandler<>).FullName, handlersQueue.Count);
 
@@ -83,32 +104,52 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
         {
             var matcherType = contextMatcher!.GetType();
             logger?.LogDebug("Resolved context matcher {MatcherType}", matcherType.FullName);
-            var matcher = contextMatcher as IContextUpdateMatcher;
-            if (matcher == null)
+            if (contextMatcher is not IContextUpdateMatcher matcher)
             {
                 logger?.LogWarning("Failed to cast {MatcherType} to {IContextUpdateMatcherType}",
                     matcherType.FullName, nameof(IContextUpdateMatcher));
                 continue;
             }
 
-            if (await matcher.MatchesAsync(update))
+            try
             {
-                var handlerType = typeof(IContextMatchingUpdateHandler<>).MakeGenericType(matcherType);
-                var handlerObject = scope.ServiceProvider.GetService(handlerType);
-                logger?.LogDebug("Resolved context handler {HandlerType} for matcher {MatcherType}",
-                    handlerType.FullName, matcherType.FullName);
-
-                var handler = handlerObject as IUpdateHandler;
-                if (handler == null)
+                if (!await matcher.MatchesAsync(update, cancellationToken))
                 {
-                    logger?.LogWarning("Failed to cast {HandlerType} to {IUpdateHandlerType}", handlerType.FullName,
-                        nameof(IUpdateHandler));
                     continue;
                 }
-
-                handlersQueue.Enqueue(handler);
             }
+            catch (Exception ex)
+            {
+                var logLevel = _options.ThrowBuildFlowExceptions
+                    ? LogLevel.Error
+                    : LogLevel.Warning;
+
+                logger?.Log(logLevel, ex, "Exception occured while matching message with mather {MatcherType}",
+                    matcherType.FullName);
+
+                if (_options.ThrowBuildFlowExceptions)
+                {
+                    throw;
+                }
+                
+                continue;
+            }
+
+            var handlerType = typeof(IContextMatchingUpdateHandler<>).MakeGenericType(matcherType);
+            var handlerObject = scope.ServiceProvider.GetService(handlerType);
+            logger?.LogDebug("Resolved context handler {HandlerType} for matcher {MatcherType}",
+                handlerType.FullName, matcherType.FullName);
+
+            if (handlerObject is not IUpdateHandler handler)
+            {
+                logger?.LogWarning("Failed to cast {HandlerType} to {IUpdateHandlerType}", handlerType.FullName,
+                    nameof(IUpdateHandler));
+                continue;
+            }
+
+            handlersQueue.Enqueue(handler);
         }
+
         logger?.LogDebug("Queued handlers of type {HandlerType}. Total: {TotalQueuedHandlers}",
             typeof(IContextMatchingUpdateHandler<>).FullName, handlersQueue.Count);
 
@@ -120,14 +161,14 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
             }
             catch (Exception ex)
             {
-                var logLevel = _options.ThrowFlowExceptions
+                var logLevel = _options.ThrowHandlingFlowExceptions
                     ? LogLevel.Error
                     : LogLevel.Warning;
 
                 logger?.Log(logLevel, ex, "Exception occured while handling message: {UpdateHandlerType}",
                     handler.GetType().Name);
 
-                if (_options.ThrowFlowExceptions)
+                if (_options.ThrowHandlingFlowExceptions)
                 {
                     throw;
                 }
