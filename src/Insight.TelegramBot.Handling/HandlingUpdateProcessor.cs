@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Handling.Handlers;
@@ -168,6 +169,12 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
                 logger?.Log(logLevel, ex, "Exception occured while handling message: {UpdateHandlerType}",
                     handler.GetType().Name);
 
+                var errorHandlers = scope.ServiceProvider.GetServices(typeof(IExceptionFlowHandler)).OfType<IExceptionFlowHandler>();
+                foreach (var errorHandler in errorHandlers)
+                {
+                    await errorHandler.Handle(ex, CancellationToken.None);
+                }
+                
                 if (_options.ThrowHandlingFlowExceptions)
                 {
                     throw;
