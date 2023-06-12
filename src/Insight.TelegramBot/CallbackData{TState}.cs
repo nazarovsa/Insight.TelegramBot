@@ -1,9 +1,11 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Insight.TelegramBot
 {
+    [Obsolete]
     public class CallbackData<TState>
         where TState : Enum
     {
@@ -21,7 +23,7 @@ namespace Insight.TelegramBot
         {
             var result = $"{Convert.ToInt32(NextState)}>{string.Join("|", Args)}";
 
-            return Encoding.UTF8.GetBytes(result).Length > 64
+            return Encoding.UTF8.GetByteCount(result) > 64
                 ? throw new ArgumentException("String length should be less than 65 bytes")
                 : result;
         }
@@ -32,7 +34,7 @@ namespace Insight.TelegramBot
                 throw new ArgumentNullException(nameof(commandText));
 
             var items = commandText.Split('>');
-            var nextState = (TState) Enum.Parse(typeof(TState), items[0]);
+            var nextState = (TState)Enum.Parse(typeof(TState), items[0]);
 
             var args = items[^1]
                 .Split('|');

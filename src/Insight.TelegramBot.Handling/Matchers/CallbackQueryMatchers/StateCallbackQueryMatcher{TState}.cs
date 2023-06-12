@@ -6,6 +6,7 @@ using Telegram.Bot.Types;
 
 namespace Insight.TelegramBot.Handling.Matchers.CallbackQueryMatchers;
 
+[Obsolete]
 public class StateCallbackQueryMatcher<TState> : CallbackQueryMatcher
     where TState : Enum
 {
@@ -17,7 +18,7 @@ public class StateCallbackQueryMatcher<TState> : CallbackQueryMatcher
             return false;
 
         var callbackData = CallbackData<TState>.Parse(update.CallbackQuery!.Data);
-        
+
         return ExpectingState.Equals(callbackData.NextState);
     }
 }
