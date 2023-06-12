@@ -32,13 +32,13 @@ internal sealed class TelegramBotPollingWebHost : IHostedService
     {
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         _client = client ?? throw new ArgumentNullException(nameof(client));
-        _botConfiguration = config?.Value ?? throw new ArgumentNullException(nameof(config));
+        _botConfiguration = config.Value ?? throw new ArgumentNullException(nameof(config));
         _receiverOptions = receiverOptions;
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        if (_botConfiguration.WebHookConfiguration.UseWebHook)
+        if (_botConfiguration.WebHookConfiguration is { UseWebHook: true })
             throw new InvalidOperationException("For webhook bots use TelegramBotWithHookWebHost");
 
         _cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
