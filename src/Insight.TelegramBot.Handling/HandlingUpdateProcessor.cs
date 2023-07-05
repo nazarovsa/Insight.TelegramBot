@@ -52,7 +52,7 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
         logger?.LogDebug("Queued handlers of type {HandlerType}. Total: {TotalQueuedHandlers}",
             typeof(IUpdateHandler).FullName, handlersQueue.Count);
 
-        // Handle maching update handlers
+        // Handle matching update handlers
         logger?.LogDebug("Queueing handlers of type {HandlerType}", typeof(IMatchingUpdateHandler<>).FullName);
         foreach (var kv in _updateHandlersProvider.TypeMap)
         {
@@ -161,10 +161,10 @@ internal sealed class HandlingUpdateProcessor : IUpdateProcessor
                 var beforeExecutionHandlers = scope.ServiceProvider.GetServices(typeof(IBeforeExecutionHandler)).OfType<IBeforeExecutionHandler>();
                 foreach (var beforeExecutionHandler in beforeExecutionHandlers)
                 {
-                    await beforeExecutionHandler.Handle(update, cancellationToken);
+                    await beforeExecutionHandler.Handle(update, cancellationToken).ConfigureAwait(_options.ExecuteHandlersAtSameAsyncContext);
                 }
                 
-                await handler.Handle(update, cancellationToken);
+                await handler.Handle(update, cancellationToken).ConfigureAwait(_options.ExecuteHandlersAtSameAsyncContext);
             }
             catch (Exception ex)
             {

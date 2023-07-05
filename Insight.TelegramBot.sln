@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Handlin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Samples.Handling", "samples\Insight.TelegramBot.Samples.Handling\Insight.TelegramBot.Samples.Handling.csproj", "{F2193156-FD66-4B6E-8197-D1FC7D4BE410}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Handling.Tests", "tests\Insight.TelegramBot.Handling.Tests\Insight.TelegramBot.Handling.Tests.csproj", "{F1AC6A27-F992-431A-8DA4-B1E61382E93E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,10 @@ Global
 		{F2193156-FD66-4B6E-8197-D1FC7D4BE410}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2193156-FD66-4B6E-8197-D1FC7D4BE410}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2193156-FD66-4B6E-8197-D1FC7D4BE410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1AC6A27-F992-431A-8DA4-B1E61382E93E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1AC6A27-F992-431A-8DA4-B1E61382E93E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1AC6A27-F992-431A-8DA4-B1E61382E93E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1AC6A27-F992-431A-8DA4-B1E61382E93E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +108,7 @@ Global
 		{4DF2FD85-6790-40F6-A017-F71CE29C20A1} = {494EDB46-5FFC-4970-969C-FB610ABFE2FE}
 		{4084EE63-0379-421A-873E-E80A77B158D3} = {81588F4A-07B4-4A93-A68E-973D04B8D463}
 		{F2193156-FD66-4B6E-8197-D1FC7D4BE410} = {81588F4A-07B4-4A93-A68E-973D04B8D463}
+		{F1AC6A27-F992-431A-8DA4-B1E61382E93E} = {494EDB46-5FFC-4970-969C-FB610ABFE2FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10C4076E-C2CA-4CC2-9B4F-661FA0F96D79}

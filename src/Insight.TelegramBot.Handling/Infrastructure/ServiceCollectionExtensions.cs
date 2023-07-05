@@ -70,7 +70,7 @@ public static class ServiceCollectionExtensions
                 ServiceLifetime.Transient);
             services.Add(serviceDescriptor);
         }
-    } 
+    }
     
     private static void RegisterContextMatchingHandlers(this IServiceCollection services, Assembly assembly)
     {

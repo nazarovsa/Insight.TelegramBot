@@ -1,3 +1,3 @@
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Insight.TelegramBot.Tests")]
+[assembly: InternalsVisibleTo("Insight.TelegramBot.Handling.Tests")]

@@ -8,4 +8,6 @@ public sealed class HandlingUpdateProcessorOptions
     public bool ThrowHandlingFlowExceptions { get; set; } = false;
 
     public bool ThrowBuildFlowExceptions { get; set; } = false;
+
+    public bool ExecuteHandlersAtSameAsyncContext { get; set; } = false;
 }
