@@ -10,7 +10,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Insight.TelegramBot.Samples.Domain
 {
-    public sealed class SampleUpdateProcessor : IPollingUpdateProcessor
+    public sealed class SampleUpdateProcessor : IUpdateProcessor, IPollingExceptionHandler
     {
         private readonly IBot _bot;
 

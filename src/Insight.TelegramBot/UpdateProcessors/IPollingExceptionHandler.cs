@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Insight.TelegramBot.UpdateProcessors;
 
-public interface IPollingUpdateProcessor : IUpdateProcessor
+public interface IPollingExceptionHandler
 {
     Task HandlePollingErrorAsync(Exception exception, CancellationToken cancellationToken = default);
 }
