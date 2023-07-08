@@ -38,6 +38,7 @@ namespace Insight.TelegramBot.Samples.WebHookBot
             
             services.AddScoped<IBot, Bot>();
             services.AddScoped<IUpdateProcessor, SampleUpdateProcessor>();
+            services.AddScoped<IPollingExceptionHandler, SampleUpdateProcessor>();
             
             services.AddTransient<ITelegramBotClient, TelegramBotClient>(c =>
                 new TelegramBotClient(c.GetService<IOptions<BotConfiguration>>().Value.Token,
