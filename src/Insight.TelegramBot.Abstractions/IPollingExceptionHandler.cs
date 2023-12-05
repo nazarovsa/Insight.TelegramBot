@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Insight.TelegramBot.UpdateProcessors;
+namespace Insight.TelegramBot.Abstractions;
 
 public interface IPollingExceptionHandler
 {

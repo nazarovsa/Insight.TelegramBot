@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
-namespace Insight.TelegramBot.UpdateProcessors
+namespace Insight.TelegramBot.Abstractions
 {
     public interface IUpdateProcessor
     {

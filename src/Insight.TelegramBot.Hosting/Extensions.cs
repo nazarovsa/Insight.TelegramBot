@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using Insight.TelegramBot.Configurations;
+using Insight.TelegramBot.Abstractions.Configurations;
 using Insight.TelegramBot.Hosting.Hosts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;

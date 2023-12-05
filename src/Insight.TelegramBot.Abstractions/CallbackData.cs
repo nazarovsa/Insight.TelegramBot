@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Insight.TelegramBot
+namespace Insight.TelegramBot.Abstractions
 {
     public class CallbackData<TState>
         where TState : Enum

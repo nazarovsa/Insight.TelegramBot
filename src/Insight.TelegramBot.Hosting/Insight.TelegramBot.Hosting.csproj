@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
         <Nullable>enable</Nullable>
         <LangVersion>$(LanguageVersion)</LangVersion>
         <Title>Hosting tools for Insight.TelegramBot</Title>
@@ -10,13 +10,13 @@
         <RepositoryUrl>https://github.com/nazarovsa/Insight.TelegramBot</RepositoryUrl>
         <RepositoryType>Github</RepositoryType>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Insight.TelegramBot\Insight.TelegramBot.csproj" />
+        <ProjectReference Include="..\Insight.TelegramBot.Abstractions\Insight.TelegramBot.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

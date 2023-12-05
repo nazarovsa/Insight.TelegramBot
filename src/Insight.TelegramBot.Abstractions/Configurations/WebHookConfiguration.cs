@@ -1,6 +1,6 @@
 using System;
 
-namespace Insight.TelegramBot.Configurations
+namespace Insight.TelegramBot.Abstractions.Configurations
 {
     public sealed class WebHookConfiguration
     {

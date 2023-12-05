@@ -1,4 +1,5 @@
 using System;
+using Insight.TelegramBot.Abstractions;
 using Insight.TelegramBot.Testing;
 using Xunit;
 

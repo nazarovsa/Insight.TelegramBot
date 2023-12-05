@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Insight.TelegramBot.Abstractions;
 using Insight.TelegramBot.Handling.Handlers;
 using Insight.TelegramBot.Handling.Matchers;
-using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Insight.TelegramBot.Handling.Infrastructure;

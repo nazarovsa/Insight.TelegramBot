@@ -10,8 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.Abstractions\Insight.TelegramBot.Abstractions.csproj" />
         <ProjectReference Include="..\..\src\Insight.TelegramBot.Hosting\Insight.TelegramBot.Hosting.csproj" />
-        <ProjectReference Include="..\..\src\Insight.TelegramBot\Insight.TelegramBot.csproj" />
         <ProjectReference Include="..\Insight.TelegramBot.Samples.Domain\Insight.TelegramBot.Samples.Domain.csproj" />
     </ItemGroup>
 

@@ -1,5 +1,5 @@
 using System;
-using Insight.TelegramBot.Configurations;
+using Insight.TelegramBot.Abstractions.Configurations;
 using Xunit;
 
 namespace Insight.TelegramBot.Tests
