@@ -6,7 +6,7 @@ namespace Insight.TelegramBot.Configurations
     {
         public WebHookConfiguration? WebHookConfiguration { get; set; }
 
-        public TimeSpan PollingTaskCheckInterval { get; set; } = TimeSpan.FromHours(1);
+        public TimeSpan PollingTaskCheckInterval { get; set; } = TimeSpan.FromMinutes(1);
         
         public string Token { get; set; }
     }
