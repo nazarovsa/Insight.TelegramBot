@@ -5,6 +5,7 @@ using Insight.TelegramBot.Hosting.Hosts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
@@ -63,6 +64,7 @@ public static class Extensions
 
         services.AddHostedService(ctx =>
             new TelegramBotPollingWebHost(ctx.GetRequiredService<IServiceProvider>(),
+                ctx.GetRequiredService<ILogger<TelegramBotPollingWebHost>>(),
                 ctx.GetRequiredService<IOptions<BotConfiguration>>(),
                 ctx.GetRequiredService<ITelegramBotClient>(),
                 receiverOptions));
