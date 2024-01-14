@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -45,16 +46,16 @@ namespace Insight.TelegramBot.Keyboards
 				Add(button);
 		}
 
+		[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
 		public void AddRow(IEnumerable<IKeyboardButton> buttons)
 		{
 			if (buttons == null)
 				throw new ArgumentNullException(nameof(buttons));
 
-			var keyboardButtons = buttons as IKeyboardButton[] ?? buttons.ToArray();
-			if (!keyboardButtons.Any())
+			if (!buttons.Any())
 				throw new ArgumentException($"Empty collection: {nameof(buttons)}");
 
-			_buttons.Add(keyboardButtons);
+			_buttons.Add(buttons);
 		}
 
 		public IEnumerator<IEnumerable<IKeyboardButton>> GetEnumerator()
