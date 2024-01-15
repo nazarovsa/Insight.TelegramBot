@@ -1,6 +1,7 @@
 using System.Net.Http;
 using Insight.TelegramBot.Configurations;
 using Insight.TelegramBot.Hosting;
+using Insight.TelegramBot.Hosting.Hosts.Polling;
 using Insight.TelegramBot.Samples.Domain;
 using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.AspNetCore.Builder;

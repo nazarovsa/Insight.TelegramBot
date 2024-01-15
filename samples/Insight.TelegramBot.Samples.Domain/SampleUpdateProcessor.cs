@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Insight.TelegramBot.Hosting.Hosts.Polling;
 using Insight.TelegramBot.Models;
 using Insight.TelegramBot.UpdateProcessors;
 using Telegram.Bot.Types;
@@ -27,11 +28,6 @@ namespace Insight.TelegramBot.Samples.Domain
                 UpdateType.CallbackQuery => ProcessCallback(update.CallbackQuery, cancellationToken),
                 _ => throw new NotImplementedException()
             };
-        }
-
-        public Task HandlePollingErrorAsync(Exception exception, CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
         }
 
         private async Task ProcessMessage(Message message, CancellationToken cancellationToken = default)
@@ -83,6 +79,11 @@ namespace Insight.TelegramBot.Samples.Domain
                 default:
                     throw new ArgumentException(nameof(callbackData.NextState));
             }
+        }
+
+        public Task HandlePollingException(Exception exception, CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
         }
     }
 }

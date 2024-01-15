@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Insight.TelegramBot.Configurations;
+using Insight.TelegramBot.Hosting.Hosts.Polling;
 using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -53,22 +54,34 @@ internal sealed class TelegramBotPollingWebHost : BackgroundService
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            if (_pollingTask == null)
+            try
             {
-                _pollingTask = _client.ReceiveAsync(HandleUpdateAsync, HandlePollingErrorAsync, receiverOptions,
-                    stoppingToken);
-            }
+                if (_pollingTask == null)
+                {
+                    _pollingTask = _client.ReceiveAsync(HandleUpdateAsync, HandlePollingErrorAsync, receiverOptions,
+                        stoppingToken);
+                }
 
-            if (_pollingTask.Status >= TaskStatus.RanToCompletion)
+                if (_pollingTask.Status >= TaskStatus.RanToCompletion)
+                {
+                    _logger.LogWarning("Polling task failed unexpectedly. Task status was {TaskStatus}",
+                        _pollingTask.Status);
+
+                    if (_pollingTask.Exception != null)
+                    {
+                        _logger.LogWarning(_pollingTask.Exception, "Exception at failed polling task logged");
+                    }
+
+                    _pollingTask = _client.ReceiveAsync(HandleUpdateAsync, HandlePollingErrorAsync, receiverOptions, stoppingToken);
+                }
+
+                await Task.Delay(_botConfiguration.PollingTaskCheckInterval, stoppingToken);
+            }
+            catch (Exception ex)
             {
-                _logger.LogWarning(
-                    "Polling task failed unexpectedly. Task status was {TaskStatus}",
-                    _pollingTask.Status);
-                _pollingTask = _client.ReceiveAsync(HandleUpdateAsync, HandlePollingErrorAsync, receiverOptions,
-                    stoppingToken);
+                _logger.LogError(ex, "Exception occured while checking polling task");
+                await Task.Delay(_botConfiguration.PollingTaskExceptionDelay, stoppingToken);
             }
-
-            await Task.Delay(_botConfiguration.PollingTaskCheckInterval, stoppingToken);
         }
     }
 
@@ -84,7 +97,13 @@ internal sealed class TelegramBotPollingWebHost : BackgroundService
         CancellationToken cancellationToken = default)
     {
         using var scope = _serviceProvider.CreateScope();
-        var updateProcessor = scope.ServiceProvider.GetRequiredService<IPollingExceptionHandler>();
-        await updateProcessor.HandlePollingErrorAsync(exception, cancellationToken);
+        var exceptionHandler = scope.ServiceProvider.GetService<IPollingExceptionHandler>();
+        if (exceptionHandler == null)
+        {
+            _logger.LogError(exception, "Exception occured during polling");
+            return;
+        }
+
+        await exceptionHandler.HandlePollingException(exception, cancellationToken);
     }
 }

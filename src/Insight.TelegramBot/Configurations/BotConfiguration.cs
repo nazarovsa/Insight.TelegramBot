@@ -8,6 +8,8 @@ namespace Insight.TelegramBot.Configurations
 
         public TimeSpan PollingTaskCheckInterval { get; set; } = TimeSpan.FromMinutes(1);
         
+        public TimeSpan PollingTaskExceptionDelay { get; set; } = TimeSpan.FromMinutes(5);
+
         public string Token { get; set; }
     }
 }
