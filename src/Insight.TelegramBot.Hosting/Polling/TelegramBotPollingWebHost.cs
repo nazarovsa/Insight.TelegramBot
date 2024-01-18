@@ -1,8 +1,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Insight.TelegramBot.Configurations;
-using Insight.TelegramBot.Hosting.Hosts.Polling;
+using Insight.TelegramBot.Hosting.Options;
+using Insight.TelegramBot.Hosting.Polling.ExceptionHandlers;
 using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,9 +13,9 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Insight.TelegramBot.Hosting.Hosts;
+namespace Insight.TelegramBot.Hosting.Polling;
 
-internal sealed class TelegramBotPollingWebHost : BackgroundService
+public sealed class TelegramBotPollingWebHost : BackgroundService
 {
     private readonly IServiceProvider _serviceProvider;
 
@@ -23,7 +23,7 @@ internal sealed class TelegramBotPollingWebHost : BackgroundService
 
     private readonly ITelegramBotClient _client;
 
-    private readonly BotConfiguration _botConfiguration;
+    private readonly TelegramBotOptions _telegramBotOptions;
 
     private readonly ReceiverOptions? _receiverOptions;
 
@@ -31,22 +31,24 @@ internal sealed class TelegramBotPollingWebHost : BackgroundService
 
     public TelegramBotPollingWebHost(IServiceProvider serviceProvider,
         ILogger<TelegramBotPollingWebHost> logger,
-        IOptions<BotConfiguration> config,
+        IOptions<TelegramBotOptions> config,
         ITelegramBotClient client,
         ReceiverOptions? receiverOptions = null)
     {
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _client = client ?? throw new ArgumentNullException(nameof(client));
-        _botConfiguration = config.Value ?? throw new ArgumentNullException(nameof(config));
+        _telegramBotOptions = config.Value ?? throw new ArgumentNullException(nameof(config));
         _receiverOptions = receiverOptions;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        if (_botConfiguration.WebHookConfiguration is { UseWebHook: true })
-            throw new InvalidOperationException("For webhook bots use TelegramBotWithHookWebHost");
-
+        if (_telegramBotOptions.Polling == null)
+        {
+            throw new ArgumentNullException(nameof(TelegramBotOptions.Polling), "Polling is not configured");
+        }
+        
         var receiverOptions = _receiverOptions ?? new ReceiverOptions
         {
             AllowedUpdates = Array.Empty<UpdateType>()
@@ -75,12 +77,12 @@ internal sealed class TelegramBotPollingWebHost : BackgroundService
                     _pollingTask = _client.ReceiveAsync(HandleUpdateAsync, HandlePollingErrorAsync, receiverOptions, stoppingToken);
                 }
 
-                await Task.Delay(_botConfiguration.PollingTaskCheckInterval, stoppingToken);
+                await Task.Delay(_telegramBotOptions.Polling.PollingTaskCheckInterval, stoppingToken);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Exception occured while checking polling task");
-                await Task.Delay(_botConfiguration.PollingTaskExceptionDelay, stoppingToken);
+                await Task.Delay(_telegramBotOptions.Polling.PollingTaskExceptionDelay, stoppingToken);
             }
         }
     }

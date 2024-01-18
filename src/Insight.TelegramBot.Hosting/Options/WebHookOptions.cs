@@ -1,8 +1,8 @@
 using System;
 
-namespace Insight.TelegramBot.Configurations
+namespace Insight.TelegramBot.Hosting.Options
 {
-    public sealed class WebHookConfiguration
+    public sealed class WebHookOptions
     {
         public bool UseWebHook { get; set; }
 

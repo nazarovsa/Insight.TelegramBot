@@ -1,13 +1,10 @@
-using System.Net.Http;
-using Insight.TelegramBot.Configurations;
-using Insight.TelegramBot.Hosting;
+using Insight.TelegramBot.Hosting.DependencyInjection.Infrastructure;
+using Insight.TelegramBot.Hosting.Infrastructure;
+using Insight.TelegramBot.Hosting.Polling.ExceptionHandlers;
 using Insight.TelegramBot.Samples.Domain;
-using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Telegram.Bot;
 
 namespace Insight.TelegramBot.Samples.SimpleHostedBot
 {
@@ -22,15 +19,12 @@ namespace Insight.TelegramBot.Samples.SimpleHostedBot
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<BotConfiguration>(Configuration.GetSection(nameof(BotConfiguration)));
-            services.AddTransient<IUpdateProcessor, SampleUpdateProcessor>();
-            services.AddTransient<IBot, SampleBot>();
-
-            services.AddSingleton<ITelegramBotClient, TelegramBotClient>(c =>
-                new TelegramBotClient(c.GetService<IOptions<BotConfiguration>>().Value.Token,
-                    new HttpClient()));
-
-            services.AddPollingBotHost();
+            services.AddTelegramBot(builder =>
+                builder.WithBot<SampleBot>(ServiceLifetime.Transient)
+                    .WithTelegramBotClient(client => client.WithLifetime(ServiceLifetime.Singleton))
+                    .WithOptions(opt => opt.FromConfiguration(Configuration))
+                    .WithUpdateProcessor<SampleUpdateProcessor>()
+                    .WithPolling(polling => polling.WithExceptionHandler<LoggingPollingExceptionHandler>()));
         }
 
         public void Configure(IApplicationBuilder configure)

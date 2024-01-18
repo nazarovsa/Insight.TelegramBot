@@ -1,15 +1,11 @@
-using System.Net.Http;
-using Insight.TelegramBot.Configurations;
-using Insight.TelegramBot.Hosting;
-using Insight.TelegramBot.Hosting.Hosts.Polling;
+using Insight.TelegramBot.Hosting.DependencyInjection.Infrastructure;
+using Insight.TelegramBot.Hosting.Infrastructure;
+using Insight.TelegramBot.Hosting.Options;
 using Insight.TelegramBot.Samples.Domain;
-using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
-using Telegram.Bot;
 
 namespace Insight.TelegramBot.Samples.WebHookBot
 {
@@ -17,35 +13,25 @@ namespace Insight.TelegramBot.Samples.WebHookBot
     {
         public IConfiguration Configuration { get; }
 
-        public BotConfiguration BotConfiguration { get; } = new BotConfiguration();
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            Configuration.GetSection(nameof(BotConfiguration)).Bind(BotConfiguration);
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTelegramBot(builder =>
+                builder.WithBot<SampleBot>()
+                    .WithTelegramBotClient(client =>
+                        client.WithMicrosoftHttpClientFactory()
+                            .WithLifetime(ServiceLifetime.Transient))
+                    .WithOptions(opt => opt.FromConfiguration(Configuration))
+                    .WithUpdateProcessor<SampleUpdateProcessor>()
+                    .WithWebHook(webhook => webhook.WithDefaultUpdateController()));
+
             services.AddMvc()
-                .AddNewtonsoftJson(
-                    opt => opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver())
-                .AddUpdateController();
-
-            services.Configure<BotConfiguration>(Configuration.GetSection(nameof(BotConfiguration)));
-
-            services.AddHttpClient();
-            
-            services.AddScoped<IBot, Bot>();
-            services.AddScoped<IUpdateProcessor, SampleUpdateProcessor>();
-            services.AddScoped<IPollingExceptionHandler, SampleUpdateProcessor>();
-            
-            services.AddTransient<ITelegramBotClient, TelegramBotClient>(c =>
-                new TelegramBotClient(c.GetService<IOptions<BotConfiguration>>().Value.Token,
-                    c.GetService<IHttpClientFactory>().CreateClient()));
-            
-            services.AddWebHookBotHost();
+                .AddNewtonsoftJson(opt =>
+                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
         }
 
         public void Configure(IApplicationBuilder app)
@@ -53,7 +39,8 @@ namespace Insight.TelegramBot.Samples.WebHookBot
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.AddUpdateControllerRoute(BotConfiguration.WebHookConfiguration.WebHookPath);
+                endpoints.AddUpdateControllerRoute(
+                    app.ApplicationServices.GetRequiredService<TelegramBotOptions>().WebHook!.WebHookPath);
             });
         }
     }
