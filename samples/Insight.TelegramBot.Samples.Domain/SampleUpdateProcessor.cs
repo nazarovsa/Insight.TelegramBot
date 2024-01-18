@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Insight.TelegramBot.Hosting.Hosts.Polling;
+using Insight.TelegramBot.Hosting.Polling.ExceptionHandlers;
 using Insight.TelegramBot.Models;
 using Insight.TelegramBot.UpdateProcessors;
 using Telegram.Bot.Types;

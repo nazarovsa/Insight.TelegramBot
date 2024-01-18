@@ -1,5 +1,5 @@
 using System;
-using Insight.TelegramBot.Configurations;
+using Insight.TelegramBot.Hosting.Options;
 using Xunit;
 
 namespace Insight.TelegramBot.Tests
@@ -14,7 +14,7 @@ namespace Insight.TelegramBot.Tests
         [InlineData("https://site.com/", "/update/token", "https://site.com:443/update/token")]
         public void Should_return_correct_uri(string baseUrl, string path, string url)
         {
-            var configuration = new WebHookConfiguration
+            var configuration = new WebHookOptions
             {
                 UseWebHook = true,
                 WebHookBaseUrl = baseUrl,
@@ -27,7 +27,7 @@ namespace Insight.TelegramBot.Tests
         [Fact]
         public void Should_throw_ANE_when_baseUrl_isEmpty()
         {
-            var configuration = new WebHookConfiguration
+            var configuration = new WebHookOptions
             {
                 UseWebHook = true,
                 WebHookBaseUrl = null,
@@ -40,7 +40,7 @@ namespace Insight.TelegramBot.Tests
         [Fact]
         public void Should_throw_ANE_when_path_isEmpty()
         {
-            var configuration = new WebHookConfiguration
+            var configuration = new WebHookOptions
             {
                 UseWebHook = true,
                 WebHookBaseUrl = "host",

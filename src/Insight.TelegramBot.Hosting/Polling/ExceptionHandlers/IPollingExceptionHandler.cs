@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Insight.TelegramBot.Hosting.Hosts.Polling;
+namespace Insight.TelegramBot.Hosting.Polling.ExceptionHandlers;
 
 public interface IPollingExceptionHandler
 {

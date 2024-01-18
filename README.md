@@ -23,7 +23,13 @@ StateMachine is abstract class that uses [Stateless](https://www.nuget.org/packa
 [![nuget version](https://img.shields.io/nuget/v/Insight.TelegramBot.Hosting)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting/)
 [![Nuget](https://img.shields.io/nuget/dt/Insight.TelegramBot.Hosting?color=%2300000)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting/)
 
-Extensions to simplify bot usage and hosted services.
+Hosted bots.
+
+## Insight.TelegramBot.Hosting.DependencyInjection
+[![nuget version](https://img.shields.io/nuget/v/Insight.TelegramBot.Hosting.DependencyInjection)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting.DependencyInjection/)
+[![Nuget](https://img.shields.io/nuget/dt/Insight.TelegramBot.Hosting.DependencyInjection?color=%2300000)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting.DependencyInjection/)
+
+Extensions to simplify bot registration.
 
 Samples
 ------------------------
