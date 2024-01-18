@@ -37,14 +37,6 @@ public sealed class WebHookHostBuilder
 
     internal void Build()
     {
-        if (_services == null)
-        {
-            throw new ArgumentNullException(nameof(_services));
-        }
-
-        // TODO: rewrite ctor to accept IServiceProvider
-        _services.AddHostedService(ctx =>
-            new TelegramBotWebHookHost(ctx.GetRequiredService<ITelegramBotClient>(),
-                ctx.GetRequiredService<IOptions<TelegramBotOptions>>().Value));
+        _services.AddHostedService<TelegramBotWebHookHost>();
     }
 }

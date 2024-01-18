@@ -34,6 +34,7 @@ public sealed class TelegramBotPollingWebHost : BackgroundService
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _telegramBotOptions = telegramBotOptions.Value ?? throw new ArgumentNullException(nameof(telegramBotOptions));
+        
         _client = serviceProvider.GetRequiredService<ITelegramBotClient>();
     }
 
