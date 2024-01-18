@@ -29,13 +29,7 @@ public sealed class PollingHostBuilder
 
     internal void Build()
     {
-        // TODO: rewrite ctor to accept IServiceProvider
-        _services.AddHostedService(ctx =>
-            new TelegramBotPollingWebHost(ctx.GetRequiredService<IServiceProvider>(),
-                ctx.GetRequiredService<ILogger<TelegramBotPollingWebHost>>(),
-                ctx.GetRequiredService<IOptions<TelegramBotOptions>>(),
-                ctx.GetRequiredService<ITelegramBotClient>(),
-                ctx.GetRequiredService<ReceiverOptions>()));
+        _services.AddHostedService<TelegramBotPollingWebHost>();
 
         _services.TryAddSingleton<IPollingExceptionHandler, NulloPollingExceptionHandler>();
     }

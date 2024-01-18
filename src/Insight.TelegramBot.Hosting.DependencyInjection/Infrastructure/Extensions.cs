@@ -1,5 +1,5 @@
 using System;
-using Insight.TelegramBot.Hosting.Infrastructure;
+using Insight.TelegramBot.Hosting.DependencyInjection.Builders;
 using Insight.TelegramBot.Hosting.WebHook;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;

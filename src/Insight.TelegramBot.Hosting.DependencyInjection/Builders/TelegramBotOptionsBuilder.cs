@@ -3,7 +3,7 @@ using Insight.TelegramBot.Hosting.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Insight.TelegramBot.Hosting.Infrastructure;
+namespace Insight.TelegramBot.Hosting.DependencyInjection.Builders;
 
 public sealed class TelegramBotOptionsBuilder
 {

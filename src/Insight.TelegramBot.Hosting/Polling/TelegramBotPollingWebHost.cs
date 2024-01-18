@@ -25,31 +25,21 @@ public sealed class TelegramBotPollingWebHost : BackgroundService
 
     private readonly TelegramBotOptions _telegramBotOptions;
 
-    private readonly ReceiverOptions? _receiverOptions;
-
     private Task? _pollingTask;
 
     public TelegramBotPollingWebHost(IServiceProvider serviceProvider,
         ILogger<TelegramBotPollingWebHost> logger,
-        IOptions<TelegramBotOptions> config,
-        ITelegramBotClient client,
-        ReceiverOptions? receiverOptions = null)
+        IOptions<TelegramBotOptions> telegramBotOptions)
     {
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _client = client ?? throw new ArgumentNullException(nameof(client));
-        _telegramBotOptions = config.Value ?? throw new ArgumentNullException(nameof(config));
-        _receiverOptions = receiverOptions;
+        _telegramBotOptions = telegramBotOptions.Value ?? throw new ArgumentNullException(nameof(telegramBotOptions));
+        _client = serviceProvider.GetRequiredService<ITelegramBotClient>();
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        if (_telegramBotOptions.Polling == null)
-        {
-            throw new ArgumentNullException(nameof(TelegramBotOptions.Polling), "Polling is not configured");
-        }
-        
-        var receiverOptions = _receiverOptions ?? new ReceiverOptions
+        var receiverOptions = _telegramBotOptions.Polling.ReceiverOptions ?? new ReceiverOptions
         {
             AllowedUpdates = Array.Empty<UpdateType>()
         };
@@ -74,7 +64,8 @@ public sealed class TelegramBotPollingWebHost : BackgroundService
                         _logger.LogWarning(_pollingTask.Exception, "Exception at failed polling task logged");
                     }
 
-                    _pollingTask = _client.ReceiveAsync(HandleUpdateAsync, HandlePollingErrorAsync, receiverOptions, stoppingToken);
+                    _pollingTask = _client.ReceiveAsync(HandleUpdateAsync, HandlePollingErrorAsync, receiverOptions,
+                        stoppingToken);
                 }
 
                 await Task.Delay(_telegramBotOptions.Polling.PollingTaskCheckInterval, stoppingToken);

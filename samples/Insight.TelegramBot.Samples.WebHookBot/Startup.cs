@@ -1,5 +1,4 @@
 using Insight.TelegramBot.Hosting.DependencyInjection.Infrastructure;
-using Insight.TelegramBot.Hosting.Infrastructure;
 using Insight.TelegramBot.Hosting.Options;
 using Insight.TelegramBot.Samples.Domain;
 using Microsoft.AspNetCore.Builder;

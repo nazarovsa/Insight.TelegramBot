@@ -1,14 +1,12 @@
 using System;
 using System.Linq;
-using Insight.TelegramBot.Hosting.DependencyInjection.Builders;
 using Insight.TelegramBot.Hosting.Options;
 using Insight.TelegramBot.UpdateProcessors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Telegram.Bot;
-using Telegram.Bot.Polling;
 
-namespace Insight.TelegramBot.Hosting.Infrastructure;
+namespace Insight.TelegramBot.Hosting.DependencyInjection.Builders;
 
 /// <summary>
 /// Builder for Telegram Bot.
@@ -73,9 +71,9 @@ public sealed class TelegramBotBuilder
         return this;
     }
 
-    public TelegramBotBuilder WithUpdateProcessor<TUpdateHandler>(
+    public TelegramBotBuilder WithUpdateProcessor<TUpdateProcessor>(
         ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
-        where TUpdateHandler : IUpdateProcessor
+        where TUpdateProcessor : IUpdateProcessor
     {
         if (_handlingConfigured)
         {
@@ -84,16 +82,16 @@ public sealed class TelegramBotBuilder
                 $"Update handler of type {registration.ImplementationType!.Name} already registered");
         }
 
-        var descriptor = new ServiceDescriptor(typeof(IUpdateHandler), typeof(TUpdateHandler), serviceLifetime);
+        var descriptor = new ServiceDescriptor(typeof(IUpdateProcessor), typeof(TUpdateProcessor), serviceLifetime);
         Services.Add(descriptor);
         _handlingConfigured = true;
         return this;
     }
 
-    public TelegramBotBuilder WithUpdateProcessor<TUpdateHandler>(
-        Func<IServiceProvider, TUpdateHandler> updateHandlerFactory,
+    public TelegramBotBuilder WithUpdateProcessor<TUpdateProcessor>(
+        Func<IServiceProvider, TUpdateProcessor> updateHandlerFactory,
         ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
-        where TUpdateHandler : IUpdateHandler
+        where TUpdateProcessor : IUpdateProcessor
     {
         if (_handlingConfigured)
         {
@@ -102,8 +100,7 @@ public sealed class TelegramBotBuilder
                 $"Update handler of type {registration.ImplementationType!.Name} already registered");
         }
 
-        var descriptor =
-            new ServiceDescriptor(typeof(IUpdateHandler), ctx => updateHandlerFactory(ctx), serviceLifetime);
+        var descriptor = new ServiceDescriptor(typeof(IUpdateProcessor), ctx => updateHandlerFactory(ctx), serviceLifetime);
         Services.Add(descriptor);
         _handlingConfigured = true;
         return this;

@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
 
-namespace Insight.TelegramBot.Hosting.Infrastructure;
+namespace Insight.TelegramBot.Hosting.DependencyInjection.Builders;
 
 public sealed class TelegramBotClientBuilder
 {
