@@ -83,13 +83,13 @@ public sealed class TelegramBotBuilder
         }
 
         var descriptor = new ServiceDescriptor(typeof(IUpdateProcessor), typeof(TUpdateProcessor), serviceLifetime);
-        Services.Add(descriptor);
+        Services.TryAdd(descriptor);
         _handlingConfigured = true;
         return this;
     }
 
     public TelegramBotBuilder WithUpdateProcessor<TUpdateProcessor>(
-        Func<IServiceProvider, TUpdateProcessor> updateHandlerFactory,
+        Func<IServiceProvider, TUpdateProcessor> updateProcessorFactory,
         ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
         where TUpdateProcessor : IUpdateProcessor
     {
@@ -100,8 +100,8 @@ public sealed class TelegramBotBuilder
                 $"Update handler of type {registration.ImplementationType!.Name} already registered");
         }
 
-        var descriptor = new ServiceDescriptor(typeof(IUpdateProcessor), ctx => updateHandlerFactory(ctx), serviceLifetime);
-        Services.Add(descriptor);
+        var descriptor = new ServiceDescriptor(typeof(IUpdateProcessor), ctx => updateProcessorFactory(ctx), serviceLifetime);
+        Services.TryAdd(descriptor);
         _handlingConfigured = true;
         return this;
     }
