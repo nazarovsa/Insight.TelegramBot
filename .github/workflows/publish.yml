@@ -15,9 +15,11 @@ jobs:
     - name: Setup .NET 7.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 7.0.102
+        dotnet-version: 7.0.410
     - name: Restore dependencies
-      run: dotnet restore
+      run: |
+        dotnet nuget add source --username nazarovsa --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github_telegram_bot "https://nuget.pkg.github.com/TelegramBots/index.json"
+        dotnet restore
     - name: Pack
       env: 
         NUGET_SOURCE: https://api.nuget.org/v3/index.json
