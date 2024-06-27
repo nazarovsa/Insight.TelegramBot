@@ -26,13 +26,14 @@ namespace Insight.TelegramBot
                 message.Text,
                 message.MessageThreadId,
                 message.ParseMode,
-                message.Entities, 
-                message.DisableWebPagePreview,
+                message.Entities,
+                message.LinkPreviewOptions,
                 message.DisableNotification,
                 message.ProtectContent,
-                message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, 
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup,
+                message.BusinessConnectionId,
                 cancellationToken);
         }
 
@@ -40,19 +41,20 @@ namespace Insight.TelegramBot
             CancellationToken cancellationToken = default)
         {
             return Client.SendDocumentAsync(
-                message.ChatId, 
-                message.InputOnlineFile,
+                message.ChatId,
+                message.InputFile,
                 message.MessageThreadId,
-                message.Thumbnail, 
+                message.Thumbnail,
                 message.Caption,
                 message.ParseMode,
-                message.Entities, 
+                message.Entities,
                 message.DisableContentTypeDetection,
                 message.DisableNotification,
                 message.ProtectContent,
-                message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
+                message.MessageEffectId,
+                message.ReplyParameters,
                 message.ReplyMarkup,
+                message.BusinessConnectionId,
                 cancellationToken);
         }
 
@@ -61,17 +63,20 @@ namespace Insight.TelegramBot
         {
             return Client.SendPhotoAsync(
                 message.ChatId,
-                message.InputOnlineFile, 
+                message.InputFile,
                 message.MessageThreadId,
-                message.Caption, 
+                message.Caption,
                 message.ParseMode,
-                message.Entities, 
+                message.Entities,
+                message.ShowCaptionAboveMedia,
                 message.HasSpoiler,
-                message.DisableNotification, 
-                message.ProtectContent, 
-                message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, cancellationToken);
+                message.DisableNotification,
+                message.ProtectContent,
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup,
+                message.BusinessConnectionId,
+                cancellationToken);
         }
 
         public virtual Task<Message> SendAudioAsync(AudioMessage message,
@@ -79,7 +84,7 @@ namespace Insight.TelegramBot
         {
             return Client.SendAudioAsync(
                 message.ChatId,
-                message.InputOnlineFile,
+                message.InputFile,
                 message.MessageThreadId,
                 message.Caption,
                 message.ParseMode,
@@ -90,9 +95,10 @@ namespace Insight.TelegramBot
                 message.Thumbnail,
                 message.DisableNotification,
                 message.ProtectContent,
-                message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
+                message.MessageEffectId,
+                message.ReplyParameters,
                 message.ReplyMarkup,
+                message.BusinessConnectionId,
                 cancellationToken);
         }
 
@@ -101,7 +107,7 @@ namespace Insight.TelegramBot
         {
             return Client.SendAnimationAsync(
                 message.ChatId,
-                message.InputOnlineFile,
+                message.InputFile,
                 message.MessageThreadId,
                 message.Duration,
                 message.Width,
@@ -110,12 +116,15 @@ namespace Insight.TelegramBot
                 message.Caption,
                 message.ParseMode,
                 message.Entities,
+                message.ShowCaptionAboveMedia,
                 message.HasSpoiler,
                 message.DisableNotification,
                 message.ProtectContent,
-                message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, cancellationToken);
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup,
+                message.BusinessConnectionId,
+                cancellationToken);
         }
 
         public virtual Task<Message> SendStickerAsync(StickerMessage message,
@@ -123,22 +132,29 @@ namespace Insight.TelegramBot
         {
             return Client.SendStickerAsync(
                 message.ChatId,
-                message.InputOnlineFile,
+                message.InputFile,
                 message.MessageThreadId,
                 message.Emoji,
                 message.DisableNotification,
                 message.ProtectContent,
-                message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, cancellationToken);
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup,
+                message.BusinessConnectionId, cancellationToken);
         }
 
         public virtual Task<Message> SendDiceAsync(DiceMessage message, CancellationToken cancellationToken = default)
         {
-            return Client.SendDiceAsync(message.ChatId, message.MessageThreadId, message.Emoji,
-                message.DisableNotification, message.ProtectContent, message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, cancellationToken);
+            return Client.SendDiceAsync(message.ChatId,
+                message.MessageThreadId,
+                message.Emoji,
+                message.DisableNotification,
+                message.ProtectContent,
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup,
+                message.BusinessConnectionId,
+                cancellationToken);
         }
 
         public virtual Task<Message> SendGameAsync(GameMessage message, CancellationToken cancellationToken = default)
@@ -148,10 +164,16 @@ namespace Insight.TelegramBot
                 throw new ArgumentNullException(nameof(message.ChatId.Identifier));
             }
 
-            return Client.SendGameAsync(message.ChatId.Identifier.Value, message.GameShortName,
-                message.MessageThreadId, message.DisableNotification, message.ProtectContent, message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, cancellationToken);
+            return Client.SendGameAsync(
+                message.ChatId.Identifier.Value,
+                message.GameShortName,
+                message.MessageThreadId, message.DisableNotification,
+                message.ProtectContent,
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup,
+                message.BusinessConnectionId,
+                cancellationToken);
         }
 
         public virtual Task<Message> SendLocationAsync(LocationMessage message,
@@ -162,77 +184,118 @@ namespace Insight.TelegramBot
                 message.Latitude,
                 message.Longitude,
                 message.MessageThreadId,
+                message.HorizontalAccuracy,
                 message.LivePeriod,
                 message.Heading,
                 message.ProximityAlertRadius,
                 message.DisableNotification,
                 message.ProtectContent,
-                message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, cancellationToken);
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup,
+                message.BusinessConnectionId,
+                cancellationToken);
         }
 
         public virtual Task<Message> SendVideoAsync(VideoMessage message,
             CancellationToken cancellationToken = default)
         {
-            return Client.SendVideoAsync(message.ChatId, message.InputOnlineFile, message.MessageThreadId,
+            return Client.SendVideoAsync(message.ChatId, 
+                message.InputFile,
+                message.MessageThreadId,
                 message.Duration, message.Width,
                 message.Height,
                 message.Thumbnail,
-                message.Caption, message.ParseMode, message.Entities,
+                message.Caption,
+                message.ParseMode,
+                message.Entities,
+                message.ShowCaptionAboveMedia,
                 message.HasSpoiler,
                 message.SupportsStreaming,
                 message.DisableNotification,
                 message.ProtectContent,
-                message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, cancellationToken);
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup, 
+                message.BusinessConnectionId, 
+                cancellationToken);
         }
 
         public virtual Task<Message> SendVoiceAsync(VoiceMessage message,
             CancellationToken cancellationToken = default)
         {
-            return Client.SendVoiceAsync(message.ChatId, message.InputOnlineFile, message.MessageThreadId,
-                message.Caption, message.ParseMode,
-                message.Entities, message.Duration, message.DisableNotification, message.ProtectContent,
-                message.ReplyToMessageId,
-                message.AllowSendingWithoutReply, message.ReplyMarkup, cancellationToken);
+            return Client.SendVoiceAsync(message.ChatId, 
+                message.InputFile,
+                message.MessageThreadId,
+                message.Caption,
+                message.ParseMode,
+                message.Entities,
+                message.Duration, 
+                message.DisableNotification, 
+                message.ProtectContent,
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup,
+                message.BusinessConnectionId,
+                cancellationToken);
         }
 
         public virtual Task SendChatActionAsync(ChatId chatId,
-            ChatAction chatAction,
+            ChatAction action,
             int? messageThreadId = null,
+            string? businessConnectionId = null,
             CancellationToken cancellationToken = default)
         {
-            return Client.SendChatActionAsync(chatId, chatAction, messageThreadId, cancellationToken);
+            return Client.SendChatActionAsync(chatId, action, messageThreadId, businessConnectionId, cancellationToken);
         }
 
         public virtual Task<Message> SendVideoNoteAsync(VideoNoteMessage message,
             CancellationToken cancellationToken = default)
         {
-            return Client.SendVideoNoteAsync(message.ChatId, message.InputOnlineFile, message.MessageThreadId,
+            return Client.SendVideoNoteAsync(message.ChatId, 
+                message.InputFile, 
+                message.MessageThreadId,
                 message.Duration, message.Length,
-                message.Thumbnail, message.DisableNotification, message.ProtectContent, message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, cancellationToken);
+                message.Thumbnail,
+                message.DisableNotification,
+                message.ProtectContent, 
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup, 
+                message.BusinessConnectionId, 
+                cancellationToken);
         }
 
         public virtual Task<Message> SendContactAsync(ContactMessage message,
             CancellationToken cancellationToken = default)
         {
-            return Client.SendContactAsync(message.ChatId, message.PhoneNumber, message.FirstName,
-                message.MessageThreadId, message.LastName,
-                message.VCard, message.DisableNotification, message.ProtectContent, message.ReplyToMessageId,
-                message.AllowSendingWithoutReply,
-                message.ReplyMarkup, cancellationToken);
+            return Client.SendContactAsync(message.ChatId, 
+                message.PhoneNumber,
+                message.FirstName,
+                message.MessageThreadId,
+                message.LastName,
+                message.VCard, 
+                message.DisableNotification, 
+                message.ProtectContent, 
+                message.MessageEffectId,
+                message.ReplyParameters,
+                message.ReplyMarkup, 
+                message.BusinessConnectionId, 
+                cancellationToken);
         }
 
         public virtual Task<Message> EditMessageTextAsync(int messageId,
             TextMessage message,
             CancellationToken cancellationToken = default)
         {
-            return Client.EditMessageTextAsync(message.ChatId, messageId, message.Text, message.ParseMode,
-                message.Entities, message.DisableWebPagePreview, message.ReplyMarkup as InlineKeyboardMarkup,
+            return Client.EditMessageTextAsync(message.ChatId,
+                messageId,
+                message.Text,
+                message.ParseMode,
+                message.Entities,
+                message.LinkPreviewOptions, 
+                message.ReplyMarkup as InlineKeyboardMarkup,
+                message.BusinessConnectionId,
                 cancellationToken);
         }
 
@@ -270,7 +333,7 @@ namespace Insight.TelegramBot
             return Client.DeleteMessageAsync(chatId, messageId, cancellationToken);
         }
 
-        public virtual Task<Chat> GetChatAsync(ChatId id, CancellationToken cancellationToken = default)
+        public virtual Task<ChatFullInfo> GetChatAsync(ChatId id, CancellationToken cancellationToken = default)
         {
             return Client.GetChatAsync(id, cancellationToken);
         }

@@ -38,8 +38,9 @@ namespace Insight.TelegramBot
             CancellationToken cancellationToken = default);
 
         Task SendChatActionAsync(ChatId chatId,
-            ChatAction chatAction,
+            ChatAction action,
             int? messageThreadId = null,
+            string? businessConnectionId = null,
             CancellationToken cancellationToken = default);
 
         Task<Message> SendVideoNoteAsync(VideoNoteMessage message,
@@ -68,7 +69,7 @@ namespace Insight.TelegramBot
 
         Task DeleteMessageAsync(long chatId, int messageId, CancellationToken cancellationToken = default);
 
-        Task<Chat> GetChatAsync(ChatId id, CancellationToken cancellationToken = default);
+        Task<ChatFullInfo> GetChatAsync(ChatId id, CancellationToken cancellationToken = default);
 
         Task<int> GetChatMembersCountAsync(ChatId id, CancellationToken cancellationToken = default);
 

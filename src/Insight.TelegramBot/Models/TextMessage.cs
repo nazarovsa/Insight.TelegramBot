@@ -9,7 +9,5 @@ namespace Insight.TelegramBot.Models
         }
 
         public string Text { get; set; }
-
-        public bool DisableWebPagePreview { get; set; } = false;
     }
 }

@@ -18,17 +18,21 @@ namespace Insight.TelegramBot.Models
         public ParseMode ParseMode { get; set; } = ParseMode.Html;
 
         public int? MessageThreadId { get; set; } = null;
-        
+
         public bool ProtectContent { get; set; }
 
         public bool DisableNotification { get; set; } = false;
-
-        public int ReplyToMessageId { get; set; } = 0;
+        
+        public string? MessageEffectId { get; set; }
+        
+        public ReplyParameters? ReplyParameters { get; set; } = new ReplyParameters();
 
         public IReplyMarkup ReplyMarkup { get; set; } = null;
-        
+
         public IEnumerable<MessageEntity> Entities { get; set; } = Array.Empty<MessageEntity>();
-        
-        public bool AllowSendingWithoutReply { get; set; }
+
+        public LinkPreviewOptions LinkPreviewOptions { get; set; } = new LinkPreviewOptions();
+
+        public string? BusinessConnectionId { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <TelegramBotVersion>19.0.0</TelegramBotVersion>
+    <TelegramBotVersion>21.1.0</TelegramBotVersion>
     <MicrosoftVersion>8.0.0</MicrosoftVersion>
     <LangVersion>12</LangVersion>
     <PackageFrameworkVersions>netstandard2.1;net7.0;net8.0</PackageFrameworkVersions>

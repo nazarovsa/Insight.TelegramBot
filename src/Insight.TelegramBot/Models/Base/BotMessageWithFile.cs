@@ -8,13 +8,14 @@ namespace Insight.TelegramBot.Models
         {
         }
 
-        public InputFile InputOnlineFile { get; set; }
+        public InputFile InputFile { get; set; }
         
         public InputFile? Thumbnail { get; set; } = null;
-        
 
-        public bool? HasSpoiler { get; set; }
+        public bool HasSpoiler { get; set; }
 
         public string Caption { get; set; } = null;
+
+        public bool ShowCaptionAboveMedia { get; set; }
     }
 }
