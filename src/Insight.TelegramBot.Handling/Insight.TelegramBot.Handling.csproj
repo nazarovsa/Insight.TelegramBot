@@ -3,12 +3,10 @@
     <PropertyGroup>
         <TargetFrameworks>$(PackageFrameworkVersions);</TargetFrameworks>
         <Nullable>disable</Nullable>
-        <LangVersion>$(LanguageVersion)</LangVersion>
         <Title>Update handlers for Insight.TelegramBot</Title>
         <Authors>Sergey Nazarov</Authors>
         <PackageProjectUrl>https://github.com/nazarovsa/Insight.TelegramBot</PackageProjectUrl>
         <RepositoryUrl>https://github.com/nazarovsa/Insight.TelegramBot</RepositoryUrl>
-        <RepositoryType>Github</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>

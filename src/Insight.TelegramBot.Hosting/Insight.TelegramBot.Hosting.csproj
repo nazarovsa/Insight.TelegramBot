@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
         <Nullable>enable</Nullable>
-        <LangVersion>$(LanguageVersion)</LangVersion>
         <Title>Hosting tools for Insight.TelegramBot</Title>
         <Authors>Sergey Nazarov</Authors>
         <PackageProjectUrl>https://github.com/nazarovsa/Insight.TelegramBot</PackageProjectUrl>

@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFrameworks>$(PackageFrameworkVersions);</TargetFrameworks>
-        <LangVersion>$(LanguageVersion)</LangVersion>
         <Title>Simple SDK to implement telegram bot infrastructure</Title>
         <Authors>Sergey Nazarov</Authors>
         <PackageProjectUrl>https://github.com/nazarovsa/Insight.TelegramBot</PackageProjectUrl>
