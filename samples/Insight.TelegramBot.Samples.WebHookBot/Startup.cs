@@ -1,10 +1,12 @@
-using Insight.TelegramBot.Hosting.DependencyInjection.Infrastructure;
-using Insight.TelegramBot.Hosting.Options;
+using Insight.TelegramBot.DependencyInjection.Infrastructure;
+using Insight.TelegramBot.DependencyInjection.WebHook;
+using Insight.TelegramBot.DependencyInjection.WebHook.Controllers;
 using Insight.TelegramBot.Samples.Domain;
+using Insight.TelegramBot.WebHook;
+using Insight.TelegramBot.WebHook.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
 
 namespace Insight.TelegramBot.Samples.WebHookBot
 {
@@ -28,9 +30,7 @@ namespace Insight.TelegramBot.Samples.WebHookBot
                     .WithUpdateProcessor<SampleUpdateProcessor>()
                     .WithWebHook(webhook => webhook.WithDefaultUpdateController()));
 
-            services.AddMvc()
-                .AddNewtonsoftJson(opt =>
-                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+            services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -39,7 +39,7 @@ namespace Insight.TelegramBot.Samples.WebHookBot
             app.UseEndpoints(endpoints =>
             {
                 endpoints.AddUpdateControllerRoute(
-                    app.ApplicationServices.GetRequiredService<TelegramBotOptions>().WebHook!.WebHookPath);
+                    app.ApplicationServices.GetRequiredService<WebHookOptions>()!.WebHookPath);
             });
         }
     }

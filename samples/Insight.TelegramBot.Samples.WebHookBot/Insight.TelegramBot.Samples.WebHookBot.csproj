@@ -6,11 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\src\Insight.TelegramBot.Hosting.DependencyInjection\Insight.TelegramBot.Hosting.DependencyInjection.csproj" />
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.DependencyInjection.WebHook.Controllers\Insight.TelegramBot.DependencyInjection.WebHook.Controllers.csproj" />
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.DependencyInjection.WebHook\Insight.TelegramBot.DependencyInjection.WebHook.csproj" />
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.DependencyInjection\Insight.TelegramBot.DependencyInjection.csproj" />
         <ProjectReference Include="..\..\src\Insight.TelegramBot\Insight.TelegramBot.csproj" />
         <ProjectReference Include="..\Insight.TelegramBot.Samples.Domain\Insight.TelegramBot.Samples.Domain.csproj" />
     </ItemGroup>

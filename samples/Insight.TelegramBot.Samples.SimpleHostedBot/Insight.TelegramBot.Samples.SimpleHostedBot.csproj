@@ -7,7 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Insight.TelegramBot.Hosting.DependencyInjection\Insight.TelegramBot.Hosting.DependencyInjection.csproj" />
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.DependencyInjection.Polling\Insight.TelegramBot.DependencyInjection.Polling.csproj" />
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.DependencyInjection\Insight.TelegramBot.DependencyInjection.csproj" />
         <ProjectReference Include="..\Insight.TelegramBot.Samples.Domain\Insight.TelegramBot.Samples.Domain.csproj" />
     </ItemGroup>
 

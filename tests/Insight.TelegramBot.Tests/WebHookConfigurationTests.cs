@@ -1,5 +1,5 @@
 using System;
-using Insight.TelegramBot.Hosting.Options;
+using Insight.TelegramBot.WebHook;
 using Xunit;
 
 namespace Insight.TelegramBot.Tests
@@ -16,12 +16,11 @@ namespace Insight.TelegramBot.Tests
         {
             var configuration = new WebHookOptions
             {
-                UseWebHook = true,
                 WebHookBaseUrl = baseUrl,
                 WebHookPath = path
             };
             
-            Assert.Equal(url, configuration.WebHookUrl, StringComparer.InvariantCultureIgnoreCase);
+            Assert.Equal(url, configuration.WebHookUrl, StringComparer.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -29,7 +28,6 @@ namespace Insight.TelegramBot.Tests
         {
             var configuration = new WebHookOptions
             {
-                UseWebHook = true,
                 WebHookBaseUrl = null,
                 WebHookPath = "path"
             };
@@ -42,7 +40,6 @@ namespace Insight.TelegramBot.Tests
         {
             var configuration = new WebHookOptions
             {
-                UseWebHook = true,
                 WebHookBaseUrl = "host",
                 WebHookPath = null
             };
