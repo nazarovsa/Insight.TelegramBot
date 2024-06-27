@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Insight.TelegramBot.DependencyInjection.WebHook\Insight.TelegramBot.DependencyInjection.WebHook.csproj" />
+      <ProjectReference Include="..\Insight.TelegramBot.WebHook.Controllers\Insight.TelegramBot.WebHook.Controllers.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -4,14 +4,14 @@ namespace Insight.TelegramBot.Models
 {
     public sealed class AudioMessage : BotMessageWithFile
     {
-        public AudioMessage(ChatId chatId) : base(chatId)
+        public AudioMessage(ChatId chatId, InputFile inputFile) : base(chatId, inputFile)
         {
         }
 
-        public string Performer { get; set; } = null;
+        public string? Performer { get; set; }
 
-        public string Title { get; set; } = null;
+        public string? Title { get; set; }
 
-        public int Duration { get; set; } = 0;
+        public int Duration { get; set; }
     }
 }

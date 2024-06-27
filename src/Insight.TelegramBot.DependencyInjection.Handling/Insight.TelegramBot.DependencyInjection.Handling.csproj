@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Insight.TelegramBot.DependencyInjection\Insight.TelegramBot.DependencyInjection.csproj" />
+      <ProjectReference Include="..\Insight.TelegramBot.Handling\Insight.TelegramBot.Handling.csproj" />
+    </ItemGroup>
+
+</Project>

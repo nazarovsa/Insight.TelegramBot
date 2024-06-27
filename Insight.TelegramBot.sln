@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.State",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.State.Tests", "tests\Insight.TelegramBot.State.Tests\Insight.TelegramBot.State.Tests.csproj", "{59BBB232-340F-4C62-A1B5-74D8B40C04F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.Hosting", "src\Insight.TelegramBot.Hosting\Insight.TelegramBot.Hosting.csproj", "{93459619-9745-4815-985C-664E3957A1E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insight.TelegramBot.WebHook", "src\Insight.TelegramBot.WebHook\Insight.TelegramBot.WebHook.csproj", "{93459619-9745-4815-985C-664E3957A1E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{494EDB46-5FFC-4970-969C-FB610ABFE2FE}"
 EndProject
@@ -40,7 +40,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Handlin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Samples.Handling", "samples\Insight.TelegramBot.Samples.Handling\Insight.TelegramBot.Samples.Handling.csproj", "{F2193156-FD66-4B6E-8197-D1FC7D4BE410}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Hosting.DependencyInjection", "src\Insight.TelegramBot.Hosting.DependencyInjection\Insight.TelegramBot.Hosting.DependencyInjection.csproj", "{DA926028-BDB2-4146-A001-2333FB174840}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.DependencyInjection", "src\Insight.TelegramBot.DependencyInjection\Insight.TelegramBot.DependencyInjection.csproj", "{DA926028-BDB2-4146-A001-2333FB174840}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.Polling", "src\Insight.TelegramBot.Polling\Insight.TelegramBot.Polling.csproj", "{EA5C2E7C-CD75-408F-A3CF-B68756A958C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.WebHook.Controllers", "src\Insight.TelegramBot.WebHook.Controllers\Insight.TelegramBot.WebHook.Controllers.csproj", "{0C896AB5-B565-4AE7-B87E-F5723FE7E710}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.DependencyInjection.Polling", "src\Insight.TelegramBot.DependencyInjection.Polling\Insight.TelegramBot.DependencyInjection.Polling.csproj", "{914E8274-2597-4DF2-B224-BAEAF3868E3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.DependencyInjection.WebHook", "src\Insight.TelegramBot.DependencyInjection.WebHook\Insight.TelegramBot.DependencyInjection.WebHook.csproj", "{88B4AEF0-2A98-41F4-A0E0-FC0262AFFFF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.DependencyInjection.WebHook.Controllers", "src\Insight.TelegramBot.DependencyInjection.WebHook.Controllers\Insight.TelegramBot.DependencyInjection.WebHook.Controllers.csproj", "{F5CD2F5B-978E-4309-A44D-B17A477C0A4C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insight.TelegramBot.DependencyInjection", "Insight.TelegramBot.DependencyInjection", "{9A59FB6B-5D2A-42F9-8462-0C621BBA7CE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insight.TelegramBot.DependencyInjection.Handling", "src\Insight.TelegramBot.DependencyInjection.Handling\Insight.TelegramBot.DependencyInjection.Handling.csproj", "{402EDD80-8489-4BB6-AF05-B17BAE40AB51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,6 +110,30 @@ Global
 		{DA926028-BDB2-4146-A001-2333FB174840}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA926028-BDB2-4146-A001-2333FB174840}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA926028-BDB2-4146-A001-2333FB174840}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA5C2E7C-CD75-408F-A3CF-B68756A958C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA5C2E7C-CD75-408F-A3CF-B68756A958C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA5C2E7C-CD75-408F-A3CF-B68756A958C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA5C2E7C-CD75-408F-A3CF-B68756A958C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C896AB5-B565-4AE7-B87E-F5723FE7E710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C896AB5-B565-4AE7-B87E-F5723FE7E710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C896AB5-B565-4AE7-B87E-F5723FE7E710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C896AB5-B565-4AE7-B87E-F5723FE7E710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{914E8274-2597-4DF2-B224-BAEAF3868E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{914E8274-2597-4DF2-B224-BAEAF3868E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{914E8274-2597-4DF2-B224-BAEAF3868E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{914E8274-2597-4DF2-B224-BAEAF3868E3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B4AEF0-2A98-41F4-A0E0-FC0262AFFFF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B4AEF0-2A98-41F4-A0E0-FC0262AFFFF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B4AEF0-2A98-41F4-A0E0-FC0262AFFFF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B4AEF0-2A98-41F4-A0E0-FC0262AFFFF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5CD2F5B-978E-4309-A44D-B17A477C0A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5CD2F5B-978E-4309-A44D-B17A477C0A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5CD2F5B-978E-4309-A44D-B17A477C0A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5CD2F5B-978E-4309-A44D-B17A477C0A4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{402EDD80-8489-4BB6-AF05-B17BAE40AB51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{402EDD80-8489-4BB6-AF05-B17BAE40AB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{402EDD80-8489-4BB6-AF05-B17BAE40AB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{402EDD80-8489-4BB6-AF05-B17BAE40AB51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +146,11 @@ Global
 		{4DF2FD85-6790-40F6-A017-F71CE29C20A1} = {494EDB46-5FFC-4970-969C-FB610ABFE2FE}
 		{4084EE63-0379-421A-873E-E80A77B158D3} = {81588F4A-07B4-4A93-A68E-973D04B8D463}
 		{F2193156-FD66-4B6E-8197-D1FC7D4BE410} = {81588F4A-07B4-4A93-A68E-973D04B8D463}
+		{DA926028-BDB2-4146-A001-2333FB174840} = {9A59FB6B-5D2A-42F9-8462-0C621BBA7CE4}
+		{914E8274-2597-4DF2-B224-BAEAF3868E3B} = {9A59FB6B-5D2A-42F9-8462-0C621BBA7CE4}
+		{88B4AEF0-2A98-41F4-A0E0-FC0262AFFFF2} = {9A59FB6B-5D2A-42F9-8462-0C621BBA7CE4}
+		{F5CD2F5B-978E-4309-A44D-B17A477C0A4C} = {9A59FB6B-5D2A-42F9-8462-0C621BBA7CE4}
+		{402EDD80-8489-4BB6-AF05-B17BAE40AB51} = {9A59FB6B-5D2A-42F9-8462-0C621BBA7CE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10C4076E-C2CA-4CC2-9B4F-661FA0F96D79}

@@ -1,5 +1,6 @@
-using Insight.TelegramBot.Hosting.DependencyInjection.Infrastructure;
-using Insight.TelegramBot.Hosting.Polling.ExceptionHandlers;
+using Insight.TelegramBot.DependencyInjection.Infrastructure;
+using Insight.TelegramBot.DependencyInjection.Polling;
+using Insight.TelegramBot.Polling.ExceptionHandlers;
 using Insight.TelegramBot.Samples.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;

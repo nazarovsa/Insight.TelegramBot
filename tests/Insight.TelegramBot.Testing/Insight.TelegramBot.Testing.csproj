@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <LangVersion>$(LanguageVersion)</LangVersion>
+        <TargetFramework>net8.0</TargetFramework>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
@@ -12,7 +11,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Insight.TelegramBot.State\Insight.TelegramBot.State.csproj" />
-        <ProjectReference Include="..\..\src\Insight.TelegramBot.Hosting\Insight.TelegramBot.Hosting.csproj" />
+        <ProjectReference Include="..\..\src\Insight.TelegramBot.WebHook\Insight.TelegramBot.WebHook.csproj" />
         <ProjectReference Include="..\..\src\Insight.TelegramBot\Insight.TelegramBot.csproj" />
     </ItemGroup>
 

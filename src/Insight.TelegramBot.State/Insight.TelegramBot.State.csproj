@@ -1,14 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>$(PackageFrameworkVersions);</TargetFrameworks>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
-        <LangVersion>$(LanguageVersion)</LangVersion>
         <Title>States for Insight.TelegramBot</Title>
         <Authors>Sergey Nazarov</Authors>
         <PackageProjectUrl>https://github.com/nazarovsa/Insight.TelegramBot</PackageProjectUrl>
         <RepositoryUrl>https://github.com/nazarovsa/Insight.TelegramBot</RepositoryUrl>
-        <RepositoryType>Github</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>

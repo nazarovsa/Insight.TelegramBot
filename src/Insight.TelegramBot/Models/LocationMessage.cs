@@ -17,5 +17,7 @@ namespace Insight.TelegramBot.Models
         public int Heading { get; set; }
         
         public int ProximityAlertRadius { get; set; }
+        
+        public double? HorizontalAccuracy { get; set; }
     }
 }

@@ -1,27 +1,30 @@
 <Project>
-    <PropertyGroup>
-        <TelegramBotVersion>19.0.0</TelegramBotVersion>
-        <MicrosoftVersion>7.0.0</MicrosoftVersion>
-        <LanguageVersion>10</LanguageVersion>
-        <PackageFrameworkVersions>netstandard2.1;net6.0;net7.0</PackageFrameworkVersions>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageVersion Include="Telegram.Bot" Version="$(TelegramBotVersion)"/>
-        <PackageVersion Include="Stateless" Version="5.11.0"/>
-    </ItemGroup>
-    <ItemGroup Label="Microsoft">
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MicrosoftVersion)"/>
-        <PackageVersion Include="Microsoft.Extensions.Logging" Version="$(MicrosoftVersion)"/>
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(MicrosoftVersion)"/>
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftVersion)"/>
-        <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="$(MicrosoftVersion)"/>
-        <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="$(MicrosoftVersion)"/>
-    </ItemGroup>
-    <ItemGroup Label="Testing">
-        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.11.0"/>
-        <PackageVersion Include="xunit" Version="2.4.1"/>
-        <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3"/>
-        <PackageVersion Include="coverlet.collector" Version="3.1.0"/>
-        <PackageVersion Include="NSubstitute" Version="4.4.0"/>
-    </ItemGroup>
+  <PropertyGroup>
+    <TelegramBotVersion>21.1.0</TelegramBotVersion>
+    <MicrosoftVersion>8.0.0</MicrosoftVersion>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Telegram.Bot" Version="$(TelegramBotVersion)" />
+    <PackageVersion Include="Stateless" Version="5.11.0" />
+  </ItemGroup>
+  <ItemGroup Label="Microsoft">
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MicrosoftVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="$(MicrosoftVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(MicrosoftVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(MicrosoftVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="$(MicrosoftVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="$(MicrosoftVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(MicrosoftVersion)" />
+  </ItemGroup>
+  <ItemGroup Label="Testing">
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageVersion Include="xunit" Version="2.8.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageVersion>
+    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+    <PackageVersion Include="NSubstitute" Version="5.1.0" />
+  </ItemGroup>
 </Project>

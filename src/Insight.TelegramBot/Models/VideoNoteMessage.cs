@@ -4,7 +4,7 @@ namespace Insight.TelegramBot.Models
 {
     public class VideoNoteMessage : BotMessageWithFile
     {
-        public VideoNoteMessage(ChatId chatId) : base(chatId)
+        public VideoNoteMessage(ChatId chatId, InputFile inputFile) : base(chatId, inputFile)
         {
         }
 
