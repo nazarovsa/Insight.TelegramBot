@@ -4,7 +4,7 @@ namespace Insight.TelegramBot.Models
 {
     public sealed class StickerMessage : BotMessageWithFile
     {
-        public StickerMessage(ChatId chatId) : base(chatId)
+        public StickerMessage(ChatId chatId, InputFile inputFile) : base(chatId, inputFile)
         {
         }
 
