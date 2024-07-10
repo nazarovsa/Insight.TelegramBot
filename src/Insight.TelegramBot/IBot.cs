@@ -79,7 +79,7 @@ namespace Insight.TelegramBot
 
         Task<File> GetFileAsync(string id, CancellationToken cancellationToken = default);
 
-        Task<ChatMember> GetChatMemberAsync(ChatId chatId, int userId, CancellationToken cancellationToken = default);
+        Task<ChatMember> GetChatMemberAsync(ChatId chatId, long userId, CancellationToken cancellationToken = default);
 
         Task<BotCommand[]> GetMyCommandsAsync(BotCommandScope? scope = null, string? languageCode = null,
             CancellationToken cancellationToken = default);

@@ -360,7 +360,7 @@ namespace Insight.TelegramBot
         }
 
         public virtual Task<ChatMember> GetChatMemberAsync(ChatId chatId,
-            int userId,
+            long userId,
             CancellationToken cancellationToken = default)
         {
             return Client.GetChatMemberAsync(chatId, userId, cancellationToken);
