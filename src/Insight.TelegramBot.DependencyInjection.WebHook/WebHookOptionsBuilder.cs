@@ -10,13 +10,6 @@ public sealed class WebHookOptionsBuilder : OptionsBuilderBase<WebHookOptions>
     public WebHookOptionsBuilder(IServiceCollection services) : base(services)
     {
     }
-    
-    public WebHookOptionsBuilder FromConfiguration(IConfiguration configuration)
-    {
-        base.FromConfiguration(configuration, $"{nameof(TelegramBotOptions)}:{nameof(WebHookOptions)}");
-        return this;
-    }
-
     public override OptionsBuilderBase<WebHookOptions> FromValue(WebHookOptions options)
     {
         if (options == null)

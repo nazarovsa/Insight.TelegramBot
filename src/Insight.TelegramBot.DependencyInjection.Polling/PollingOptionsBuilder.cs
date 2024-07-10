@@ -11,12 +11,6 @@ public sealed class PollingOptionsBuilder : OptionsBuilderBase<PollingOptions>
     public PollingOptionsBuilder(IServiceCollection services) : base(services)
     {
     }
-
-    public PollingOptionsBuilder FromConfiguration(IConfiguration configuration)
-    {
-        base.FromConfiguration(configuration, $"{nameof(TelegramBotOptions)}:{nameof(PollingOptions)}");
-        return this;
-    }
     
     public override OptionsBuilderBase<PollingOptions> FromValue(PollingOptions options)
     {

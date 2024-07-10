@@ -11,12 +11,6 @@ public sealed class TelegramBotOptionsBuilder : OptionsBuilderBase<TelegramBotOp
     {
     }
 
-    public TelegramBotOptionsBuilder FromConfiguration(IConfiguration configuration)
-    {
-        base.FromConfiguration(configuration, nameof(TelegramBotOptions));
-        return this;
-    }
-
     public override OptionsBuilderBase<TelegramBotOptions> FromValue(TelegramBotOptions options)
     {
         if (options == null)
