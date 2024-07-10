@@ -1,6 +1,7 @@
 using System;
 using Insight.TelegramBot.DependencyInjection.Builders.Base;
 using Insight.TelegramBot.Polling;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Insight.TelegramBot.DependencyInjection.Polling;
@@ -11,6 +12,12 @@ public sealed class PollingOptionsBuilder : OptionsBuilderBase<PollingOptions>
     {
     }
 
+    public PollingOptionsBuilder FromConfiguration(IConfiguration configuration)
+    {
+        base.FromConfiguration(configuration, $"{nameof(TelegramBotOptions)}:{nameof(PollingOptions)}");
+        return this;
+    }
+    
     public override OptionsBuilderBase<PollingOptions> FromValue(PollingOptions options)
     {
         if (options == null)

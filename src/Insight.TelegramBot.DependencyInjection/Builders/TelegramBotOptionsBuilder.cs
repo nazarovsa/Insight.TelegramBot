@@ -1,5 +1,6 @@
 using System;
 using Insight.TelegramBot.DependencyInjection.Builders.Base;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Insight.TelegramBot.DependencyInjection.Builders;
@@ -8,6 +9,12 @@ public sealed class TelegramBotOptionsBuilder : OptionsBuilderBase<TelegramBotOp
 {
     public TelegramBotOptionsBuilder(IServiceCollection services) : base(services)
     {
+    }
+
+    public TelegramBotOptionsBuilder FromConfiguration(IConfiguration configuration)
+    {
+        base.FromConfiguration(configuration, nameof(TelegramBotOptions));
+        return this;
     }
 
     public override OptionsBuilderBase<TelegramBotOptions> FromValue(TelegramBotOptions options)

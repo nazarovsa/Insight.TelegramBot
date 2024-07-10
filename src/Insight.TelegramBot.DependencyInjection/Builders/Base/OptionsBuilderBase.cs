@@ -15,8 +15,8 @@ public abstract class OptionsBuilderBase<TOptions> where TOptions : class, new()
         Services = services ?? throw new ArgumentNullException(nameof(services));
     }
 
-    public OptionsBuilderBase<TOptions> FromConfiguration(IConfiguration configuration,
-        string sectionName = nameof(TOptions))
+    protected OptionsBuilderBase<TOptions> FromConfiguration(IConfiguration configuration,
+        string sectionName)
     {
         if (configuration == null)
         {
