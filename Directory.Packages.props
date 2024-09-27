@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <TelegramBotVersion>21.10.0</TelegramBotVersion>
+    <TelegramBotVersion>21.11.0</TelegramBotVersion>
     <MicrosoftVersion>8.0.0</MicrosoftVersion>
     <LangVersion>12</LangVersion>
   </PropertyGroup>

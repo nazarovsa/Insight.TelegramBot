@@ -1,5 +1,4 @@
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 
 namespace Insight.TelegramBot.Models
 {
@@ -9,6 +8,6 @@ namespace Insight.TelegramBot.Models
         {
         }
 
-        public Emoji? Emoji { get; set; }
+        public string? Emoji { get; set; }
     }
 }
