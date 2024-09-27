@@ -10,55 +10,45 @@ namespace Insight.TelegramBot.Handling;
 
 internal sealed class UpdateHandlersProvider : IUpdateHandlersProvider
 {
-    public Dictionary<Type, IUpdateMatcher> TypeMap { get; } = new();
+  public Dictionary<Type, IUpdateMatcher> TypeMap { get; } = new();
 
-    public UpdateHandlersProvider(params Assembly[] assemblies)
+  public UpdateHandlersProvider(params Assembly[] assemblies)
+  {
+    Initialize(assemblies);
+  }
+
+  private void Initialize(params Assembly[] assemblies)
+  {
+    foreach (var assembly in assemblies)
+      Initialize(assembly);
+  }
+
+  /// <summary>
+  /// Adds one handler for one <see cref="IMatchingUpdateHandler{TMatcher}"/> for single matcher type.
+  /// </summary>
+  private void Initialize(Assembly assembly)
+  {
+    var types = assembly.ExportedTypes
+      .GetMatchingUpdateHandlersImplementations()
+      .ToArray();
+
+    foreach (var type in types)
     {
-        Initialize(assemblies);
+      var implementedGenericMatcherInterfaceType = type.GetInterfaces()
+        .Single(x =>
+          x.IsGenericType &&
+          x.GetGenericTypeDefinition()
+            .IsAssignableFrom(typeof(IMatchingUpdateHandler<>))
+        );
+
+
+      if (!TypeMap.ContainsKey(implementedGenericMatcherInterfaceType))
+      {
+        var matcherType = implementedGenericMatcherInterfaceType.GetGenericArguments().First();
+        var matcher = Activator.CreateInstance(matcherType) as IUpdateMatcher;
+        
+        TypeMap.Add(implementedGenericMatcherInterfaceType, matcher);
+      }
     }
-
-    private void Initialize(params Assembly[] assemblies)
-    {
-        foreach (var assembly in assemblies)
-            Initialize(assembly);
-    }
-
-    /// <summary>
-    /// Adds one handler for one <see cref="IMatchingUpdateHandler{TMatcher}"/> for single matcher type.
-    /// </summary>
-    private void Initialize(Assembly assembly)
-    {
-        var types = assembly.ExportedTypes
-            .GetMatchingUpdateHandlersImplementations()
-            .ToArray();
-
-        foreach (var type in types)
-        {
-            var implementedGenericMatcherInterfaceType = type.GetInterfaces()
-                .Single(x =>
-                    x.IsGenericType &&
-                    x.GetGenericTypeDefinition()
-                        .IsAssignableFrom(typeof(IMatchingUpdateHandler<>))
-                );
-
-            if (!TypeMap.ContainsKey(implementedGenericMatcherInterfaceType))
-            {
-                var propertyInfo = implementedGenericMatcherInterfaceType
-                    .GetProperty("Matcher", BindingFlags.Public | BindingFlags.Static);
-                if (propertyInfo == null)
-                {
-                    throw new InvalidOperationException(
-                        $"Failed to extract matcher property info for handler: {type.Name}. m {typeof(IMatchingUpdateHandler<>)}.");
-                }
-
-                var matcher = propertyInfo.GetValue(null, null) as IUpdateMatcher;
-                if (matcher == null)
-                {
-                    throw new InvalidOperationException($"Failed to extract matcher for handler: {type.Name}");
-                }
-
-                TypeMap.Add(implementedGenericMatcherInterfaceType, matcher);
-            }
-        }
-    }
+  }
 }
