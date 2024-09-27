@@ -11,7 +11,7 @@ namespace Insight.TelegramBot
 {
     public class Bot : IBot
     {
-        protected ITelegramBotClient Client { get; private set; }
+        public ITelegramBotClient Client { get; }
 
         public Bot(ITelegramBotClient client)
         {
