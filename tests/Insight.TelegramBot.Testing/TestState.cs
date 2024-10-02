@@ -1,9 +1,8 @@
-namespace Insight.TelegramBot.Testing
+namespace Insight.TelegramBot.Testing;
+
+public enum TestState
 {
-    public enum TestState
-    {
-        None = 0,
-        Pending = 1,
-        Done = 2
-    }
+    None = 0,
+    Pending = 1,
+    Done = 2
 }

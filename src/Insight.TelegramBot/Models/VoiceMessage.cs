@@ -1,13 +1,12 @@
 using Telegram.Bot.Types;
 
-namespace Insight.TelegramBot.Models
-{
-    public class VoiceMessage : BotMessageWithFile
-    {
-        public VoiceMessage(ChatId chatId, InputFile inputFile) : base(chatId, inputFile)
-        {
-        }
+namespace Insight.TelegramBot.Models;
 
-        public int Duration { get; set; }
+public class VoiceMessage : BotMessageWithFile
+{
+    public VoiceMessage(ChatId chatId, InputFile inputFile) : base(chatId, inputFile)
+    {
     }
+
+    public int Duration { get; set; }
 }

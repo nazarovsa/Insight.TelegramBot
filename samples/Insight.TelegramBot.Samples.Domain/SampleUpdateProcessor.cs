@@ -10,81 +10,80 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace Insight.TelegramBot.Samples.Domain
+namespace Insight.TelegramBot.Samples.Domain;
+
+public sealed class SampleUpdateProcessor : IUpdateProcessor, IPollingExceptionHandler
 {
-    public sealed class SampleUpdateProcessor : IUpdateProcessor, IPollingExceptionHandler
+    private readonly ITelegramBotClient _botClient;
+
+    public SampleUpdateProcessor(ITelegramBotClient botClient)
     {
-        private readonly ITelegramBotClient _botClient;
+        _botClient = botClient ?? throw new ArgumentNullException(nameof(botClient));
+    }
 
-        public SampleUpdateProcessor(ITelegramBotClient botClient)
+    public Task HandleUpdate(Update update, CancellationToken cancellationToken = default)
+    {
+        return update.Type switch
         {
-            _botClient = botClient ?? throw new ArgumentNullException(nameof(botClient));
-        }
+            UpdateType.Message => ProcessMessage(update.Message, cancellationToken),
+            UpdateType.CallbackQuery => ProcessCallback(update.CallbackQuery, cancellationToken),
+            _ => throw new NotImplementedException()
+        };
+    }
 
-        public Task HandleUpdate(Update update, CancellationToken cancellationToken = default)
+    private async Task ProcessMessage(Message message, CancellationToken cancellationToken = default)
+    {
+        if (message.Text != null)
         {
-            return update.Type switch
+            if (message.Text == "/start")
             {
-                UpdateType.Message => ProcessMessage(update.Message, cancellationToken),
-                UpdateType.CallbackQuery => ProcessCallback(update.CallbackQuery, cancellationToken),
-                _ => throw new NotImplementedException()
-            };
-        }
-
-        private async Task ProcessMessage(Message message, CancellationToken cancellationToken = default)
-        {
-            if (message.Text != null)
-            {
-                if (message.Text == "/start")
+                await _botClient.SendMessageAsync(new TextMessage(message.Chat.Id)
                 {
-                    await _botClient.SendMessageAsync(new TextMessage(message.Chat.Id)
+                    Text = "Hello world",
+                    ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
                     {
-                        Text = "Hello world",
-                        ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
+                        new List<InlineKeyboardButton>
                         {
-                            new List<InlineKeyboardButton>
+                            new InlineKeyboardButton("Touch me.")
                             {
-                                new InlineKeyboardButton("Touch me.")
-                                {
-                                    CallbackData = new CallbackData<SampleState>(SampleState.TouchMe).ToString()
-                                }
+                                CallbackData = new CallbackData<SampleState>(SampleState.TouchMe).ToString()
                             }
-                        })
-                    }, cancellationToken);
-                }
+                        }
+                    })
+                }, cancellationToken);
             }
         }
+    }
 
-        private async Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default)
+    private async Task ProcessCallback(CallbackQuery callbackQuery, CancellationToken cancellationToken = default)
+    {
+        var callbackData = CallbackData<SampleState>.Parse(callbackQuery.Data);
+
+        switch (callbackData.NextState)
         {
-            var callbackData = CallbackData<SampleState>.Parse(callbackQuery.Data);
-
-            switch (callbackData.NextState)
-            {
-                case SampleState.TouchMe:
-                    await _botClient.SendMessageAsync(new TextMessage(callbackQuery.From.Id)
+            case SampleState.TouchMe:
+                await _botClient.SendMessageAsync(new TextMessage(callbackQuery.From.Id)
+                {
+                    Text = "Oh my",
+                    ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
                     {
-                        Text = "Oh my",
-                        ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
+                        new List<InlineKeyboardButton>
                         {
-                            new List<InlineKeyboardButton>
+                            new InlineKeyboardButton("Touch me")
                             {
-                                new InlineKeyboardButton("Touch me")
-                                {
-                                    CallbackData = new CallbackData<SampleState>(SampleState.TouchMe).ToString()
-                                }
+                                CallbackData = new CallbackData<SampleState>(SampleState.TouchMe).ToString()
                             }
-                        })
-                    }, cancellationToken);
-                    break;
-                default:
-                    throw new ArgumentException(nameof(callbackData.NextState));
-            }
+                        }
+                    })
+                }, cancellationToken);
+                break;
+            default:
+                throw new ArgumentException(nameof(callbackData.NextState));
         }
+    }
 
-        public Task HandlePollingException(Exception exception, CancellationToken cancellationToken = default)
-        {
-            return Task.CompletedTask;
-        }
+    public Task HandlePollingException(Exception exception, CancellationToken cancellationToken = default)
+    {
+        return Task.CompletedTask;
     }
 }

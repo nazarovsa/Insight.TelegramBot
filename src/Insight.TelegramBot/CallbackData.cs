@@ -2,45 +2,44 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Insight.TelegramBot
+namespace Insight.TelegramBot;
+
+public class CallbackData<TState>
+    where TState : Enum
 {
-    public class CallbackData<TState>
-        where TState : Enum
+    public IReadOnlyCollection<string> Args { get; }
+
+    public TState NextState { get; }
+
+    public CallbackData(TState nextState, params string[] args)
     {
-        public IReadOnlyCollection<string> Args { get; }
+        NextState = nextState;
+        Args = args;
+    }
 
-        public TState NextState { get; }
+    public override string ToString()
+    {
+        var result = $"{Convert.ToInt32(NextState)}>{string.Join("|", Args)}";
 
-        public CallbackData(TState nextState, params string[] args)
-        {
-            NextState = nextState;
-            Args = args;
-        }
+        return Encoding.UTF8.GetBytes(result).Length > 64
+            ? throw new ArgumentException("String length should be less than 65 bytes")
+            : result;
+    }
 
-        public override string ToString()
-        {
-            var result = $"{Convert.ToInt32(NextState)}>{string.Join("|", Args)}";
+    public static CallbackData<TState> Parse(string commandText)
+    {
+        if (string.IsNullOrWhiteSpace(commandText))
+            throw new ArgumentNullException(nameof(commandText));
 
-            return Encoding.UTF8.GetBytes(result).Length > 64
-                ? throw new ArgumentException("String length should be less than 65 bytes")
-                : result;
-        }
+        var items = commandText.Split('>');
+        var nextState = (TState) Enum.Parse(typeof(TState), items[0]);
 
-        public static CallbackData<TState> Parse(string commandText)
-        {
-            if (string.IsNullOrWhiteSpace(commandText))
-                throw new ArgumentNullException(nameof(commandText));
+        var args = items[^1]
+            .Split('|');
 
-            var items = commandText.Split('>');
-            var nextState = (TState) Enum.Parse(typeof(TState), items[0]);
+        if (args.Length == 0 || args.Length == 1 && string.IsNullOrWhiteSpace(args[0]))
+            return new CallbackData<TState>(nextState, Array.Empty<string>());
 
-            var args = items[^1]
-                .Split('|');
-
-            if (args.Length == 0 || args.Length == 1 && string.IsNullOrWhiteSpace(args[0]))
-                return new CallbackData<TState>(nextState, Array.Empty<string>());
-
-            return new CallbackData<TState>(nextState, args);
-        }
+        return new CallbackData<TState>(nextState, args);
     }
 }

@@ -8,38 +8,37 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Insight.TelegramBot.Samples.WebHookBot
+namespace Insight.TelegramBot.Samples.WebHookBot;
+
+public class Startup
 {
-    public class Startup
+    public IConfiguration Configuration { get; }
+
+    public Startup(IConfiguration configuration)
     {
-        public IConfiguration Configuration { get; }
+        Configuration = configuration;
+    }
 
-        public Startup(IConfiguration configuration)
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddTelegramBot(builder =>
+            builder.WithTelegramBotClient(client =>
+                    client.WithMicrosoftHttpClientFactory()
+                        .WithLifetime(ServiceLifetime.Transient))
+                .WithOptions(opt => opt.FromConfiguration(Configuration))
+                .WithUpdateProcessor<SampleUpdateProcessor>()
+                .WithWebHook(webhook => webhook.WithDefaultUpdateController()));
+
+        services.AddMvc();
+    }
+
+    public void Configure(IApplicationBuilder app)
+    {
+        app.UseRouting();
+        app.UseEndpoints(endpoints =>
         {
-            Configuration = configuration;
-        }
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddTelegramBot(builder =>
-                builder.WithTelegramBotClient(client =>
-                        client.WithMicrosoftHttpClientFactory()
-                            .WithLifetime(ServiceLifetime.Transient))
-                    .WithOptions(opt => opt.FromConfiguration(Configuration))
-                    .WithUpdateProcessor<SampleUpdateProcessor>()
-                    .WithWebHook(webhook => webhook.WithDefaultUpdateController()));
-
-            services.AddMvc();
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.AddUpdateControllerRoute(
-                    app.ApplicationServices.GetRequiredService<WebHookOptions>()!.WebHookPath);
-            });
-        }
+            endpoints.AddUpdateControllerRoute(
+                app.ApplicationServices.GetRequiredService<WebHookOptions>()!.WebHookPath);
+        });
     }
 }

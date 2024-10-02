@@ -1,7 +1,6 @@
-namespace Insight.TelegramBot.DependencyInjection
+namespace Insight.TelegramBot.DependencyInjection;
+
+public sealed class TelegramBotOptions
 {
-    public sealed class TelegramBotOptions
-    {
-        public string Token { get; set; }
-    }
+    public string Token { get; set; }
 }
