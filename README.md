@@ -12,19 +12,6 @@ Includes wrapper over [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bo
 
 In progress... To fast start check [HandlingExtensionsTests](https://github.com/nazarovsa/Insight.TelegramBot/blob/master/tests/Insight.TelegramBot.Tests/HandlingExtensionsTests.cs)...
 
-## Insight.TelegramBot.State
-[![nuget version](https://img.shields.io/nuget/v/Insight.TelegramBot.State)](https://www.nuget.org/packages/Insight.TelegramBot.State/)
-[![Nuget](https://img.shields.io/nuget/dt/Insight.TelegramBot.State?color=%2300000)](https://www.nuget.org/packages/Insight.TelegramBot.State/)
-
-Includes abstractions to implement state machine for your bot. You can see working example at [tests](https://github.com/nazarovsa/Insight.TelegramBot/blob/master/tests/Insight.TelegramBot.State.Tests/StateMachineTest.cs). 
-StateMachine is abstract class that uses [Stateless](https://www.nuget.org/packages/stateless) library to work with state, so you should know a little about how to use it to configure your state machine.
-
-## Insight.TelegramBot.Hosting
-[![nuget version](https://img.shields.io/nuget/v/Insight.TelegramBot.Hosting)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting/)
-[![Nuget](https://img.shields.io/nuget/dt/Insight.TelegramBot.Hosting?color=%2300000)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting/)
-
-Hosted bots.
-
 ## Insight.TelegramBot.Hosting.DependencyInjection
 [![nuget version](https://img.shields.io/nuget/v/Insight.TelegramBot.Hosting.DependencyInjection)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting.DependencyInjection/)
 [![Nuget](https://img.shields.io/nuget/dt/Insight.TelegramBot.Hosting.DependencyInjection?color=%2300000)](https://www.nuget.org/packages/Insight.TelegramBot.Hosting.DependencyInjection/)
