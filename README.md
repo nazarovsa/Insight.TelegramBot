@@ -18,7 +18,7 @@ Insight.TelegramBot is a powerful and flexible SDK for implementing Telegram bot
 
 ## Installation
 
-Before installation you shoud add nuget source for Telegram.Bot package:
+Before installation, you shoud add nuget source for Telegram.Bot package:
 
 ```
 dotnet nuget add source https://pkgs.dev.azure.com/tgbots/Telegram.Bot/_packaging/release/nuget/v3/index.json -n Telegram.Bot
