@@ -30,13 +30,6 @@ public sealed class TelegramBotBuilder
         Services = services ?? throw new ArgumentNullException(nameof(services));
     }
 
-    public TelegramBotBuilder WithBot<TBot>(ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
-        where TBot : class, IBot
-    {
-        Services.TryAdd(new ServiceDescriptor(typeof(IBot), typeof(TBot), serviceLifetime));
-        return this;
-    }
-
     /// <summary>
     /// Configure <see cref="TelegramBotClient"/>.
     /// </summary>

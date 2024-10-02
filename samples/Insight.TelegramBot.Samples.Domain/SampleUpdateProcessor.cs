@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Insight.TelegramBot.Models;
 using Insight.TelegramBot.Polling.ExceptionHandlers;
 using Insight.TelegramBot.UpdateProcessors;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -13,11 +14,11 @@ namespace Insight.TelegramBot.Samples.Domain
 {
     public sealed class SampleUpdateProcessor : IUpdateProcessor, IPollingExceptionHandler
     {
-        private readonly IBot _bot;
+        private readonly ITelegramBotClient _botClient;
 
-        public SampleUpdateProcessor(IBot bot)
+        public SampleUpdateProcessor(ITelegramBotClient botClient)
         {
-            _bot = bot ?? throw new ArgumentNullException(nameof(bot));
+            _botClient = botClient ?? throw new ArgumentNullException(nameof(botClient));
         }
 
         public Task HandleUpdate(Update update, CancellationToken cancellationToken = default)
@@ -36,7 +37,7 @@ namespace Insight.TelegramBot.Samples.Domain
             {
                 if (message.Text == "/start")
                 {
-                    await _bot.SendMessageAsync(new TextMessage(message.Chat.Id)
+                    await _botClient.SendMessageAsync(new TextMessage(message.Chat.Id)
                     {
                         Text = "Hello world",
                         ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
@@ -61,7 +62,7 @@ namespace Insight.TelegramBot.Samples.Domain
             switch (callbackData.NextState)
             {
                 case SampleState.TouchMe:
-                    await _bot.SendMessageAsync(new TextMessage(callbackQuery.From.Id)
+                    await _botClient.SendMessageAsync(new TextMessage(callbackQuery.From.Id)
                     {
                         Text = "Oh my",
                         ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>

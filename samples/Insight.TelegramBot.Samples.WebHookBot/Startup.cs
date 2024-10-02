@@ -22,8 +22,7 @@ namespace Insight.TelegramBot.Samples.WebHookBot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTelegramBot(builder =>
-                builder.WithBot<SampleBot>()
-                    .WithTelegramBotClient(client =>
+                builder.WithTelegramBotClient(client =>
                         client.WithMicrosoftHttpClientFactory()
                             .WithLifetime(ServiceLifetime.Transient))
                     .WithOptions(opt => opt.FromConfiguration(Configuration))

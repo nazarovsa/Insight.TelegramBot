@@ -20,8 +20,7 @@ namespace Insight.TelegramBot.Samples.SimpleHostedBot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTelegramBot(builder =>
-                builder.WithBot<SampleBot>(ServiceLifetime.Transient)
-                    .WithTelegramBotClient(client => client.WithLifetime(ServiceLifetime.Singleton))
+                builder.WithTelegramBotClient(client => client.WithLifetime(ServiceLifetime.Singleton))
                     .WithOptions(opt => opt.FromConfiguration(Configuration))
                     .WithUpdateProcessor<SampleUpdateProcessor>()
                     .WithPolling(polling => polling.WithExceptionHandler<LoggingPollingExceptionHandler>()));
