@@ -24,6 +24,8 @@ public abstract class BotMessage
     public bool DisableNotification { get; set; } = false;
         
     public string? MessageEffectId { get; set; }
+    
+    public bool AllowPaidBroadcast { get; set; }
         
     public ReplyParameters? ReplyParameters { get; set; } = new ReplyParameters();
 

@@ -1,12 +1,11 @@
 <Project>
   <PropertyGroup>
-    <TelegramBotVersion>21.11.0</TelegramBotVersion>
+    <TelegramBotVersion>22.0.2</TelegramBotVersion>
     <MicrosoftVersion>8.0.0</MicrosoftVersion>
     <LangVersion>12</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Telegram.Bot" Version="$(TelegramBotVersion)" />
-    <PackageVersion Include="Stateless" Version="5.11.0" />
   </ItemGroup>
   <ItemGroup Label="Microsoft">
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MicrosoftVersion)" />
