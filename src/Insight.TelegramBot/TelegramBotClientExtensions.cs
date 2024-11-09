@@ -10,156 +10,156 @@ namespace Insight.TelegramBot;
 
 public static class TelegramBotClientExtensions
 {
-  public static Task<Message> SendMessageAsync(this ITelegramBotClient client, TextMessage message,
+  public static Task<Message> SendMessage(this ITelegramBotClient client, TextMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendTextMessageAsync(
+    return client.SendMessage(
       message.ChatId,
       message.Text,
-      message.MessageThreadId,
       message.ParseMode,
-      message.Entities,
-      message.LinkPreviewOptions,
-      message.DisableNotification,
-      message.ProtectContent,
-      message.AllowPaidBroadcast,
-      message.MessageEffectId,
       message.ReplyParameters,
       message.ReplyMarkup,
+      message.LinkPreviewOptions,
+      message.MessageThreadId,
+      message.Entities,
+      message.DisableNotification,
+      message.ProtectContent,
+      message.MessageEffectId,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendDocumentAsync(this ITelegramBotClient client, DocumentMessage message,
+  public static Task<Message> SendDocument(this ITelegramBotClient client, DocumentMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendDocumentAsync(
+    return client.SendDocument(
       message.ChatId,
       message.InputFile,
-      message.MessageThreadId,
-      message.Thumbnail,
       message.Caption,
       message.ParseMode,
+      message.ReplyParameters,
+      message.ReplyMarkup,
+      message.Thumbnail,
+      message.MessageThreadId,
       message.Entities,
       message.DisableContentTypeDetection,
       message.DisableNotification,
       message.ProtectContent,
-      message.AllowPaidBroadcast,
       message.MessageEffectId,
-      message.ReplyParameters,
-      message.ReplyMarkup,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendPhotoAsync(this ITelegramBotClient client, PhotoMessage message,
+  public static Task<Message> SendPhoto(this ITelegramBotClient client, PhotoMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendPhotoAsync(
+    return client.SendPhoto(
       message.ChatId,
       message.InputFile,
-      message.MessageThreadId,
       message.Caption,
       message.ParseMode,
+      message.ReplyParameters,
+      message.ReplyMarkup,
+      message.MessageThreadId,
       message.Entities,
       message.ShowCaptionAboveMedia,
       message.HasSpoiler,
       message.DisableNotification,
       message.ProtectContent,
-      message.AllowPaidBroadcast,
       message.MessageEffectId,
-      message.ReplyParameters,
-      message.ReplyMarkup,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendAudioAsync(this ITelegramBotClient client, AudioMessage message,
+  public static Task<Message> SendAudio(this ITelegramBotClient client, AudioMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendAudioAsync(
+    return client.SendAudio(
       message.ChatId,
       message.InputFile,
-      message.MessageThreadId,
       message.Caption,
       message.ParseMode,
-      message.Entities,
+      message.ReplyParameters,
+      message.ReplyMarkup,
       message.Duration,
       message.Performer,
       message.Title,
       message.Thumbnail,
+      message.MessageThreadId,
+      message.Entities,
       message.DisableNotification,
       message.ProtectContent,
-      message.AllowPaidBroadcast,
       message.MessageEffectId,
-      message.ReplyParameters,
-      message.ReplyMarkup,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendAnimationAsync(this ITelegramBotClient client, AnimationMessage message,
+  public static Task<Message> SendAnimation(this ITelegramBotClient client, AnimationMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendAnimationAsync(
+    return client.SendAnimation(
       message.ChatId,
       message.InputFile,
-      message.MessageThreadId,
+      message.Caption,
+      message.ParseMode,
+      message.ReplyParameters,
+      message.ReplyMarkup,
       message.Duration,
       message.Width,
       message.Height,
       message.Thumbnail,
-      message.Caption,
-      message.ParseMode,
+      message.MessageThreadId,
       message.Entities,
       message.ShowCaptionAboveMedia,
       message.HasSpoiler,
       message.DisableNotification,
       message.ProtectContent,
-      message.AllowPaidBroadcast,
       message.MessageEffectId,
-      message.ReplyParameters,
-      message.ReplyMarkup,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendStickerAsync(this ITelegramBotClient client, StickerMessage message,
+  public static Task<Message> SendSticker(this ITelegramBotClient client, StickerMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendStickerAsync(
+    return client.SendSticker(
       message.ChatId,
       message.InputFile,
-      message.MessageThreadId,
-      message.Emoji,
-      message.DisableNotification,
-      message.ProtectContent,
-      message.AllowPaidBroadcast,
-      message.MessageEffectId,
       message.ReplyParameters,
       message.ReplyMarkup,
+      message.Emoji,
+      message.MessageThreadId,
+      message.DisableNotification,
+      message.ProtectContent,
+      message.MessageEffectId,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendDiceAsync(this ITelegramBotClient client, DiceMessage message,
+  public static Task<Message> SendDice(this ITelegramBotClient client, DiceMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendDiceAsync(
+    return client.SendDice(
       message.ChatId,
-      message.MessageThreadId,
       message.Emoji,
-      message.DisableNotification,
-      message.ProtectContent,
-      message.AllowPaidBroadcast,
-      message.MessageEffectId,
       message.ReplyParameters,
       message.ReplyMarkup,
+      message.MessageThreadId,
+      message.DisableNotification,
+      message.ProtectContent,
+      message.MessageEffectId,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendGameAsync(this ITelegramBotClient client, GameMessage message,
+  public static Task<Message> SendGame(this ITelegramBotClient client, GameMessage message,
     CancellationToken cancellationToken = default)
   {
     if (message.ChatId.Identifier == null)
@@ -167,134 +167,134 @@ public static class TelegramBotClientExtensions
       throw new ArgumentNullException(nameof(message.ChatId.Identifier));
     }
 
-    return client.SendGameAsync(
+    return client.SendGame(
       message.ChatId.Identifier.Value,
       message.GameShortName,
+      message.ReplyParameters,
+      message.ReplyMarkup,
       message.MessageThreadId,
       message.DisableNotification,
       message.ProtectContent,
-      message.AllowPaidBroadcast,
       message.MessageEffectId,
-      message.ReplyParameters,
-      message.ReplyMarkup,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendLocationAsync(this ITelegramBotClient client, LocationMessage message,
+  public static Task<Message> SendLocation(this ITelegramBotClient client, LocationMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendLocationAsync(
+    return client.SendLocation(
       message.ChatId,
       message.Latitude,
       message.Longitude,
-      message.MessageThreadId,
+      message.ReplyParameters,
+      message.ReplyMarkup,
       message.HorizontalAccuracy,
       message.LivePeriod,
       message.Heading,
       message.ProximityAlertRadius,
+      message.MessageThreadId,
       message.DisableNotification,
       message.ProtectContent,
-      message.AllowPaidBroadcast,
       message.MessageEffectId,
-      message.ReplyParameters,
-      message.ReplyMarkup,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
   public static Task<Message> SendVideoAsync(this ITelegramBotClient client, VideoMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendVideoAsync(
+    return client.SendVideo(
       message.ChatId,
       message.InputFile,
-      message.MessageThreadId,
+      message.Caption, 
+      message.ParseMode,
+      message.ReplyParameters,
+      message.ReplyMarkup,
       message.Duration,
       message.Width,
       message.Height,
       message.Thumbnail,
-      message.Caption,
-      message.ParseMode,
+      message.MessageThreadId,
       message.Entities,
       message.ShowCaptionAboveMedia,
       message.HasSpoiler,
       message.SupportsStreaming,
       message.DisableNotification,
       message.ProtectContent,
-      message.AllowPaidBroadcast,
       message.MessageEffectId,
-      message.ReplyParameters,
-      message.ReplyMarkup,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendVoiceAsync(this ITelegramBotClient client, VoiceMessage message,
+  public static Task<Message> SendVoice(this ITelegramBotClient client, VoiceMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendVoiceAsync(
+    return client.SendVoice(
       message.ChatId,
       message.InputFile,
-      message.MessageThreadId,
       message.Caption,
       message.ParseMode,
-      message.Entities,
-      message.Duration,
-      message.DisableNotification,
-      message.ProtectContent,
-      message.AllowPaidBroadcast,
-      message.MessageEffectId,
       message.ReplyParameters,
       message.ReplyMarkup,
+      message.Duration,
+      message.MessageThreadId,
+      message.Entities,
+      message.DisableNotification,
+      message.ProtectContent,
+      message.MessageEffectId,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendVideoNoteAsync(this ITelegramBotClient client, VideoNoteMessage message,
+  public static Task<Message> SendVideoNote(this ITelegramBotClient client, VideoNoteMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendVideoNoteAsync(
+    return client.SendVideoNote(
       message.ChatId,
       message.InputFile,
-      message.MessageThreadId,
+      message.ReplyParameters,
+      message.ReplyMarkup,
       message.Duration,
       message.Length,
       message.Thumbnail,
+      message.MessageThreadId,
       message.DisableNotification,
       message.ProtectContent,
-      message.AllowPaidBroadcast,
       message.MessageEffectId,
-      message.ReplyParameters,
-      message.ReplyMarkup,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> SendContactAsync(this ITelegramBotClient client, ContactMessage message,
+  public static Task<Message> SendContact(this ITelegramBotClient client, ContactMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.SendContactAsync(
+    return client.SendContact(
       message.ChatId,
       message.PhoneNumber,
       message.FirstName,
-      message.MessageThreadId,
       message.LastName,
       message.VCard,
-      message.DisableNotification,
-      message.ProtectContent,
-      message.AllowPaidBroadcast,
-      message.MessageEffectId,
       message.ReplyParameters,
       message.ReplyMarkup,
+      message.MessageThreadId,
+      message.DisableNotification,
+      message.ProtectContent,
+      message.MessageEffectId,
       message.BusinessConnectionId,
+      message.AllowPaidBroadcast,
       cancellationToken);
   }
 
-  public static Task<Message> EditMessageTextAsync(this ITelegramBotClient client, int messageId, TextMessage message,
+  public static Task<Message> EditMessageText(this ITelegramBotClient client, int messageId, TextMessage message,
     CancellationToken cancellationToken = default)
   {
-    return client.EditMessageTextAsync(
+    return client.EditMessageText(
       message.ChatId,
       messageId,
       message.Text,

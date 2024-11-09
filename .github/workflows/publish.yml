@@ -18,7 +18,6 @@ jobs:
         dotnet-version: 7.0.410
     - name: Restore dependencies
       run: |
-        dotnet nuget add source https://nuget.voids.site/v3/index.json
         dotnet restore
     - name: Pack
       env: 

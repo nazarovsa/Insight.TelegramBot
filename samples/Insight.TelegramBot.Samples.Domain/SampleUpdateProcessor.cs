@@ -37,7 +37,7 @@ public sealed class SampleUpdateProcessor : IUpdateProcessor, IPollingExceptionH
         {
             if (message.Text == "/start")
             {
-                await _botClient.SendMessageAsync(new TextMessage(message.Chat.Id)
+                await _botClient.SendMessage(new TextMessage(message.Chat.Id)
                 {
                     Text = "Hello world",
                     ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
@@ -62,7 +62,7 @@ public sealed class SampleUpdateProcessor : IUpdateProcessor, IPollingExceptionH
         switch (callbackData.NextState)
         {
             case SampleState.TouchMe:
-                await _botClient.SendMessageAsync(new TextMessage(callbackQuery.From.Id)
+                await _botClient.SendMessage(new TextMessage(callbackQuery.From.Id)
                 {
                     Text = "Oh my",
                     ReplyMarkup = new InlineKeyboardMarkup(new List<List<InlineKeyboardButton>>
