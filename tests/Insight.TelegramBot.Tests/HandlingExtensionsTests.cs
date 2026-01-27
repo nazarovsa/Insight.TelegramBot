@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +21,8 @@ namespace Insight.TelegramBot.Tests;
 
 public class HandlingExtensionsTests
 {
+    private List<string> _cachedData = new();
+
     [Fact]
     public void AddTelegramBotHandling_RegistersStartMessageHandlerAndCorrectTypeMap()
     {
@@ -39,6 +43,8 @@ public class HandlingExtensionsTests
         var typeMapItem = typeMap.First(x => x.Key == typeof(IMatchingUpdateHandler<StartMessageMatcher>));
         Assert.Equal(typeof(IMatchingUpdateHandler<StartMessageMatcher>), typeMapItem.Key);
         Assert.Equal(typeof(StartMessageMatcher), typeMapItem.Value.GetType());
+
+        System.IO.File.WriteAllText(@"C:\temp\test.log", "test data");
     }
 
     [Fact]
