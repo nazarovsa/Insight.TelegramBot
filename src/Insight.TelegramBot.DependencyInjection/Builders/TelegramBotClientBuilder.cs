@@ -59,13 +59,13 @@ public sealed class TelegramBotClientBuilder
         if (_httpClientFactory == null)
         {
             descriptor = new ServiceDescriptor(typeof(ITelegramBotClient),
-                ctx => new TelegramBotClient(ctx.GetRequiredService<IOptions<TelegramBotOptions>>().Value.Token),
+                ctx => new TelegramBotClient(ctx.GetRequiredService<IOptions<TelegramBotClientOptions>>().Value),
                 _serviceLifetime);
         }
         else
         {
             descriptor = new ServiceDescriptor(typeof(ITelegramBotClient),
-                ctx => new TelegramBotClient(ctx.GetRequiredService<IOptions<TelegramBotOptions>>().Value.Token,
+                ctx => new TelegramBotClient(ctx.GetRequiredService<IOptions<TelegramBotClientOptions>>().Value,
                     _httpClientFactory.Invoke(ctx)),
                 _serviceLifetime);
         }

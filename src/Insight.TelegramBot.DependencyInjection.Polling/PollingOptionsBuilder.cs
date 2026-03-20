@@ -11,22 +11,4 @@ public sealed class PollingOptionsBuilder : OptionsBuilderBase<PollingOptions>
     public PollingOptionsBuilder(IServiceCollection services) : base(services)
     {
     }
-    
-    public override OptionsBuilderBase<PollingOptions> FromValue(PollingOptions options)
-    {
-        if (options == null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
-
-        Services.Configure<PollingOptions>(opt =>
-        {
-            opt.ReceiverOptions = options.ReceiverOptions;
-            opt.PollingTaskCheckInterval = options.PollingTaskCheckInterval;
-            opt.PollingTaskExceptionDelay = options.PollingTaskExceptionDelay;
-        });
-
-        OptionsConfigured = true;
-        return this;
-    }
 }
