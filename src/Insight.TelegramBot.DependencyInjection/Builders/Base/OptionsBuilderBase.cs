@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Insight.TelegramBot.DependencyInjection.Builders.Base;
 
-public abstract class OptionsBuilderBase<TOptions> where TOptions : class, new()
+public abstract class OptionsBuilderBase<TOptions> where TOptions : class
 {
     protected readonly IServiceCollection Services;
 
@@ -27,8 +27,6 @@ public abstract class OptionsBuilderBase<TOptions> where TOptions : class, new()
         OptionsConfigured = true;
         return this;
     }
-
-    public abstract OptionsBuilderBase<TOptions> FromValue(TOptions options);
 
     internal void Build()
     {

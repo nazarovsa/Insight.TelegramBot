@@ -54,7 +54,7 @@ public sealed class TelegramBotBuilder
     {
         if (_telegramBotOptionsBuilder != null)
         {
-            throw new InvalidOperationException($"{nameof(TelegramBotOptions)} already configured");
+            throw new InvalidOperationException($"{nameof(TelegramBotClientOptions)} already configured");
         }
 
         _telegramBotOptionsBuilder = new TelegramBotOptionsBuilder(Services);
