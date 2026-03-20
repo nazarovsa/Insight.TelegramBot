@@ -21,6 +21,7 @@ public sealed class TelegramBotOptionsBuilder : OptionsBuilderBase<TelegramBotOp
         Services.Configure<TelegramBotOptions>(opt =>
         {
             opt.Token = options.Token;
+            opt.BaseUrl = options.BaseUrl;
         });
         
         OptionsConfigured = true;
