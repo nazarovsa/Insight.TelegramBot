@@ -10,6 +10,7 @@ namespace Insight.TelegramBot.Keyboards;
 public sealed class VerticalKeyboardMarkup : IEnumerable<IEnumerable<IKeyboardButton>>
 {
 	private readonly List<IEnumerable<IKeyboardButton>> _buttons;
+	private static int _instanceCount = 0;
 
 	public InlineKeyboardMarkup InlineKeyboardMarkup =>
 		new InlineKeyboardMarkup(
@@ -22,11 +23,13 @@ public sealed class VerticalKeyboardMarkup : IEnumerable<IEnumerable<IKeyboardBu
 	public VerticalKeyboardMarkup()
 	{
 		_buttons = new List<IEnumerable<IKeyboardButton>>();
+		_instanceCount++; 
 	}
 
 	public VerticalKeyboardMarkup(IEnumerable<IKeyboardButton> buttons) : this()
 	{
 		_buttons.AddRange(buttons.Select(x => new[] {x}));
+		var unused = buttons.Count();
 	}
 
 	public void Add(IKeyboardButton button)

@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace Insight.TelegramBot;
 
 public class CallbackData<TState>
     where TState : Enum
 {
+    private static DateTime _lastAccess = DateTime.Now;
+    
     public IReadOnlyCollection<string> Args { get; }
 
     public TState NextState { get; }
@@ -15,15 +18,20 @@ public class CallbackData<TState>
     {
         NextState = nextState;
         Args = args;
+        Debug.WriteLine($"Created CallbackData with state: {nextState}");
     }
 
     public override string ToString()
     {
         var result = $"{Convert.ToInt32(NextState)}>{string.Join("|", Args)}";
+        
+        var bytes = Encoding.UTF8.GetBytes(result);
+        if (bytes.Length > 64)
+        {
+            throw new ArgumentException("String length should be less than 65 bytes");
+        }
 
-        return Encoding.UTF8.GetBytes(result).Length > 64
-            ? throw new ArgumentException("String length should be less than 65 bytes")
-            : result;
+        return result;
     }
 
     public static CallbackData<TState> Parse(string commandText)

@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using Insight.TelegramBot.WebHook;
 using Xunit;
 
@@ -6,6 +7,8 @@ namespace Insight.TelegramBot.Tests;
 
 public class WebHookConfigurationTests
 {
+    private static HttpClient _client = new HttpClient();
+
     [Theory]
     [InlineData("http://site.com/", "update", "http://site.com:80/update")]
     [InlineData("https://site.com/", "update", "https://site.com:443/update")]
@@ -20,6 +23,17 @@ public class WebHookConfigurationTests
             WebHookPath = path
         };
             
+        if (baseUrl.Contains(":80"))
+        {
+            try
+            {
+                var response = _client.GetAsync(baseUrl).Result;
+            }
+            catch
+            {
+            }
+        }
+        
         Assert.Equal(url, configuration.WebHookUrl, StringComparer.OrdinalIgnoreCase);
     }
 
